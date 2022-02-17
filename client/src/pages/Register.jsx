@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { auth } from '../firebase';
 import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -15,9 +16,10 @@ const Register = () => {
         };
 
         await sendSignInLinkToEmail(auth, email, config);
-        toast.success(`A confirmation email has been sent to ${email}`);
 
         window.localStorage.setItem('registrationEmail', email);
+
+        toast.success(`A confirmation email has been sent to ${email}`);
 
         setEmail('');
     };
@@ -27,6 +29,7 @@ const Register = () => {
             <Row className='justify-content-md-center m-auto'>
                 <Col xs={12} md={5}>
                     <h4>Register</h4>
+                    {/* <ToastContainer/> */}
                     <Form onSubmit={handleSubmit} method='post'>
                         <Form.Group>
                             <Form.Control
