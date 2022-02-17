@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import FormContainer from '../components/FormContainer';
 import { auth } from '../firebase';
 
 const RegisterComplete = () => {
@@ -61,41 +62,33 @@ const RegisterComplete = () => {
     };
 
     return (
-        <Container>
-            <Row className='justify-content-md-center m-auto'>
-                <Col xs={12} md={5}>
-                    <h4>Complete your registration</h4>
-                    <Form onSubmit={handleSubmit} method='post'>
-                        <Form.Group>
-                            <Form.Control
-                                type='email'
-                                placeholder='Enter email address'
-                                value={email}
-                                disabled
-                            />
-                        </Form.Group>
-                        <Form.Group className='mt-2'>
-                            <Form.Control
-                                type='password'
-                                placeholder='Enter password'
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <Form.Text className='text-muted'>
-                                Password must be at least 6 character long
-                            </Form.Text>
-                        </Form.Group>
-                        <Button
-                            type='submit'
-                            variant='primary'
-                            className='mt-2'
-                        >
-                            Register
-                        </Button>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
+        <FormContainer>
+            <h4>Complete your registration</h4>
+            <Form onSubmit={handleSubmit} method='post'>
+                <Form.Group>
+                    <Form.Control
+                        type='email'
+                        placeholder='Enter email address'
+                        value={email}
+                        disabled
+                    />
+                </Form.Group>
+                <Form.Group className='mt-2'>
+                    <Form.Control
+                        type='password'
+                        placeholder='Enter password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Form.Text className='text-muted'>
+                        Password must be at least 6 character long
+                    </Form.Text>
+                </Form.Group>
+                <Button type='submit' variant='primary' className='mt-2'>
+                    Register
+                </Button>
+            </Form>
+        </FormContainer>
     );
 };
 
