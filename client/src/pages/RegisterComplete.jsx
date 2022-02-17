@@ -73,7 +73,7 @@ const RegisterComplete = () => {
                         disabled
                     />
                 </Form.Group>
-                <Form.Group className='mt-2'>
+                <Form.Group className='my-3'>
                     <Form.Control
                         type='password'
                         placeholder='Enter password'
