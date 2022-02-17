@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-// import RegisterComplete from './pages/RegisterComplete';
+import RegisterComplete from './pages/RegisterComplete';
 
 function App() {
     return (
@@ -18,7 +18,7 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
-                {/* <Route path='/register/complete' element={<RegisterComplete />} /> */}
+                <Route path='/register/complete' element={<RegisterComplete />} />
             </Routes>
         </Fragment>
     );
