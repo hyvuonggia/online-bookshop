@@ -7,8 +7,33 @@ import Register from './pages/Register';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import RegisterComplete from './pages/RegisterComplete';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getIdTokenResult, onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase';
+import { LOGGED_IN_USER } from './constants/userConstants';
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const idTokenResult = await getIdTokenResult(user);
+                // console.log('user', user);
+                dispatch({
+                    type: LOGGED_IN_USER,
+                    payload: {
+                        email: user.email,
+                        token: idTokenResult,
+                    },
+                });
+            }
+        });
+        
+        return unsubscribe;
+    }, [dispatch]);
+
     return (
         <BrowserRouter>
             <Header />
