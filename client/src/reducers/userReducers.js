@@ -1,6 +1,6 @@
 import { LOGGED_IN_USER, LOGOUT } from '../constants/userConstants';
 
-export const userLoginReducer = (state = { user: {} }, action) => {
+export const userLoginReducer = (state = {}, action) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -10,10 +10,7 @@ export const userLoginReducer = (state = { user: {} }, action) => {
                 user: payload,
             };
         case LOGOUT:
-            return {
-                ...state,
-                user: {},
-            };
+            return {};
         default:
             return state;
     }

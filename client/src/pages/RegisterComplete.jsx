@@ -4,7 +4,7 @@ import {
     updatePassword,
 } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormContainer from '../components/FormContainer';
