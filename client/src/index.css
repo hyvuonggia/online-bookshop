@@ -1,8 +1,9 @@
 main {
-    min-height: 80vh;
-    display: flex;
+    height: 80vh;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    /* margin-top: 200px; */
 }
 
 h3 {
@@ -16,4 +17,9 @@ h3 {
 h1 {
     font-size: 1.4rem;
     padding: 0.1rem;
+}
+
+.login-btn {
+    width: 100%;
+    background-color: cornflowerblue;
 }

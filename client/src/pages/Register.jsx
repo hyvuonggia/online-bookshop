@@ -27,10 +27,10 @@ const Register = () => {
 
     return (
         <FormContainer>
-            <h4>Register</h4>
-            {/* <ToastContainer/> */}
-            <Form onSubmit={handleSubmit} method='post'>
+            <h1>Register</h1>
+            <Form onSubmit={handleSubmit} method='post' className='mt-5'>
                 <Form.Group>
+                    <Form.Label>Email address</Form.Label>
                     <Form.Control
                         type='email'
                         placeholder='Enter email address'
@@ -38,10 +38,10 @@ const Register = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <Form.Text className='text-muted'>
-                        Please provide valid email
+                        Please use a valid email
                     </Form.Text>
                 </Form.Group>
-                <Button type='submit' variant='primary' className='mt-2'>
+                <Button type='submit' variant='primary' className='mt-3'>
                     Register
                 </Button>
             </Form>
