@@ -1,7 +1,11 @@
-import { getIdTokenResult, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+    getIdTokenResult,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+} from 'firebase/auth';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { auth } from '../firebase';
+import { auth, googleAuthProvider } from '../firebase';
 import { toast } from 'react-toastify';
 import FormContainer from '../components/FormContainer';
 import { useDispatch } from 'react-redux';
@@ -44,6 +48,27 @@ const Login = () => {
         }
     };
 
+    const googleLogin = async () => {
+        signInWithPopup(auth, googleAuthProvider)
+            .then(async (result) => {
+                const { user } = result;
+                const idTokenResult = await getIdTokenResult(user);
+                dispatch({
+                    type: LOGGED_IN_USER,
+                    payload: {
+                        email: user.email,
+                        token: idTokenResult,
+                    },
+                });
+                toast.success('Login successful');
+                navigate('/');
+            })
+            .catch((error) => {
+                console.error(error);
+                toast.error(error.message);
+            });
+    };
+
     return (
         <>
             {/* {loading && <Loader />} */}
@@ -62,23 +87,35 @@ const Login = () => {
                     </Form.Group>
                     <Form.Group className='my-3'>
                         <Form.Label>Password</Form.Label>
-
                         <Form.Control
                             type='password'
                             placeholder='Enter password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        <Form.Text>
+                            Password must be at least 6 characters long
+                        </Form.Text>
                     </Form.Group>
                     <Button
                         type='submit'
                         variant='primary'
-                        className='login-btn'
+                        className='login-btn mb-3'
                         disabled={!email || password.length < 6}
                     >
-                        Login
+                        <i className='fa-solid fa-xl fa-envelope me-2'></i>
+                        Login with Email/Password
                     </Button>
                 </Form>
+                <Button
+                    type='submit'
+                    variant='danger'
+                    className='login-btn'
+                    onClick={googleLogin}
+                >
+                    <i className='fa-brands fa-xl fa-google me-2'></i>
+                    Login with Google account
+                </Button>
             </FormContainer>
         </>
     );

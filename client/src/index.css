@@ -23,3 +23,7 @@ h1 {
     width: 100%;
     background-color: cornflowerblue;
 }
+
+.logout-btn {
+    width: fit-content;
+}

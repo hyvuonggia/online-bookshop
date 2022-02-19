@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -19,11 +19,7 @@ const Header = () => {
 
     return (
         <header>
-            <Navbar
-                variant='dark'
-                bg='dark'
-                expand='lg'
-            >
+            <Navbar variant='dark' bg='dark' expand='lg'>
                 <Container>
                     <LinkContainer to='/'>
                         <Navbar.Brand>
@@ -40,7 +36,36 @@ const Header = () => {
                     <Navbar.Toggle aria-controls='basic-navbar-nav' />
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='ms-auto'>
-                            {!user ? (
+                            {user ? (
+                                <>
+                                    <NavDropdown
+                                        title={`Welcome hyvuonggia`}
+                                        id='basic-nav-dropdown'
+                                        className='mt-2'
+                                    >
+                                        <NavDropdown.Item href='#action/3.1'>
+                                            Action
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href='#action/3.2'>
+                                            Another action
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href='#action/3.3'>
+                                            Something
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item href='#action/3.4'>
+                                            Separated link
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                                    <Button
+                                        className='logout-btn mt-2'
+                                        variant='danger'
+                                        onClick={logoutHandler}
+                                    >
+                                        Logout
+                                    </Button>
+                                </>
+                            ) : (
                                 <>
                                     <LinkContainer to='/login'>
                                         <Nav.Link>
@@ -55,13 +80,6 @@ const Header = () => {
                                         </Nav.Link>
                                     </LinkContainer>
                                 </>
-                            ) : (
-                                <Button
-                                    variant='danger'
-                                    onClick={logoutHandler}
-                                >
-                                    Logout
-                                </Button>
                             )}
                         </Nav>
                     </Navbar.Collapse>
