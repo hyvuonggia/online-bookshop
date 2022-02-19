@@ -3,13 +3,13 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
 } from 'firebase/auth';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { auth, googleAuthProvider } from '../firebase';
 import { toast } from 'react-toastify';
 import FormContainer from '../components/FormContainer';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { LOGGED_IN_USER } from '../constants/userConstants';
 import Loader from '../components/Loader';
 
@@ -20,6 +20,15 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(true);
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const { user } = userLogin;
+
+    useEffect(() => {
+        if (user && user.token) {
+            navigate('/');
+        }
+    }, [user, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -116,6 +125,9 @@ const Login = () => {
                     <i className='fa-brands fa-xl fa-google me-2'></i>
                     Login with Google account
                 </Button>
+                <div className='mt-2'>
+                    <Link to='/forgot/password'>Forgot your password?</Link>
+                </div>
             </FormContainer>
         </>
     );

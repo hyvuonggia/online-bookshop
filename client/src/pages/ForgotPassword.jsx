@@ -1,14 +1,13 @@
-import { sendSignInLinkToEmail } from 'firebase/auth';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { auth } from '../firebase';
-import { toast } from 'react-toastify';
-import FormContainer from '../components/FormContainer';
+import { Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import FormContainer from '../components/FormContainer';
+import { auth } from '../firebase';
 
-const Register = () => {
+const ForgotPassword = () => {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -25,22 +24,24 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const config = {
-            url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+            url: process.env.REACT_APP_FORGOT_PASSWORD_REDIRECT_URL,
             handleCodeInApp: true,
         };
-
-        await sendSignInLinkToEmail(auth, email, config);
-
-        window.localStorage.setItem('registrationEmail', email);
-
-        toast.success(`A confirmation email has been sent to ${email}`);
-
-        setEmail('');
+        await sendPasswordResetEmail(auth, email, config)
+            .then(() => {
+                setEmail('');
+                toast.success(
+                    'A password reset link has been sent to your email address',
+                );
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            });
     };
 
     return (
         <FormContainer>
-            <h1>Register</h1>
+            <h1>Reset password</h1>
             <Form onSubmit={handleSubmit} method='post' className='mt-5'>
                 <Form.Group>
                     <Form.Label>Email address</Form.Label>
@@ -51,15 +52,16 @@ const Register = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <Form.Text className='text-muted'>
-                        Please use a valid email
+                        Enter the email address that you need to recover your
+                        password
                     </Form.Text>
                 </Form.Group>
                 <Button type='submit' variant='primary' className='mt-3'>
-                    Register
+                    Submit
                 </Button>
             </Form>
         </FormContainer>
     );
 };
 
-export default Register;
+export default ForgotPassword;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -37,11 +37,11 @@ const Header = () => {
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='ms-auto'>
                             {user ? (
-                                <>
+                                <Fragment className='mt-2'>
                                     <NavDropdown
                                         title={`Welcome hyvuonggia`}
                                         id='basic-nav-dropdown'
-                                        className='mt-2'
+                                        className='pt-2'
                                     >
                                         <NavDropdown.Item href='#action/3.1'>
                                             Action
@@ -64,7 +64,7 @@ const Header = () => {
                                     >
                                         Logout
                                     </Button>
-                                </>
+                                </Fragment>
                             ) : (
                                 <>
                                     <LinkContainer to='/login'>

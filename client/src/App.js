@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { getIdTokenResult, onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import { LOGGED_IN_USER } from './constants/userConstants';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
     const dispatch = useDispatch();
@@ -46,6 +47,10 @@ function App() {
                     <Route
                         path='/register/complete'
                         element={<RegisterComplete />}
+                    />
+                    <Route
+                        path='/forgot/password'
+                        element={<ForgotPassword />}
                     />
                 </Routes>
             </main>
