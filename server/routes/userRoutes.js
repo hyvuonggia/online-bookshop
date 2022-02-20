@@ -1,11 +1,9 @@
 import express from 'express';
+import { createUser, updateUser } from '../controllers/userControllers.js';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json({
-        message: 'Hello world from user route',
-    });
-});
+router.route('/').post(createUser);
+router.route('/:id').put(updateUser);
 
 export default router;
