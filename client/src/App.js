@@ -21,7 +21,7 @@ function App() {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const idTokenResult = await getIdTokenResult(user);
-                // console.log('user', user);
+                console.log('user', user);
                 dispatch({
                     type: LOGGED_IN_USER,
                     payload: {

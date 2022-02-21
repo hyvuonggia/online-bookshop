@@ -11,7 +11,7 @@ import FormContainer from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGGED_IN_USER } from '../constants/userConstants';
-import Loader from '../components/Loader';
+import { createUser } from '../actions/userActions';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const userLogin = useSelector((state) => state.userLogin);
     const { user } = userLogin;
@@ -41,15 +41,19 @@ const Login = () => {
             );
             // console.log(user);
             const idTokenResult = await getIdTokenResult(user);
-            dispatch({
-                type: LOGGED_IN_USER,
-                payload: {
-                    email: user.email,
-                    token: idTokenResult,
-                },
-            });
-            toast.success('Login successful');
-            navigate('/');
+            
+            dispatch(createUser(idTokenResult.token)).then((res) =>
+                console.log('CREATE OR UPDATE RES', res),
+            );
+            // dispatch({
+            //     type: LOGGED_IN_USER,
+            //     payload: {
+            //         email: user.email,
+            //         token: idTokenResult,
+            //     },
+            // });
+            // toast.success('Login successful');
+            // navigate('/');
         } catch (error) {
             console.error(error);
             toast.error(error.message);
@@ -82,7 +86,7 @@ const Login = () => {
         <>
             {/* {loading && <Loader />} */}
             <FormContainer>
-                <h1>Login</h1>
+                {loading ? <h1>Loading...</h1> : <h1>Login</h1>}
                 <Form onSubmit={handleSubmit} method='post' className='mt-5'>
                     <Form.Group>
                         <Form.Label>Email address</Form.Label>

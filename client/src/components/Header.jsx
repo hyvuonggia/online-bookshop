@@ -37,9 +37,11 @@ const Header = () => {
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Nav className='ms-auto'>
                             {user ? (
-                                <Fragment className='mt-2'>
+                                <Fragment>
                                     <NavDropdown
-                                        title={`Welcome hyvuonggia`}
+                                        title={`Welcome ${
+                                            user.email.split('@')[0]
+                                        }`}
                                         id='basic-nav-dropdown'
                                         className='pt-2'
                                     >
