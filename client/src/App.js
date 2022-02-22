@@ -14,6 +14,8 @@ import { auth } from './firebase';
 import { LOGGED_IN_USER } from './constants/userConstants';
 import ForgotPassword from './pages/ForgotPassword';
 import { getCurrentUser } from './actions/userActions';
+import ProtectedRoute from './components/ProtectedRoute';
+import UserHistory from './pages/UserHistory';
 
 function App() {
     const dispatch = useDispatch();
@@ -23,18 +25,18 @@ function App() {
             if (user) {
                 const idTokenResult = await getIdTokenResult(user);
                 // console.log('user', user);
-                 dispatch(getCurrentUser(idTokenResult.token)).then((res) =>
-                     dispatch({
-                         type: LOGGED_IN_USER,
-                         payload: {
-                             name: res.data.name,
-                             email: res.data.email,
-                             token: idTokenResult,
-                             role: res.data.role,
-                             _id: res.data._id,
-                         },
-                     }),
-                 );
+                dispatch(getCurrentUser(idTokenResult.token)).then((res) =>
+                    dispatch({
+                        type: LOGGED_IN_USER,
+                        payload: {
+                            name: res.data.name,
+                            email: res.data.email,
+                            token: idTokenResult,
+                            role: res.data.role,
+                            _id: res.data._id,
+                        },
+                    }),
+                );
             }
         });
 
@@ -58,6 +60,9 @@ function App() {
                         path='/forgot/password'
                         element={<ForgotPassword />}
                     />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path='/user/history' element={<UserHistory />} />
+                    </Route>
                 </Routes>
             </main>
         </BrowserRouter>
