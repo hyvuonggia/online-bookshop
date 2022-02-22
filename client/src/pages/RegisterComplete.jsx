@@ -2,6 +2,7 @@ import {
     getIdTokenResult,
     signInWithEmailLink,
     updatePassword,
+    updateProfile,
 } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
@@ -46,8 +47,12 @@ const RegisterComplete = () => {
                 // get user id token
                 let user = auth.currentUser;
                 await updatePassword(user, password);
+                await updateProfile(user, {
+                    displayName: email.split('@')[0],
+                });
                 const idTokenResult = await getIdTokenResult(user);
                 // console.log('user', user, 'idTokenResult', idTokenResult);
+
                 toast.success('Registration completed');
 
                 //redux store
