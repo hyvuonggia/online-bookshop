@@ -42,7 +42,7 @@ const Login = () => {
             // console.log(user);
             const idTokenResult = await getIdTokenResult(user);
 
-            dispatch(createUser(idTokenResult.token)).then((res) =>
+            dispatch(createUser(idTokenResult.token)).then((res) => {
                 dispatch({
                     type: LOGGED_IN_USER,
                     payload: {
@@ -52,8 +52,13 @@ const Login = () => {
                         role: res.data.role,
                         _id: res.data._id,
                     },
-                }),
-            );
+                });
+                if (res.data.role === 'admin') {
+                    navigate('/admin/dashboard');
+                } else {
+                    navigate('/user/history');
+                }
+            });
 
             toast.success('Login successful');
             navigate('/');
@@ -69,7 +74,7 @@ const Login = () => {
             .then(async (result) => {
                 const { user } = result;
                 const idTokenResult = await getIdTokenResult(user);
-                dispatch(createUser(idTokenResult.token)).then((res) =>
+                dispatch(createUser(idTokenResult.token)).then((res) => {
                     dispatch({
                         type: LOGGED_IN_USER,
                         payload: {
@@ -79,8 +84,13 @@ const Login = () => {
                             role: res.data.role,
                             _id: res.data._id,
                         },
-                    }),
-                );
+                    });
+                    if (res.data.role === 'admin') {
+                        navigate('/admin/dashboard');
+                    } else {
+                        navigate('/user/history');
+                    }
+                });
                 toast.success('Login successful');
                 navigate('/');
             })

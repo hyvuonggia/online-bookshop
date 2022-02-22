@@ -15,7 +15,7 @@ export const logout = () => (dispatch) => {
         });
 };
 
-export const createUser = (authtoken) => async (dispatch) => {
+export const createUser = (authtoken) => async () => {
     const response = await axios.post(
         'http://localhost:5000/api/users',
         {},
@@ -28,7 +28,7 @@ export const createUser = (authtoken) => async (dispatch) => {
     return response;
 };
 
-export const getCurrentUser = (authtoken) => async (dispatch) => {
+export const getCurrentUser = (authtoken) => async () => {
     const response = await axios.get(
         'http://localhost:5000/api/users/current-user',
         {
