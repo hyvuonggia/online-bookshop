@@ -27,3 +27,15 @@ export const createUser = (authtoken) => async (dispatch) => {
     );
     return response;
 };
+
+export const getCurrentUser = (authtoken) => async (dispatch) => {
+    const response = await axios.get(
+        'http://localhost:5000/api/users/current-user',
+        {
+            headers: {
+                authtoken,
+            },
+        },
+    );
+    return response;
+};

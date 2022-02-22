@@ -13,6 +13,7 @@ import { getIdTokenResult, onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import { LOGGED_IN_USER } from './constants/userConstants';
 import ForgotPassword from './pages/ForgotPassword';
+import { getCurrentUser } from './actions/userActions';
 
 function App() {
     const dispatch = useDispatch();
@@ -22,13 +23,18 @@ function App() {
             if (user) {
                 const idTokenResult = await getIdTokenResult(user);
                 // console.log('user', user);
-                dispatch({
-                    type: LOGGED_IN_USER,
-                    payload: {
-                        email: user.email,
-                        token: idTokenResult,
-                    },
-                });
+                 dispatch(getCurrentUser(idTokenResult.token)).then((res) =>
+                     dispatch({
+                         type: LOGGED_IN_USER,
+                         payload: {
+                             name: res.data.name,
+                             email: res.data.email,
+                             token: idTokenResult,
+                             role: res.data.role,
+                             _id: res.data._id,
+                         },
+                     }),
+                 );
             }
         });
 
