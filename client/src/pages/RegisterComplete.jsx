@@ -6,13 +6,17 @@ import {
 } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { createUser } from '../actions/userActions';
 import FormContainer from '../components/FormContainer';
+import { LOGGED_IN_USER } from '../constants/userConstants';
 import { auth } from '../firebase';
 
 const RegisterComplete = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -56,6 +60,18 @@ const RegisterComplete = () => {
                 toast.success('Registration completed');
 
                 //redux store
+                 dispatch(createUser(idTokenResult.token)).then((res) =>
+                     dispatch({
+                         type: LOGGED_IN_USER,
+                         payload: {
+                             name: res.data.name,
+                             email: res.data.email,
+                             token: idTokenResult,
+                             role: res.data.role,
+                             _id: res.data._id,
+                         },
+                     }),
+                 );
 
                 // redirect
                 navigate('/');

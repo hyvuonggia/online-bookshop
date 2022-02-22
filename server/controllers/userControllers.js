@@ -10,7 +10,7 @@ export const createUser = async (req, res) => {
 
     const user = await User.findOneAndUpdate(
         { email },
-        { name },
+        { name: email.split('@')[0] },
         { new: true },
     );
 
@@ -19,7 +19,7 @@ export const createUser = async (req, res) => {
         res.json(user);
     } else {
         const newUser = await new User({
-            name,
+            name: email.split('@')[0],
             email,
         }).save();
         console.log('USER CREATED', newUser);

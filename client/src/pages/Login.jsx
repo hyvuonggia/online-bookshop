@@ -41,19 +41,22 @@ const Login = () => {
             );
             // console.log(user);
             const idTokenResult = await getIdTokenResult(user);
-            
+
             dispatch(createUser(idTokenResult.token)).then((res) =>
-                console.log('CREATE OR UPDATE RES', res),
+                dispatch({
+                    type: LOGGED_IN_USER,
+                    payload: {
+                        name: res.data.name,
+                        email: res.data.email,
+                        token: idTokenResult,
+                        role: res.data.role,
+                        _id: res.data._id,
+                    },
+                }),
             );
-            // dispatch({
-            //     type: LOGGED_IN_USER,
-            //     payload: {
-            //         email: user.email,
-            //         token: idTokenResult,
-            //     },
-            // });
-            // toast.success('Login successful');
-            // navigate('/');
+
+            toast.success('Login successful');
+            navigate('/');
         } catch (error) {
             console.error(error);
             toast.error(error.message);
@@ -66,13 +69,18 @@ const Login = () => {
             .then(async (result) => {
                 const { user } = result;
                 const idTokenResult = await getIdTokenResult(user);
-                dispatch({
-                    type: LOGGED_IN_USER,
-                    payload: {
-                        email: user.email,
-                        token: idTokenResult,
-                    },
-                });
+                dispatch(createUser(idTokenResult.token)).then((res) =>
+                    dispatch({
+                        type: LOGGED_IN_USER,
+                        payload: {
+                            name: res.data.name,
+                            email: res.data.email,
+                            token: idTokenResult,
+                            role: res.data.role,
+                            _id: res.data._id,
+                        },
+                    }),
+                );
                 toast.success('Login successful');
                 navigate('/');
             })
