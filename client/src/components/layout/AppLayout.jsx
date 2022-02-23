@@ -6,7 +6,7 @@ const AppLayout = () => {
     return (
         <div
             style={{
-                padding: '0px 0px 0px 200px',
+                padding: '0px 0px 0px 210px',
             }}
         >
             <SideBarNav />
