@@ -17,6 +17,8 @@ import { getCurrentUser } from './actions/userActions';
 import ProtectedRoute from './components/ProtectedRoute';
 import UserHistory from './pages/UserHistory';
 import AppLayout from './components/layout/AppLayout';
+import PasswordUpdate from './pages/PasswordUpdate';
+import Wishlist from './pages/Wishlist';
 
 function App() {
     const dispatch = useDispatch();
@@ -66,6 +68,14 @@ function App() {
                             <Route
                                 path='/user/history'
                                 element={<UserHistory />}
+                            />
+                            <Route
+                                path='/user/password'
+                                element={<PasswordUpdate />}
+                            />
+                            <Route
+                                path='/user/wishlist'
+                                element={<Wishlist />}
                             />
                         </Route>
                     </Route>

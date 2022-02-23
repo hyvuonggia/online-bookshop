@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
@@ -45,18 +46,35 @@ const Header = () => {
                                         id='basic-nav-dropdown'
                                         className='pt-2'
                                     >
-                                        <NavDropdown.Item href='#action/3.1'>
-                                            Action
+                                        <NavDropdown.Item>
+                                            <Link
+                                                to='/user/history'
+                                                style={{
+                                                    textDecoration: 'none',
+                                                }}
+                                            >
+                                                History
+                                            </Link>
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item href='#action/3.2'>
-                                            Another action
+                                        <NavDropdown.Item>
+                                            <Link
+                                                to='/user/password'
+                                                style={{
+                                                    textDecoration: 'none',
+                                                }}
+                                            >
+                                                Password
+                                            </Link>
                                         </NavDropdown.Item>
-                                        <NavDropdown.Item href='#action/3.3'>
-                                            Something
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href='#action/3.4'>
-                                            Separated link
+                                        <NavDropdown.Item>
+                                            <Link
+                                                to='/user/wishlist'
+                                                style={{
+                                                    textDecoration: 'none',
+                                                }}
+                                            >
+                                                Wishlist
+                                            </Link>
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                     <Button
