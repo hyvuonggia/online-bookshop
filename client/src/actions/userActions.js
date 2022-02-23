@@ -39,3 +39,15 @@ export const getCurrentUser = (authtoken) => async () => {
     );
     return response;
 };
+
+export const getCurrentAdmin = async (authtoken) => {
+    const response = await axios.get(
+        'http://localhost:5000/api/users/current-admin',
+        {
+            headers: {
+                authtoken,
+            },
+        },
+    );
+    return response;
+};

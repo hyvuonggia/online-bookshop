@@ -14,11 +14,13 @@ import { auth } from './firebase';
 import { LOGGED_IN_USER } from './constants/userConstants';
 import ForgotPassword from './pages/ForgotPassword';
 import { getCurrentUser } from './actions/userActions';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/route/ProtectedRoute';
 import UserHistory from './pages/UserHistory';
 import AppLayout from './components/layout/AppLayout';
 import PasswordUpdate from './pages/PasswordUpdate';
 import Wishlist from './pages/Wishlist';
+import AdminRoute from './components/route/AdminRoute';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
     const dispatch = useDispatch();
@@ -78,6 +80,12 @@ function App() {
                                 element={<Wishlist />}
                             />
                         </Route>
+                    </Route>
+                    <Route element={<AdminRoute />}>
+                        <Route
+                            path='/admin/dashboard'
+                            element={<AdminDashboard />}
+                        />
                     </Route>
                 </Routes>
             </main>

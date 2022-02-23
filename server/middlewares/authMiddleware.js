@@ -20,7 +20,7 @@ export const authCheck = async (req, res, next) => {
 export const adminCheck = async (req, res, next) => {
     const { email } = req.user;
     try {
-        const admin = User.findOne({ email });
+        const admin = await User.findOne({ email });
         if (admin.role !== 'admin') {
             res.status(403).json({
                 error: 'Access denied',
