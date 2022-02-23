@@ -16,6 +16,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import { getCurrentUser } from './actions/userActions';
 import ProtectedRoute from './components/ProtectedRoute';
 import UserHistory from './pages/UserHistory';
+import AppLayout from './components/layout/AppLayout';
 
 function App() {
     const dispatch = useDispatch();
@@ -46,7 +47,7 @@ function App() {
     return (
         <BrowserRouter>
             <Header />
-            <main className='py-3'>
+            <main>
                 <ToastContainer />
                 <Routes>
                     <Route path='/' element={<Home />} />
@@ -61,7 +62,12 @@ function App() {
                         element={<ForgotPassword />}
                     />
                     <Route element={<ProtectedRoute />}>
-                        <Route path='/user/history' element={<UserHistory />} />
+                        <Route element={<AppLayout />}>
+                            <Route
+                                path='/user/history'
+                                element={<UserHistory />}
+                            />
+                        </Route>
                     </Route>
                 </Routes>
             </main>

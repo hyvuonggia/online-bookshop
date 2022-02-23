@@ -1,9 +1,8 @@
-import React from 'react'
+import React from 'react';
+import SideBarNav from '../components/sidebar/SideBarNav';
 
 const UserHistory = () => {
-  return (
-    <div>UserHistory</div>
-  )
-}
+    return <div>{/* <SideBarNav/> */}</div>;
+};
 
-export default UserHistory
+export default UserHistory;

@@ -18,7 +18,7 @@ const Header = () => {
     };
 
     return (
-        <header>
+        <div>
             <Navbar variant='dark' bg='dark' expand='lg'>
                 <Container>
                     <LinkContainer to='/'>
@@ -87,7 +87,7 @@ const Header = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </header>
+        </div>
     );
 };
 
