@@ -61,7 +61,6 @@ const Login = () => {
             });
 
             toast.success('Login successful');
-            navigate('/');
         } catch (error) {
             console.error(error);
             toast.error(error.message);

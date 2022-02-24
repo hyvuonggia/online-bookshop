@@ -1,11 +1,11 @@
 import admin from '../firebase/index.js';
 import User from '../models/userModel.js';
 
-export const auth = async (req, res, next) => {
+export const authCheck = async (req, res, next) => {
     try {
         const firebaseUser = await admin
             .auth()
-            .verifyIdToken(req.headers.authtoken);
+            .verifyIdToken(req.headers.authorization);
         console.log(firebaseUser);
         req.user = firebaseUser;
         next();
@@ -17,7 +17,7 @@ export const auth = async (req, res, next) => {
     }
 };
 
-export const admin = async (req, res, next) => {
+export const adminCheck = async (req, res, next) => {
     const { email } = req.user;
     try {
         const admin = await User.findOne({ email });

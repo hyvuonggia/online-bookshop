@@ -16,38 +16,44 @@ export const logout = () => (dispatch) => {
 };
 
 export const createUser = (authtoken) => async () => {
+    const config = {
+        headers: {
+            Authorization: authtoken,
+        },
+    };
+
     const response = await axios.post(
         'http://localhost:5000/api/users',
         {},
-        {
-            headers: {
-                authtoken,
-            },
-        },
+        config,
     );
     return response;
 };
 
 export const getCurrentUser = (authtoken) => async () => {
+    const config = {
+        headers: {
+            Authorization: authtoken,
+        },
+    };
+
     const response = await axios.get(
         'http://localhost:5000/api/users/current-user',
-        {
-            headers: {
-                authtoken,
-            },
-        },
+        config,
     );
     return response;
 };
 
 export const getCurrentAdmin = async (authtoken) => {
+    const config = {
+        headers: {
+            Authorization: authtoken,
+        },
+    };
+
     const response = await axios.get(
         'http://localhost:5000/api/users/current-admin',
-        {
-            headers: {
-                authtoken,
-            },
-        },
+        config,
     );
     return response;
 };
