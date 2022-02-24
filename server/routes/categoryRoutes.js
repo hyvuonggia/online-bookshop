@@ -6,16 +6,19 @@ import {
     readCategory,
     updateCategory,
 } from '../controllers/categoryControllers.js';
-import { admin, auth } from '../middlewares/authMiddleware.js';
+import { adminCheck, authCheck } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.route('/').get(listCategories).post(auth, admin, createCategory);
+router
+    .route('/')
+    .get(listCategories)
+    .post(authCheck, adminCheck, createCategory);
 
 router
     .route('/:slug')
-    .get(auth, admin, readCategory)
-    .put(auth, admin, updateCategory)
-    .delete(auth, admin, deleteCategory);
+    .get(authCheck, adminCheck, readCategory)
+    .put(authCheck, adminCheck, updateCategory)
+    .delete(authCheck, adminCheck, deleteCategory);
 
 export default router;
