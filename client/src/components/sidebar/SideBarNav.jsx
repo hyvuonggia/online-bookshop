@@ -45,6 +45,17 @@ const SideBarNav = () => {
                         </div>
                     </Link>
                     <Link
+                        to='/admin/category'
+                        key='category'
+                        style={{ textDecoration: 'none' }}
+                    >
+                        <div className='sidebar-menu-item'>
+                            <div className='sidebar-menu-item-text'>
+                                Category
+                            </div>
+                        </div>
+                    </Link>
+                    <Link
                         to='/admin/coupon'
                         key='coupon'
                         style={{ textDecoration: 'none' }}

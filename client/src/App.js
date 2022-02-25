@@ -21,6 +21,7 @@ import PasswordUpdate from './pages/PasswordUpdate';
 import Wishlist from './pages/Wishlist';
 import AdminRoute from './components/route/AdminRoute';
 import AdminDashboard from './pages/AdminDashboard';
+import CategoryCreate from './pages/CategoryCreate';
 
 function App() {
     const dispatch = useDispatch();
@@ -86,6 +87,10 @@ function App() {
                             <Route
                                 path='/admin/dashboard'
                                 element={<AdminDashboard />}
+                            />
+                            <Route
+                                path='/admin/category'
+                                element={<CategoryCreate />}
                             />
                         </Route>
                     </Route>
