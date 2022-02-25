@@ -120,7 +120,9 @@ export const deleteCategory = async (req, res) => {
                 message: 'Category not found',
             });
         }
-        res.json(deletedCategory);
+        res.json({
+            message: 'Category deleted',
+        });
     } catch (error) {
         console.error(error);
         res.status(400).json({
