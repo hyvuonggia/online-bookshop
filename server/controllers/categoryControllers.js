@@ -10,14 +10,11 @@ import slugify from 'slugify';
  * @param {*} res
  */
 export const listCategories = async (req, res) => {
-    try {
-        const categories = await Category.find({});
+    const categories = await Category.find({});
+    if (categories) {
         res.json(categories);
-    } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            message: 'List category failed',
-        });
+    } else {
+        res.status(404).send('List category failed');
     }
 };
 
@@ -30,8 +27,11 @@ export const listCategories = async (req, res) => {
  * @param {*} res
  */
 export const createCategory = async (req, res) => {
-    try {
-        const { name } = req.body;
+    // console.log('===========================>', req.body);
+    const { name } = req.body;
+    if (await Category.findOne({ slug: slugify(name) })) {
+       res.status(400).send('Category already created');
+    } else {
         const category = await new Category({
             name,
             slug: slugify(name, { lower: true }),
@@ -39,11 +39,6 @@ export const createCategory = async (req, res) => {
         console.log(category);
         await category.save();
         res.json(category);
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({
-            message: 'Create category failed',
-        });
     }
 };
 
@@ -56,19 +51,11 @@ export const createCategory = async (req, res) => {
  * @param {*} res
  */
 export const readCategory = async (req, res) => {
-    try {
-        const category = await Category.findOne({ slug: req.params.slug });
-        if (!category) {
-            res.status(404).json({
-                message: 'Category not found',
-            });
-        }
+    const category = await Category.findOne({ slug: req.params.slug });
+    if (category) {
         res.json(category);
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({
-            message: 'Get category failed',
-        });
+    } else {
+        res.status(404).send('Category not found');
     }
 };
 
@@ -82,23 +69,16 @@ export const readCategory = async (req, res) => {
  */
 export const updateCategory = async (req, res) => {
     const { name } = req.body;
-    try {
-        const updatedCategory = await Category.findOneAndUpdate(
-            { slug: req.params.slug },
-            { name, slug: slugify(name) },
-            { new: true },
-        );
-        if (!updatedCategory) {
-            res.status(404).json({
-                message: 'Category not found',
-            });
-        }
+    const updatedCategory = await Category.findOneAndUpdate(
+        { slug: req.params.slug },
+        { name, slug: slugify(name) },
+        { new: true },
+    );
+    if (updatedCategory) {
         res.json(updatedCategory);
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({
-            message: 'Update category failed',
-        });
+    } else {
+        res.status(404).send('Category not found');
+        
     }
 };
 
@@ -111,22 +91,14 @@ export const updateCategory = async (req, res) => {
  * @param {*} res
  */
 export const deleteCategory = async (req, res) => {
-    try {
-        const deletedCategory = await Category.findOneAndDelete({
-            slug: req.params.slug,
-        });
-        if (!deletedCategory) {
-            res.status(404).json({
-                message: 'Category not found',
-            });
-        }
+    const deletedCategory = await Category.findOneAndDelete({
+        slug: req.params.slug,
+    });
+    if (deletedCategory) {
         res.json({
             message: 'Category deleted',
         });
-    } catch (error) {
-        console.error(error);
-        res.status(400).json({
-            message: 'Delete category failed',
-        });
+    } else {
+        res.status(404).send('Category not found');
     }
 };
