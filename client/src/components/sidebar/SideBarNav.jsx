@@ -72,7 +72,7 @@ const SideBarNav = () => {
             <div className='sidebar-menu'>
                 <div className='sidebar-menu-indicator'>
                     <Link
-                        to='/admin/dashboard'
+                        to='/user/history'
                         key='history'
                         style={{ textDecoration: 'none' }}
                     >
