@@ -82,10 +82,12 @@ function App() {
                         </Route>
                     </Route>
                     <Route element={<AdminRoute />}>
-                        <Route
-                            path='/admin/dashboard'
-                            element={<AdminDashboard />}
-                        />
+                        <Route element={<AppLayout />}>
+                            <Route
+                                path='/admin/dashboard'
+                                element={<AdminDashboard />}
+                            />
+                        </Route>
                     </Route>
                 </Routes>
             </main>

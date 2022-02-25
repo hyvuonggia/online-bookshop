@@ -46,16 +46,30 @@ const Header = () => {
                                         id='basic-nav-dropdown'
                                         className='pt-2'
                                     >
-                                        <NavDropdown.Item>
-                                            <Link
-                                                to='/user/history'
-                                                style={{
-                                                    textDecoration: 'none',
-                                                }}
-                                            >
-                                                History
-                                            </Link>
-                                        </NavDropdown.Item>
+                                        {user && user.role === 'user' ? (
+                                            <NavDropdown.Item>
+                                                <Link
+                                                    to='/user/history'
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                    }}
+                                                >
+                                                    Dashboard
+                                                </Link>
+                                            </NavDropdown.Item>
+                                        ) : (
+                                            <NavDropdown.Item>
+                                                <Link
+                                                    to='/admin/dashboard'
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                    }}
+                                                >
+                                                    Dashboard
+                                                </Link>
+                                            </NavDropdown.Item>
+                                        )}
+
                                         <NavDropdown.Item>
                                             <Link
                                                 to='/user/password'
