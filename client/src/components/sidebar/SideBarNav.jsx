@@ -3,21 +3,6 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './SideBarNav.scss';
 
-const sideBarNavItems = [
-    {
-        display: 'History',
-        to: '/user/history',
-    },
-    {
-        display: 'Password',
-        to: '/user/password',
-    },
-    {
-        display: 'Wishlist',
-        to: '/user/wishlist',
-    },
-];
-
 const SideBarNav = () => {
     const userLogin = useSelector((state) => state.userLogin);
     const { user } = userLogin;
@@ -27,8 +12,8 @@ const SideBarNav = () => {
             <div className='sidebar-menu'>
                 <div className='sidebar-menu-indicator'>
                     <Link
-                        to='/user/history'
-                        key='history'
+                        to='/admin/dashboard'
+                        key='dashboard'
                         style={{ textDecoration: 'none' }}
                     >
                         <div className='sidebar-menu-item'>
