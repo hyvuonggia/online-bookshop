@@ -27,10 +27,9 @@ export const listCategories = async (req, res) => {
  * @param {*} res
  */
 export const createCategory = async (req, res) => {
-    // console.log('===========================>', req.body);
     const { name } = req.body;
     if (await Category.findOne({ slug: slugify(name) })) {
-       res.status(400).send('Category already created');
+        res.status(400).send('Category already created');
     } else {
         const category = await new Category({
             name,
@@ -74,11 +73,11 @@ export const updateCategory = async (req, res) => {
         { name, slug: slugify(name) },
         { new: true },
     );
+    console.log('UPDATED CATEGORY =>>>>>>>>>>', updatedCategory);
     if (updatedCategory) {
         res.json(updatedCategory);
     } else {
         res.status(404).send('Category not found');
-        
     }
 };
 

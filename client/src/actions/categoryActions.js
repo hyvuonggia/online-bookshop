@@ -16,7 +16,6 @@ export const getCategories = () => async (dispatch) => {
         const response = await axios.get(
             'http://localhost:5000/api/categories',
         );
-        console.log('=========================>', response);
         dispatch({
             type: GET_CATEGORIES_SUCCESS,
             payload: response.data,
@@ -41,6 +40,7 @@ export const getCategory = (slug) => async (dispatch) => {
             type: GET_CATEGORY_SUCCESS,
             payload: response.data,
         });
+        return response;
     } catch (error) {
         dispatch({
             type: GET_CATEGORY_FAIL,
@@ -74,7 +74,7 @@ export const createCategory = (name) => async (dispatch, getState) => {
     return response;
 };
 
-export const updateCategory = (category) => async (dispatch, getState) => {
+export const updateCategory = (slug, category) => async (dispatch, getState) => {
     try {
         const {
             userLogin: { user },
@@ -87,7 +87,7 @@ export const updateCategory = (category) => async (dispatch, getState) => {
         };
 
         const response = await axios.put(
-            `http://localhost:5000/api/categories/${category.slug}`,
+            `http://localhost:5000/api/categories/${slug}`,
             category,
             config,
         );
@@ -95,6 +95,7 @@ export const updateCategory = (category) => async (dispatch, getState) => {
             type: UPDATE_CATEGORY_SUCCESS,
             payload: response.data,
         });
+        return response;
     } catch (error) {
         dispatch({
             type: UPDATE_CATEGORY_FAIL,

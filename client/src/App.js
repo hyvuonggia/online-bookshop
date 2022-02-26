@@ -22,6 +22,7 @@ import Wishlist from './pages/Wishlist';
 import AdminRoute from './components/route/AdminRoute';
 import AdminDashboard from './pages/AdminDashboard';
 import CategoryCreate from './pages/CategoryCreate';
+import CategoryUpdate from './pages/CategoryUpdate';
 
 function App() {
     const dispatch = useDispatch();
@@ -91,6 +92,10 @@ function App() {
                             <Route
                                 path='/admin/category'
                                 element={<CategoryCreate />}
+                            />
+                            <Route
+                                path='/admin/category/:slug'
+                                element={<CategoryUpdate />}
                             />
                         </Route>
                     </Route>

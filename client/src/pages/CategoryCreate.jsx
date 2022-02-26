@@ -25,7 +25,6 @@ const CategoryCreate = () => {
         dispatch(createCategory(name))
             .then((res) => {
                 setName('');
-                console.log('=========================>>>>', res);
                 toast.success(`"${res.data.name}" created`);
                 dispatch(getCategories());
             })
@@ -83,7 +82,7 @@ const CategoryCreate = () => {
                         <tr key={category._id}>
                             <td width='100%'>{category.name}</td>
                             <td>
-                                <Link to={`/admin/categories/${category.slug}`}>
+                                <Link to={`/admin/category/${category.slug}`}>
                                     <Button variant='dark'>
                                         <i className='fas fa-pencil' />
                                     </Button>

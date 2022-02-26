@@ -17,7 +17,7 @@ router
 
 router
     .route('/:slug')
-    .get(authCheck, adminCheck, readCategory)
+    .get(readCategory)
     .put(authCheck, adminCheck, updateCategory)
     .delete(authCheck, adminCheck, deleteCategory);
 
