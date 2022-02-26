@@ -8,7 +8,7 @@ import {
     GET_CATEGORY_FAIL,
     GET_CATEGORY_SUCCESS,
     UPDATE_CATEGORY_FAIL,
-    UPDATE_CATEGORY_SUCCESS
+    UPDATE_CATEGORY_SUCCESS,
 } from '../constants/categoryConstant';
 
 export const getCategories = () => async (dispatch) => {
@@ -53,25 +53,25 @@ export const getCategory = (slug) => async (dispatch) => {
 };
 
 export const createCategory = (name) => async (dispatch, getState) => {
-        const {
-            userLogin: { user },
-        } = getState();
-        const config = {
-            headers: {
-                Authorization: user.token.token,
-            },
-        };
+    const {
+        userLogin: { user },
+    } = getState();
+    const config = {
+        headers: {
+            Authorization: user.token.token,
+        },
+    };
 
-        const response = await axios.post(
-            'http://localhost:5000/api/categories',
-            { name },
-            config,
-        );
-        dispatch({
-            type: CREATE_CATEGORY_SUCCESS,
-            payload: response.data,
-        });
-        return response;
+    const response = await axios.post(
+        'http://localhost:5000/api/categories',
+        { name },
+        config,
+    );
+    dispatch({
+        type: CREATE_CATEGORY_SUCCESS,
+        payload: response.data,
+    });
+    return response;
 };
 
 export const updateCategory = (category) => async (dispatch, getState) => {
@@ -106,7 +106,7 @@ export const updateCategory = (category) => async (dispatch, getState) => {
     }
 };
 
-export const deleteCategory = (category) => async (dispatch, getState) => {
+export const deleteCategory = (slug) => async (dispatch, getState) => {
     try {
         const {
             userLogin: { user },
@@ -118,13 +118,14 @@ export const deleteCategory = (category) => async (dispatch, getState) => {
             },
         };
 
-        await axios.delete(
-            `http://localhost:5000/api/categories/${category.slug}`,
+        const response = await axios.delete(
+            `http://localhost:5000/api/categories/${slug}`,
             config,
         );
         dispatch({
             type: DELETE_CATEGORY_SUCCESS,
         });
+        return response;
     } catch (error) {
         dispatch({
             type: DELETE_CATEGORY_FAIL,
