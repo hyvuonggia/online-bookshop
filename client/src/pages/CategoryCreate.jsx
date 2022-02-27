@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Button, Form, Table } from 'react-bootstrap';
+import { Button, Form, FormControl, InputGroup, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     createCategory,
@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 const CategoryCreate = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
+    const [keyword, setKeyword] = useState('');
 
     const { categories } = useSelector((state) => state.getCategories);
 
@@ -29,7 +30,6 @@ const CategoryCreate = () => {
                 dispatch(getCategories());
             })
             .catch((error) => {
-                // toast.error(error.response.data)
                 setName('');
                 if (error.response.status === 400) {
                     toast.error(error.response.data);
@@ -55,6 +55,13 @@ const CategoryCreate = () => {
         }
     };
 
+    const handleKeywordChange = (e) => {
+        setKeyword(e.target.value.toLowerCase());
+    };
+
+    const searchedKeyword = (keyword) => (c) =>
+        c.name.toLowerCase().includes(keyword);
+
     return (
         <Fragment>
             <Form onSubmit={handleSubmit}>
@@ -69,6 +76,14 @@ const CategoryCreate = () => {
                 <Button type='submit'>Submit</Button>
             </Form>
             {/* {JSON.stringify(categories)} */}
+            <br></br>
+            <input
+                placeholder='Search category'
+                style={{ width: '20%' }}
+                className='mb-3'
+                value={keyword}
+                onChange={handleKeywordChange}
+            />
             <Table
                 striped
                 bordered
@@ -78,26 +93,32 @@ const CategoryCreate = () => {
                 size='sm'
             >
                 <tbody>
-                    {categories.map((category) => (
-                        <tr key={category._id}>
-                            <td width='100%'>{category.name}</td>
-                            <td>
-                                <Link to={`/admin/category/${category.slug}`}>
-                                    <Button variant='dark'>
-                                        <i className='fas fa-pencil' />
+                    {categories
+                        .filter(searchedKeyword(keyword))
+                        .map((category) => (
+                            <tr key={category._id}>
+                                <td width='100%'>{category.name}</td>
+                                <td>
+                                    <Link
+                                        to={`/admin/category/${category.slug}`}
+                                    >
+                                        <Button variant='dark'>
+                                            <i className='fas fa-pencil' />
+                                        </Button>
+                                    </Link>
+                                </td>
+                                <td>
+                                    <Button
+                                        variant='danger'
+                                        onClick={() =>
+                                            handleDelete(category.slug)
+                                        }
+                                    >
+                                        <i className='fas fa-trash' />
                                     </Button>
-                                </Link>
-                            </td>
-                            <td>
-                                <Button
-                                    variant='danger'
-                                    onClick={() => handleDelete(category.slug)}
-                                >
-                                    <i className='fas fa-trash' />
-                                </Button>
-                            </td>
-                        </tr>
-                    ))}
+                                </td>
+                            </tr>
+                        ))}
                 </tbody>
             </Table>
         </Fragment>
