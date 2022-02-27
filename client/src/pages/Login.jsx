@@ -129,7 +129,7 @@ const Login = () => {
                     </Form.Group>
                     <Button
                         type='submit'
-                        variant='primary'
+                        variant='dark'
                         className='login-btn mb-3'
                         disabled={!email || password.length < 6}
                     >

@@ -42,7 +42,7 @@ const PasswordUpdate = () => {
                 </Form.Group>
                 <Button
                     type='submit'
-                    variant='primary'
+                    variant='dark'
                     className='login-btn mb-3'
                     disabled={!password || password.length < 6 || loading}
                 >

@@ -105,7 +105,7 @@ const RegisterComplete = () => {
                         Password must be at least 6 character long
                     </Form.Text>
                 </Form.Group>
-                <Button type='submit' variant='primary' className='mt-2'>
+                <Button type='submit' variant='dark' className='mt-2'>
                     Register
                 </Button>
             </Form>

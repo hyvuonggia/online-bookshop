@@ -73,7 +73,9 @@ const CategoryCreate = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </Form.Group>
-                <Button type='submit'>Submit</Button>
+                <Button type='submit' variant='dark'>
+                    Submit
+                </Button>
             </Form>
             {/* {JSON.stringify(categories)} */}
             <br></br>
