@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getCategory, updateCategory } from '../actions/categoryActions';
+import { GET_CATEGORY_RESET } from '../constants/categoryConstant';
 
 const CategoryUpdate = () => {
     const navigate = useNavigate();
@@ -12,11 +13,12 @@ const CategoryUpdate = () => {
     const dispatch = useDispatch();
 
     const [name, setName] = useState('');
+
     const { category } = useSelector((state) => state.getCategory);
+
     useEffect(() => {
         dispatch(getCategory(match.slug));
-        setName(category.name);
-    }, [category, dispatch, match.slug]);
+    }, [dispatch]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,6 +26,9 @@ const CategoryUpdate = () => {
             .then((res) => {
                 setName('');
                 toast.success(`"${res.data.name}" updated`);
+                dispatch({
+                    type: GET_CATEGORY_RESET,
+                });
                 navigate('/admin/category');
             })
             .catch((error) => {

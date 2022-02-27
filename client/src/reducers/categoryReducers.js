@@ -4,6 +4,7 @@ import {
     GET_CATEGORIES_FAIL,
     GET_CATEGORIES_SUCCESS,
     GET_CATEGORY_FAIL,
+    GET_CATEGORY_RESET,
     GET_CATEGORY_SUCCESS,
     UPDATE_CATEGORY_FAIL,
     UPDATE_CATEGORY_SUCCESS,
@@ -39,6 +40,10 @@ export const getCategoryReducer = (state = { category: {} }, action) => {
             return {
                 ...state,
                 error: payload,
+            };
+        case GET_CATEGORY_RESET:
+            return {
+                category: {},
             };
         default:
             return state;
