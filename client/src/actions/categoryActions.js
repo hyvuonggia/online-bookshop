@@ -36,10 +36,12 @@ export const getCategory = (slug) => async (dispatch) => {
         const response = await axios.get(
             `http://localhost:5000/api/categories/${slug}`,
         );
+        
         dispatch({
             type: GET_CATEGORY_SUCCESS,
             payload: response.data,
         });
+
         return response;
     } catch (error) {
         dispatch({
@@ -56,6 +58,7 @@ export const createCategory = (name) => async (dispatch, getState) => {
     const {
         userLogin: { user },
     } = getState();
+
     const config = {
         headers: {
             Authorization: user.token.token,
@@ -67,10 +70,12 @@ export const createCategory = (name) => async (dispatch, getState) => {
         { name },
         config,
     );
+
     dispatch({
         type: CREATE_CATEGORY_SUCCESS,
         payload: response.data,
     });
+
     return response;
 };
 

@@ -1,5 +1,5 @@
 import slugify from 'slugify';
-import { Product } from '../models/productModel';
+import Product  from '../models/productModel.js';
 
 export const createProduct = async (req, res) => {
     req.body.slug = slugify(req.body.title);

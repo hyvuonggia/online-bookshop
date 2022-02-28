@@ -25,11 +25,11 @@ const productSchema = new mongoose.Schema(
             trim: true,
             required: true,
         },
-        category: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Category',
-            required: true,
-        },
+        // category: {
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: 'Category',
+        //     required: true,
+        // },
         quantity: {
             type: Number,
         },
@@ -37,17 +37,25 @@ const productSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
-        images: {
-            type: Array,
-        },
-        shipping: {
-            type: String,
-            enum: ['Yes', 'No'],
-        },
+        // images: {
+        //     type: Array,
+        // },
+        // shipping: {
+        //     type: String,
+        //     enum: ['Yes', 'No'],
+        // },
+        // rating: [
+        //     {
+        //         star: Number,
+        //         postedBy: {
+        //             type: mongoose.Schema.Types.ObjectId
+        //         }
+        //     }
+        // ]
     },
     { timestamps: true },
 );
 
 const Product = mongoose.model('Product', productSchema);
 
-export const Product
+export default Product
