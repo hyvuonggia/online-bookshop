@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { CREATE_PRODUCT_FAIL, CREATE_PRODUCT_SUCCESS } from '../constants/productConstants';
+import {
+    CREATE_PRODUCT_FAIL,
+    CREATE_PRODUCT_SUCCESS,
+} from '../constants/productConstants';
 
 export const createProduct = (product) => async (dispatch, getState) => {
     try {
@@ -22,12 +25,11 @@ export const createProduct = (product) => async (dispatch, getState) => {
             type: CREATE_PRODUCT_SUCCESS,
             payload: response.data,
         });
-        // return response;
-    } catch (error) {dispatch({
-        type: CREATE_PRODUCT_FAIL,
-        payload:
-            error.response && error.response.data.message
-                ? error.response.data.message
-                : error.message,
-    });}
+        return response;
+    } catch (error) {
+        dispatch({
+            type: CREATE_PRODUCT_FAIL,
+            payload: error.response.data,
+        });
+    }
 };

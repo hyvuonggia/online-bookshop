@@ -1,17 +1,21 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createProduct } from '../actions/productActions';
 import FormContainer from '../components/FormContainer';
+import { CREATE_PRODUCT_RESET } from '../constants/productConstants.js';
 
 const ProductCreate = () => {
     const dispatch = useDispatch();
 
-    const { success, product: createdProduct } = useSelector(
-        (state) => state.createProduct,
-    );
+    const {
+        success,
+        product: createdProduct,
+        error,
+    } = useSelector((state) => state.createProduct);
 
     const [product, setProduct] = useState({
         title: '',
@@ -23,9 +27,31 @@ const ProductCreate = () => {
         shipping: '',
     });
 
+    useEffect(() => {
+        dispatch({
+            type: CREATE_PRODUCT_RESET,
+        });
+        if (success) {
+            toast.success(
+                `Book with title "${createdProduct.title}" is created`,
+            );
+        } else {
+            toast.error(error);
+        }
+    }, [dispatch, createdProduct, success, error]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(createProduct(product));
+        setProduct({
+            title: '',
+            author: '',
+            description: '',
+            price: '',
+            quantity: '',
+            images: '',
+            shipping: '',
+        });
     };
 
     const handleChange = (e) => {
@@ -40,7 +66,6 @@ const ProductCreate = () => {
 
     return (
         <FormContainer onSubmit>
-            {success && toast.success(`"${createdProduct.title}" created`)}
             <h1>Add new product</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
