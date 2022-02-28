@@ -37,7 +37,7 @@ export const getCurrentUser = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.user.email });
         if (!user) {
-            throw new Error('User not found');
+            res.status(404).json('User not found')
         }
         res.json(user);
     } catch (error) {
