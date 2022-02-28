@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getCategory, updateCategory } from '../actions/categoryActions';
-import { GET_CATEGORY_RESET } from '../constants/categoryConstant';
+import { GET_CATEGORY_RESET } from '../constants/categoryConstants';
 
 const CategoryUpdate = () => {
     const navigate = useNavigate();

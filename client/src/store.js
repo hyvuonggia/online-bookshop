@@ -9,6 +9,7 @@ import {
     getCategoryReducer,
     updateCategoryReducer,
 } from './reducers/categoryReducers';
+import { createProductReducer } from './reducers/productReducers';
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -17,6 +18,7 @@ const reducer = combineReducers({
     createCategory: createCategoryReducer,
     updateCategory: updateCategoryReducer,
     deleteCategory: deleteCategoryReducer,
+    createProduct: createProductReducer,
 });
 
 const middleware = [thunk];

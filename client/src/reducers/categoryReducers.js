@@ -8,7 +8,7 @@ import {
     GET_CATEGORY_SUCCESS,
     UPDATE_CATEGORY_FAIL,
     UPDATE_CATEGORY_SUCCESS,
-} from '../constants/categoryConstant';
+} from '../constants/categoryConstants';
 
 export const getCategoriesReducer = (state = { categories: [] }, action) => {
     const { type, payload } = action;
