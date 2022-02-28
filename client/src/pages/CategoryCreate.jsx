@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Button, Form, FormControl, InputGroup, Table } from 'react-bootstrap';
+import { Button, Form, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     createCategory,

@@ -60,18 +60,18 @@ const RegisterComplete = () => {
                 toast.success('Registration completed');
 
                 //redux store
-                 dispatch(createUser(idTokenResult.token)).then((res) =>
-                     dispatch({
-                         type: LOGGED_IN_USER,
-                         payload: {
-                             name: res.data.name,
-                             email: res.data.email,
-                             token: idTokenResult,
-                             role: res.data.role,
-                             _id: res.data._id,
-                         },
-                     }),
-                 );
+                dispatch(createUser(idTokenResult.token)).then((res) =>
+                    dispatch({
+                        type: LOGGED_IN_USER,
+                        payload: {
+                            name: res.data.name,
+                            email: res.data.email,
+                            token: idTokenResult,
+                            role: res.data.role,
+                            _id: res.data._id,
+                        },
+                    }),
+                );
 
                 // redirect
                 navigate('/');
@@ -105,7 +105,12 @@ const RegisterComplete = () => {
                         Password must be at least 6 character long
                     </Form.Text>
                 </Form.Group>
-                <Button type='submit' variant='dark' className='mt-2'>
+                <Button
+                    type='submit'
+                    variant='dark'
+                    className='mt-2'
+                    disabled={!password || password.length < 6}
+                >
                     Register
                 </Button>
             </Form>

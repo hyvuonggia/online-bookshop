@@ -14,6 +14,7 @@ const CategoryUpdate = () => {
 
     const [name, setName] = useState('');
 
+    
     const { category } = useSelector((state) => state.getCategory);
 
     useEffect(() => {
