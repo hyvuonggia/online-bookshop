@@ -16,3 +16,8 @@ export const createProduct = async (req, res) => {
         res.status(400).send(error.message);
     }
 };
+
+export const getProducts = async (req, res) => {
+    const products = await Product.find({});
+    res.json(products);
+};

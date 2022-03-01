@@ -54,7 +54,7 @@ const Register = () => {
                         Please use a valid email
                     </Form.Text>
                 </Form.Group>
-                <Button type='submit' variant='primary' className='mt-3'>
+                <Button type='submit' variant='dark' className='mt-3'>
                     Register
                 </Button>
             </Form>

@@ -15,6 +15,7 @@ const productSchema = new mongoose.Schema(
         },
         author: {
             type: String,
+            default: 'Unknown',
         },
         description: {
             type: String,
@@ -25,11 +26,11 @@ const productSchema = new mongoose.Schema(
             trim: true,
             required: true,
         },
-        // category: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: 'Category',
-        //     required: true,
-        // },
+        category: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Category',
+            required: true,
+        },
         quantity: {
             type: Number,
         },
@@ -58,4 +59,4 @@ const productSchema = new mongoose.Schema(
 
 const Product = mongoose.model('Product', productSchema);
 
-export default Product
+export default Product;

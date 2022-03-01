@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { createProduct } from '../actions/productActions';
 import FormContainer from '../components/FormContainer';
 import { CREATE_PRODUCT_RESET } from '../constants/productConstants.js';
+import { getCategories } from '../actions/categoryActions';
 
 const ProductCreate = () => {
     const dispatch = useDispatch();
@@ -17,6 +18,8 @@ const ProductCreate = () => {
         error,
     } = useSelector((state) => state.createProduct);
 
+    const { categories } = useSelector((state) => state.getCategories);
+
     const [product, setProduct] = useState({
         title: '',
         author: '',
@@ -25,6 +28,7 @@ const ProductCreate = () => {
         quantity: '',
         images: '',
         shipping: '',
+        category: '',
     });
 
     useEffect(() => {
@@ -38,6 +42,7 @@ const ProductCreate = () => {
         } else {
             toast.error(error);
         }
+        dispatch(getCategories());
     }, [dispatch, createdProduct, success, error]);
 
     const handleSubmit = (e) => {
@@ -51,6 +56,7 @@ const ProductCreate = () => {
             quantity: '',
             images: '',
             shipping: '',
+            category: '',
         });
     };
 
@@ -118,14 +124,28 @@ const ProductCreate = () => {
                         autoFocus
                     />
                 </Form.Group>
-                {/* <Form.Group>
-                    <Form.Label>Shipping</Form.Label>
-                    <Form.Select name='shipping' onChange={handleChange}>
-                        <option value='Yes'>Yes</option>
-                        <option value='No'>No</option>
+                <Form.Group>
+                    <Form.Label>Category</Form.Label>
+                    <Form.Select name='category' onChange={handleChange}>
+                        <option value={null}>---Please select---</option>
+                        {categories.map((category) => (
+                            <option key={category._id} value={category._id}>
+                                {category.name}
+                            </option>
+                        ))}
                     </Form.Select>
-                </Form.Group> */}
-                <Button variant='dark' type='submit'>
+                </Form.Group>
+
+                <Button
+                    variant='dark'
+                    type='submit'
+                    disabled={
+                        !product.title ||
+                        !product.price ||
+                        !product.quantity ||
+                        !product.category
+                    }
+                >
                     Save
                 </Button>
             </Form>
