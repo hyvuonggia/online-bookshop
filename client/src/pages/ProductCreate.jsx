@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createProduct } from '../actions/productActions';
@@ -106,13 +106,16 @@ const ProductCreate = () => {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Price</Form.Label>
-                    <Form.Control
-                        type='number'
-                        name='price'
-                        value={product.price}
-                        onChange={handleChange}
-                        autoFocus
-                    />
+                    <InputGroup>
+                    <InputGroup.Text variant='dark'>$</InputGroup.Text>
+                        <Form.Control
+                            type='number'
+                            name='price'
+                            value={product.price}
+                            onChange={handleChange}
+                            autoFocus
+                        />
+                    </InputGroup>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Quantity</Form.Label>
