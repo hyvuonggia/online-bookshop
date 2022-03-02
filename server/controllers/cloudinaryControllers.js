@@ -1,4 +1,7 @@
 import cloudinary from 'cloudinary';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -16,4 +19,3 @@ export const upload = async (req, res) => {
         url: result.secure_url,
     });
 };
-

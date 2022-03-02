@@ -4,6 +4,6 @@ import { adminCheck, authCheck } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.route('/upload').post(authCheck, adminCheck, upload);
+router.route('/upload').post(upload);
 
 export default router;

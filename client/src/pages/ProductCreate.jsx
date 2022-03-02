@@ -73,7 +73,7 @@ const ProductCreate = () => {
     return (
         <FormContainer onSubmit>
             <h1>Add new product</h1>
-            {JSON.stringify(product)}
+            {JSON.stringify(product.image)}
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Title</Form.Label>
@@ -139,7 +139,7 @@ const ProductCreate = () => {
                         ))}
                     </Form.Select>
                 </Form.Group>
-                <FileUpload />
+                <FileUpload product={product} setProduct={setProduct} />
                 <Button
                     variant='dark'
                     type='submit'
