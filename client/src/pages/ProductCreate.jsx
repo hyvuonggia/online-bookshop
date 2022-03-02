@@ -8,6 +8,7 @@ import { createProduct } from '../actions/productActions';
 import FormContainer from '../components/FormContainer';
 import { CREATE_PRODUCT_RESET } from '../constants/productConstants.js';
 import { getCategories } from '../actions/categoryActions';
+import FileUpload from '../components/FileUpload';
 
 const ProductCreate = () => {
     const dispatch = useDispatch();
@@ -26,8 +27,6 @@ const ProductCreate = () => {
         description: '',
         price: '',
         quantity: '',
-        images: '',
-        shipping: '',
         category: '',
     });
 
@@ -54,8 +53,6 @@ const ProductCreate = () => {
             description: '',
             price: '',
             quantity: '',
-            images: '',
-            shipping: '',
             category: '',
         });
     };
@@ -73,6 +70,7 @@ const ProductCreate = () => {
     return (
         <FormContainer onSubmit>
             <h1>Add new product</h1>
+            {JSON.stringify(product)}
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Title</Form.Label>
@@ -107,7 +105,7 @@ const ProductCreate = () => {
                 <Form.Group>
                     <Form.Label>Price</Form.Label>
                     <InputGroup>
-                    <InputGroup.Text variant='dark'>$</InputGroup.Text>
+                        <InputGroup.Text variant='dark'>$</InputGroup.Text>
                         <Form.Control
                             type='number'
                             name='price'
@@ -138,7 +136,7 @@ const ProductCreate = () => {
                         ))}
                     </Form.Select>
                 </Form.Group>
-
+                <FileUpload />
                 <Button
                     variant='dark'
                     type='submit'
