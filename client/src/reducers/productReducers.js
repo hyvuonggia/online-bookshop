@@ -2,6 +2,7 @@ import {
     CREATE_PRODUCT_FAIL,
     CREATE_PRODUCT_RESET,
     CREATE_PRODUCT_SUCCESS,
+    UPLOAD_IMAGE_SUCCESS,
 } from '../constants/productConstants';
 
 export const createProductReducer = (state = {}, action) => {

@@ -18,6 +18,7 @@ const Header = () => {
         navigate('/');
     };
 
+    // FIXME: Header have <a> tag inside another <a> tag
     return (
         <div>
             <Navbar variant='dark' bg='dark' expand='lg'>

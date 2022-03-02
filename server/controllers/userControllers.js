@@ -7,6 +7,8 @@ import User from '../models/userModel.js';
 export const createUser = async (req, res) => {
     const { name, email } = req.user;
 
+    // TODO: Prevent register existed email address
+
     const user = await User.findOneAndUpdate(
         { email },
         { name: email.split('@')[0] },
@@ -37,7 +39,7 @@ export const getCurrentUser = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.user.email });
         if (!user) {
-            res.status(404).json('User not found')
+            res.status(404).json('User not found');
         }
         res.json(user);
     } catch (error) {

@@ -9,6 +9,7 @@ export const logout = () => (dispatch) => {
             dispatch({
                 type: LOGOUT,
             });
+            // TODO: Reset all state
         })
         .catch((error) => {
             console.log(error);

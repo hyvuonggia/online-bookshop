@@ -73,7 +73,6 @@ const ProductCreate = () => {
     return (
         <FormContainer onSubmit>
             <h1>Add new product</h1>
-            {JSON.stringify(product.image)}
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Title</Form.Label>

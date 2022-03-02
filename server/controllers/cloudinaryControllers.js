@@ -9,6 +9,14 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+/**
+ * @description Upload image
+ * @route /api/cloudinary/upload
+ * @access private/admin
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const upload = async (req, res) => {
     let result = await cloudinary.uploader.upload(req.body.image, {
         public_id: `${Date.now()}`,

@@ -14,11 +14,13 @@ const CategoryUpdate = () => {
 
     const [name, setName] = useState('');
 
-    
     const { category } = useSelector((state) => state.getCategory);
+
+    //TODO: Pre-fill category when update
 
     useEffect(() => {
         dispatch(getCategory(match.slug));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
     const handleSubmit = (e) => {
@@ -50,7 +52,9 @@ const CategoryUpdate = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </Form.Group>
-                <Button type='submit' variant='dark'>Submit</Button>
+                <Button type='submit' variant='dark'>
+                    Submit
+                </Button>
             </Form>
         </Fragment>
     );
