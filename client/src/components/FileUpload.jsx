@@ -3,7 +3,8 @@ import { Form } from 'react-bootstrap';
 
 const FileUpload = () => {
     const fileUpload = (e) => {
-        console.log(e.target.files);
+        let file = e.target.files[0];
+        console.log(file);
     };
     return (
         <Form.Group>

@@ -28,6 +28,7 @@ const ProductCreate = () => {
         price: '',
         quantity: '',
         category: '',
+        image: '',
     });
 
     useEffect(() => {
@@ -35,6 +36,7 @@ const ProductCreate = () => {
             type: CREATE_PRODUCT_RESET,
         });
         if (success) {
+            // window.location.reload();
             toast.success(
                 `Book with title "${createdProduct.title}" is created`,
             );
@@ -54,6 +56,7 @@ const ProductCreate = () => {
             price: '',
             quantity: '',
             category: '',
+            image: '',
         });
     };
 
