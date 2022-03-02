@@ -30,22 +30,7 @@ const FileUpload = ({ product, setProduct }) => {
                 'JPEG',
                 100,
                 0,
-                (uri) => {
-                    // TODO: Refactor to redux state and add authCheck, adminCheck
-                    // axios
-                    //     .post('http://localhost:5000/api/cloudinary/upload', {
-                    //         image: uri,
-                    //     })
-                    //     .then((res) => {
-                    //         console.log('IMAGE UPLOAD RES DATA', res);
-                    //         setProduct({
-                    //             ...product,
-                    //             image: res.data,
-                    //         });
-                    //     })
-                    //     .catch((err) => {
-                    //         console.log('CLOUDINARY UPLOAD ERR', err);
-                    //     });
+                (uri) => {       
                     dispatch(uploadImage(uri));
                 },
                 'base64',
