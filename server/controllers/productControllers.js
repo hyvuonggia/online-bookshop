@@ -21,3 +21,10 @@ export const getProducts = async (req, res) => {
     const products = await Product.find({});
     res.json(products);
 };
+
+export const getProductsLimit = async (req, res) => {
+    const products = await Product.find({})
+        .limit(req.params.limit)
+        .populate('category');
+    res.json(products);
+};
