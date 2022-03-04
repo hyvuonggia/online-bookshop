@@ -1,11 +1,10 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import Resizer from 'react-image-file-resizer';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImage } from '../actions/imageActions';
 
-const FileUpload = ({ product, setProduct }) => {
+const FileUpload = ({ product, setProduct, setLoading }) => {
     const dispatch = useDispatch();
 
     const { image } = useSelector((state) => state.uploadImage);
@@ -18,9 +17,11 @@ const FileUpload = ({ product, setProduct }) => {
             });
             console.log(image.data);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ image]);
 
     const fileUpload = (e) => {
+        setLoading(true)
         let file = e.target.files[0];
         if (file) {
             Resizer.imageFileResizer(
@@ -28,7 +29,7 @@ const FileUpload = ({ product, setProduct }) => {
                 720,
                 720,
                 'JPEG',
-                100,
+                100,    
                 0,
                 (uri) => {       
                     dispatch(uploadImage(uri));
@@ -36,6 +37,7 @@ const FileUpload = ({ product, setProduct }) => {
                 'base64',
             );
         }
+        setLoading(false)
     };
     return (
         <Form.Group>

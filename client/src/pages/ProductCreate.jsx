@@ -30,6 +30,7 @@ const ProductCreate = () => {
         category: '',
         image: '',
     });
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         dispatch({
@@ -138,7 +139,11 @@ const ProductCreate = () => {
                         ))}
                     </Form.Select>
                 </Form.Group>
-                <FileUpload product={product} setProduct={setProduct} />
+                <FileUpload
+                    product={product}
+                    setProduct={setProduct}
+                    setLoading={setLoading}
+                />
                 <Button
                     variant='dark'
                     type='submit'
@@ -146,7 +151,9 @@ const ProductCreate = () => {
                         !product.title ||
                         !product.price ||
                         !product.quantity ||
-                        !product.category
+                        !product.category ||
+                        !product.image ||
+                        loading
                     }
                 >
                     Save
