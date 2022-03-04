@@ -24,6 +24,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import CategoryCreate from './pages/CategoryCreate';
 import CategoryUpdate from './pages/CategoryUpdate';
 import ProductCreate from './pages/ProductCreate';
+import AllProducts from './pages/AllProducts';
 
 function App() {
     const dispatch = useDispatch();
@@ -101,6 +102,10 @@ function App() {
                             <Route
                                 path='/admin/product'
                                 element={<ProductCreate />}
+                            />
+                            <Route
+                                path='/admin/products'
+                                element={<AllProducts />}
                             />
                         </Route>
                     </Route>

@@ -2,6 +2,8 @@ import axios from 'axios';
 import {
     CREATE_PRODUCT_FAIL,
     CREATE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_FAIL,
+    DELETE_PRODUCT_SUCCESS,
     GET_PRODUCTS_LIMIT_SUCCESS,
 } from '../constants/productConstants';
 
@@ -43,4 +45,31 @@ export const getProductsLimit = (limit) => async (dispatch) => {
         type: GET_PRODUCTS_LIMIT_SUCCESS,
         payload: response.data,
     });
+};
+
+export const deleteProduct = (slug) => async (dispatch, getState) => {
+    try {
+        const {
+            userLogin: { user },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: user.token.token,
+            },
+        };
+        const response = await axios.delete(
+            `http://localhost:5000/api/products/${slug}`,
+            config,
+        );
+        dispatch({
+            type: DELETE_PRODUCT_SUCCESS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: DELETE_PRODUCT_FAIL,
+            payload: error.response.data,
+        });
+    }
 };

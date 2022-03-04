@@ -152,7 +152,7 @@ const ProductCreate = () => {
                         !product.price ||
                         !product.quantity ||
                         !product.category ||
-                        !product.image ||
+                        // !product.image ||
                         loading
                     }
                 >

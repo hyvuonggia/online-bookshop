@@ -28,3 +28,14 @@ export const getProductsLimit = async (req, res) => {
         .populate('category');
     res.json(products);
 };
+
+export const deleteProduct = async (req, res) => {
+    const deletedProduct = await Product.findOneAndDelete({
+        slug: req.params.slug,
+    });
+    if (deletedProduct) {
+        res.json(deletedProduct);
+    } else {
+        res.status(404).send('Book not found');
+    }
+};

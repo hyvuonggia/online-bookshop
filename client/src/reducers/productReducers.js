@@ -2,8 +2,10 @@ import {
     CREATE_PRODUCT_FAIL,
     CREATE_PRODUCT_RESET,
     CREATE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_FAIL,
+    DELETE_PRODUCT_RESET,
+    DELETE_PRODUCT_SUCCESS,
     GET_PRODUCTS_LIMIT_SUCCESS,
-    UPLOAD_IMAGE_SUCCESS,
 } from '../constants/productConstants';
 
 export const createProductReducer = (state = {}, action) => {
@@ -32,6 +34,26 @@ export const getProductsLimitReducer = (state = { products: [] }, action) => {
             return {
                 products: payload,
             };
+        default:
+            return state;
+    }
+};
+
+export const deleteProductReducer = (state = {}, action) => {
+    const { type, payload } = action;
+    switch (type) {
+        case DELETE_PRODUCT_SUCCESS:
+            return {
+                success: true,
+                product: payload,
+            };
+        case DELETE_PRODUCT_FAIL:
+            return {
+                success: false,
+                error: payload,
+            };
+        case DELETE_PRODUCT_RESET:
+            return {};
         default:
             return state;
     }
