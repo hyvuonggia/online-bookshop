@@ -24,7 +24,7 @@ export const createUser = (authtoken) => async () => {
     };
 
     const response = await axios.post(
-        'http://localhost:5000/api/users',
+        `${process.env.REACT_APP_API_URL}/users`,
         {},
         config,
     );
@@ -39,7 +39,7 @@ export const getCurrentUser = (authtoken) => async () => {
     };
 
     const response = await axios.get(
-        'http://localhost:5000/api/users/current-user',
+        `${process.env.REACT_APP_API_URL}/users/current-user`,
         config,
     );
     return response;
@@ -53,7 +53,7 @@ export const getCurrentAdmin = async (authtoken) => {
     };
 
     const response = await axios.get(
-        'http://localhost:5000/api/users/current-admin',
+        `${process.env.REACT_APP_API_URL}/users/current-admin`,
         config,
     );
     return response;

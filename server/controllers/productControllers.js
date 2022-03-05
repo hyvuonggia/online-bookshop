@@ -101,7 +101,6 @@ export const getProduct = async (req, res) => {
  * @param {*} res
  */
 export const updateProduct = async (req, res) => {
-    console.log('========req.body===========>', req.body);
     try {
         if (req.body.title) {
             req.body.slug = slugify(req.body.title);
@@ -113,7 +112,6 @@ export const updateProduct = async (req, res) => {
             req.body,
             { new: true },
         );
-        console.log('========updated===========>', updated);
         res.json(updated);
     } catch (error) {
         console.log(error);

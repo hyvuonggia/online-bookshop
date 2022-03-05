@@ -24,7 +24,7 @@ export const createProduct = (product) => async (dispatch, getState) => {
         };
 
         const response = await axios.post(
-            'http://localhost:5000/api/products',
+            `${process.env.REACT_APP_API_URL}/products`,
             product,
             config,
         );
@@ -43,7 +43,7 @@ export const createProduct = (product) => async (dispatch, getState) => {
 
 export const getProductsLimit = (limit) => async (dispatch) => {
     const response = await axios.get(
-        `http://localhost:5000/api/products/limit/${limit}`,
+        `${process.env.REACT_APP_API_URL}/products/limit/${limit}`,
     );
     dispatch({
         type: GET_PRODUCTS_LIMIT_SUCCESS,
@@ -63,7 +63,7 @@ export const deleteProduct = (slug) => async (dispatch, getState) => {
             },
         };
         const response = await axios.delete(
-            `http://localhost:5000/api/products/${slug}`,
+            `${process.env.REACT_APP_API_URL}/products/${slug}`,
             config,
         );
         dispatch({
@@ -81,7 +81,7 @@ export const deleteProduct = (slug) => async (dispatch, getState) => {
 export const getProduct = (slug) => async (dispatch) => {
     try {
         const response = await axios.get(
-            `http://localhost:5000/api/products/${slug}`,
+            `${process.env.REACT_APP_API_URL}/products/${slug}`,
         );
         dispatch({
             type: GET_PRODUCT_SUCCESS,
@@ -107,7 +107,7 @@ export const updateProduct = (slug, product) => async (dispatch, getState) => {
             },
         };
         const response = await axios.put(
-            `http://localhost:5000/api/products/${slug}`,
+            `${process.env.REACT_APP_API_URL}/products/${slug}`,
             product,
             config,
         );

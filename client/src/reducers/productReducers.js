@@ -9,7 +9,6 @@ import {
     GET_PRODUCT_FAIL,
     GET_PRODUCT_SUCCESS,
     UPDATE_PRODUCT_FAIL,
-    UPDATE_PRODUCT_RESET,
     UPDATE_PRODUCT_SUCCESS,
 } from '../constants/productConstants.js';
 

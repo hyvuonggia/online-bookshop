@@ -115,9 +115,12 @@ const ProductUpdate = () => {
                     <Form.Label>Category</Form.Label>
                     <Form.Select name='category' onChange={handleChange}>
                         <option
-                            value={productDetail && productDetail.category._id}
+                            value={
+                                productDetail.category &&
+                                productDetail.category._id
+                            }
                         >
-                            {productDetail && productDetail.category.name}
+                            ---Please select---
                         </option>
                         {categories.map((category) => (
                             <option key={category._id} value={category._id}>
@@ -128,15 +131,17 @@ const ProductUpdate = () => {
                 </Form.Group>
 
                 <Button variant='dark' type='submit' disabled={loading}>
-                    {loading ? (<>
-                        <Spinner
-                            as='span'
-                            animation='border'
-                            size='sm'
-                            role='status'
-                            aria-hidden='true'
-                        /> Loading
-                    </>
+                    {loading ? (
+                        <>
+                            <Spinner
+                                as='span'
+                                animation='border'
+                                size='sm'
+                                role='status'
+                                aria-hidden='true'
+                            />{' '}
+                            Loading
+                        </>
                     ) : (
                         'Save'
                     )}

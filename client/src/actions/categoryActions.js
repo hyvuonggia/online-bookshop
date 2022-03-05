@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import dotenv from 'dotenv'
 import {
     CREATE_CATEGORY_SUCCESS,
     DELETE_CATEGORY_FAIL,
@@ -12,9 +13,10 @@ import {
 } from '../constants/categoryConstants';
 
 export const getCategories = () => async (dispatch) => {
+    console.log('process.env.REACT_APP_API_URL', process.env.REACT_APP_API_URL);
     try {
         const response = await axios.get(
-            'http://localhost:5000/api/categories',
+            `${process.env.REACT_APP_API_URL}/categories`,
         );
         dispatch({
             type: GET_CATEGORIES_SUCCESS,
@@ -31,7 +33,7 @@ export const getCategories = () => async (dispatch) => {
 export const getCategory = (slug) => async (dispatch) => {
     try {
         const response = await axios.get(
-            `http://localhost:5000/api/categories/${slug}`,
+            `${process.env.REACT_APP_API_URL}/categories/${slug}`,
         );
         dispatch({
             type: GET_CATEGORY_SUCCESS,
@@ -59,7 +61,7 @@ export const createCategory = (name) => async (dispatch, getState) => {
     };
 
     const response = await axios.post(
-        'http://localhost:5000/api/categories',
+        `${process.env.REACT_APP_API_URL}/categories`,
         { name },
         config,
     );
@@ -86,7 +88,7 @@ export const updateCategory =
             };
 
             const response = await axios.put(
-                `http://localhost:5000/api/categories/${slug}`,
+                `${process.env.REACT_APP_API_URL}/categories/${slug}`,
                 category,
                 config,
             );
@@ -116,7 +118,7 @@ export const deleteCategory = (slug) => async (dispatch, getState) => {
         };
 
         const response = await axios.delete(
-            `http://localhost:5000/api/categories/${slug}`,
+            `${process.env.REACT_APP_API_URL}/categories/${slug}`,
             config,
         );
         dispatch({

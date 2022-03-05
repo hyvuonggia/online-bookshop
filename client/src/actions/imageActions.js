@@ -13,7 +13,7 @@ export const uploadImage = (uri) => async (dispatch, getState) => {
     };
 
     const response = await axios.post(
-        'http://localhost:5000/api/cloudinary/upload',
+        `${process.env.REACT_APP_API_URL}/cloudinary/upload`,
         { image: uri },
         config,
     );
