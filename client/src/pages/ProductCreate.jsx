@@ -9,10 +9,11 @@ import FormContainer from '../components/FormContainer';
 import { CREATE_PRODUCT_RESET } from '../constants/productConstants.js';
 import { getCategories } from '../actions/categoryActions';
 import FileUpload from '../components/FileUpload';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCreate = () => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const {
         success,
         product: createdProduct,
@@ -37,7 +38,6 @@ const ProductCreate = () => {
             type: CREATE_PRODUCT_RESET,
         });
         if (success) {
-            // window.location.reload();
             toast.success(
                 `Book with title "${createdProduct.title}" is created`,
             );
@@ -49,17 +49,9 @@ const ProductCreate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createProduct(product));
-        // setProduct({
-        //     title: '',
-        //     author: '',
-        //     description: '',
-        //     price: '',
-        //     quantity: '',
-        //     category: '',
-        //     image: '',
-        // });
-        window.location.reload();
+        dispatch(createProduct(product)).then(() => {
+            navigate('/admin/products');
+        });
     };
 
     const handleChange = (e) => {
@@ -75,16 +67,6 @@ const ProductCreate = () => {
     return (
         <FormContainer onSubmit>
             <h1>Add new product</h1>
-            <img
-                src={
-                    product.image
-                        ? product.image.url
-                        : 'https://crossfitbbros.com/bbros-1/wp-content/uploads/2021/01/no-photo-available.png'
-                }
-                alt='preview'
-                width='100px'
-                height='auto'
-            />
             <Form.Group>
                 <FileUpload
                     product={product}
