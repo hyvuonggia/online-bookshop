@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Button, Form, InputGroup, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getProduct } from '../actions/productActions';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { getProduct, updateProduct } from '../actions/productActions';
 import FileUpload from '../components/FileUpload';
 import FormContainer from '../components/FormContainer';
 
 const ProductUpdate = () => {
     const dispatch = useDispatch();
     const match = useParams();
+    const navigate = useNavigate();
 
     const { product: productDetail } = useSelector((state) => state.getProduct);
     const { categories } = useSelector((state) => state.getCategories);
@@ -46,20 +48,13 @@ const ProductUpdate = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        dispatch(updateProduct(match.slug, product));
+        toast.success('Updated');
+        navigate('/admin/products');
     };
     return (
         <FormContainer onSubmit>
             <h1>Update Product</h1>
-            <img
-                src={
-                    product.image
-                        ? product.image.url
-                        : 'https://crossfitbbros.com/bbros-1/wp-content/uploads/2021/01/no-photo-available.png'
-                }
-                alt='preview'
-                width='100px'
-                height='auto'
-            />
             <Form.Group>
                 <FileUpload
                     product={product}
@@ -75,7 +70,6 @@ const ProductUpdate = () => {
                         name='title'
                         value={product.title}
                         onChange={handleChange}
-                        autoFocus
                     />
                 </Form.Group>
                 <Form.Group>
@@ -120,7 +114,11 @@ const ProductUpdate = () => {
                 <Form.Group>
                     <Form.Label>Category</Form.Label>
                     <Form.Select name='category' onChange={handleChange}>
-                        <option value={null}>---Please select---</option>
+                        <option
+                            value={productDetail && productDetail.category._id}
+                        >
+                            {productDetail && productDetail.category.name}
+                        </option>
                         {categories.map((category) => (
                             <option key={category._id} value={category._id}>
                                 {category.name}
@@ -129,19 +127,19 @@ const ProductUpdate = () => {
                     </Form.Select>
                 </Form.Group>
 
-                <Button
-                    variant='dark'
-                    type='submit'
-                    disabled={
-                        !product.title ||
-                        !product.price ||
-                        !product.quantity ||
-                        !product.category ||
-                        !product.image ||
-                        loading
-                    }
-                >
-                    Save
+                <Button variant='dark' type='submit' disabled={loading}>
+                    {loading ? (<>
+                        <Spinner
+                            as='span'
+                            animation='border'
+                            size='sm'
+                            role='status'
+                            aria-hidden='true'
+                        /> Loading
+                    </>
+                    ) : (
+                        'Save'
+                    )}
                 </Button>
             </Form>
         </FormContainer>

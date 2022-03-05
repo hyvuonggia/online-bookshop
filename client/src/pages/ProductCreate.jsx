@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Button, Form, InputGroup, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createProduct } from '../actions/productActions';
@@ -140,19 +140,21 @@ const ProductCreate = () => {
                     </Form.Select>
                 </Form.Group>
 
-                <Button
-                    variant='dark'
-                    type='submit'
-                    disabled={
-                        !product.title ||
-                        !product.price ||
-                        !product.quantity ||
-                        !product.category ||
-                        !product.image ||
-                        loading
-                    }
-                >
-                    Save
+                <Button variant='dark' type='submit' disabled={loading}>
+                    {loading ? (
+                        <>
+                            <Spinner
+                                as='span'
+                                animation='border'
+                                size='sm'
+                                role='status'
+                                aria-hidden='true'
+                            />{' '}
+                            Loading
+                        </>
+                    ) : (
+                        'Save'
+                    )}
                 </Button>
             </Form>
         </FormContainer>

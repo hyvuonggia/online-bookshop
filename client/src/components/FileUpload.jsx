@@ -17,11 +17,11 @@ const FileUpload = ({ product, setProduct, setLoading }) => {
             });
             console.log(image.data);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ image]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [image]);
 
     const fileUpload = (e) => {
-        setLoading(true)
+        setLoading(true);
         let file = e.target.files[0];
         if (file) {
             Resizer.imageFileResizer(
@@ -29,14 +29,13 @@ const FileUpload = ({ product, setProduct, setLoading }) => {
                 720,
                 720,
                 'JPEG',
-                100,    
+                100,
                 0,
-                (uri) => {       
-                    dispatch(uploadImage(uri));
+                (uri) => {
+                    dispatch(uploadImage(uri)).then(() => setLoading(false));
                 },
                 'base64',
             );
-            setLoading(false)
         }
     };
     return (

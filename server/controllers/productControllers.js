@@ -41,10 +41,34 @@ export const deleteProduct = async (req, res) => {
 };
 
 export const getProduct = async (req, res) => {
-    const product = await Product.findOne({ slug: req.params.slug });
+    const product = await Product.findOne({ slug: req.params.slug }).populate(
+        'category',
+    );
     if (product) {
+        console.log('==================>', product);
         res.json(product);
     } else {
         res.status(404).send('Product not found');
+    }
+};
+
+export const updateProduct = async (req, res) => {
+    console.log('========req.body===========>', req.body);
+    try {
+        if (req.body.title) {
+            req.body.slug = slugify(req.body.title);
+        }
+        const updated = await Product.findOneAndUpdate(
+            {
+                slug: req.params.slug,
+            },
+            req.body,
+            { new: true },
+        );
+        console.log('========updated===========>', updated);
+        res.json(updated);
+    } catch (error) {
+        console.log(error);
+        res.status(400).send('Update failed');
     }
 };

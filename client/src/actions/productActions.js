@@ -7,6 +7,8 @@ import {
     GET_PRODUCTS_LIMIT_SUCCESS,
     GET_PRODUCT_FAIL,
     GET_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_FAIL,
+    UPDATE_PRODUCT_SUCCESS,
 } from '../constants/productConstants';
 
 export const createProduct = (product) => async (dispatch, getState) => {
@@ -88,6 +90,34 @@ export const getProduct = (slug) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_PRODUCT_FAIL,
+            payload: error.response.data,
+        });
+    }
+};
+
+export const updateProduct = (slug, product) => async (dispatch, getState) => {
+    try {
+        const {
+            userLogin: { user },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: user.token.token,
+            },
+        };
+        const response = await axios.put(
+            `http://localhost:5000/api/products/${slug}`,
+            product,
+            config,
+        );
+        dispatch({
+            type: UPDATE_PRODUCT_SUCCESS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: UPDATE_PRODUCT_FAIL,
             payload: error.response.data,
         });
     }

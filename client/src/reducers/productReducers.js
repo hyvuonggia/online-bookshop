@@ -8,7 +8,10 @@ import {
     GET_PRODUCTS_LIMIT_SUCCESS,
     GET_PRODUCT_FAIL,
     GET_PRODUCT_SUCCESS,
-} from '../constants/productConstants';
+    UPDATE_PRODUCT_FAIL,
+    UPDATE_PRODUCT_RESET,
+    UPDATE_PRODUCT_SUCCESS,
+} from '../constants/productConstants.js';
 
 export const createProductReducer = (state = {}, action) => {
     const { type, payload } = action;
@@ -70,6 +73,24 @@ export const getProductReducer = (state = {}, action) => {
                 product: payload,
             };
         case GET_PRODUCT_FAIL:
+            return {
+                success: false,
+                error: payload,
+            };
+        default:
+            return state;
+    }
+};
+
+export const updateProductReducer = (state = {}, action) => {
+    const { type, payload } = action;
+    switch (type) {
+        case UPDATE_PRODUCT_SUCCESS:
+            return {
+                success: true,
+                product: payload,
+            };
+        case UPDATE_PRODUCT_FAIL:
             return {
                 success: false,
                 error: payload,
