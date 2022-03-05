@@ -1,6 +1,14 @@
 import slugify from 'slugify';
 import Product from '../models/productModel.js';
 
+/**
+ * @description Create new book
+ * @route /api/products
+ * @access private/admin
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 export const createProduct = async (req, res) => {
     try {
         req.body.slug = slugify(req.body.title);
@@ -17,11 +25,27 @@ export const createProduct = async (req, res) => {
     }
 };
 
+/**
+ * @description Get all books
+ * @route /api/products
+ * @access public
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 export const getProducts = async (req, res) => {
     const products = await Product.find({});
     res.json(products);
 };
 
+/**
+ * @description Get all books limit
+ * @route /api/products
+ * @access public
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 export const getProductsLimit = async (req, res) => {
     const products = await Product.find({})
         .limit(req.params.limit)
@@ -29,6 +53,14 @@ export const getProductsLimit = async (req, res) => {
     res.json(products);
 };
 
+/**
+ * @description Delete a book
+ * @route /api/products/:slug
+ * @access private/admin
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 export const deleteProduct = async (req, res) => {
     const deletedProduct = await Product.findOneAndDelete({
         slug: req.params.slug,
@@ -40,6 +72,14 @@ export const deleteProduct = async (req, res) => {
     }
 };
 
+/**
+ * @description Get a book
+ * @route /api/products/:slug
+ * @access public
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 export const getProduct = async (req, res) => {
     const product = await Product.findOne({ slug: req.params.slug }).populate(
         'category',
@@ -52,6 +92,14 @@ export const getProduct = async (req, res) => {
     }
 };
 
+/**
+ * @description Update a book
+ * @route /api/products/:slug
+ * @access private/admin
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 export const updateProduct = async (req, res) => {
     console.log('========req.body===========>', req.body);
     try {

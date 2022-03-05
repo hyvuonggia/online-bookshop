@@ -26,9 +26,6 @@ export const createUser = async (req, res) => {
         console.log('USER CREATED', newUser);
         res.json(newUser);
     }
-    // res.json({
-    //     data: 'Create user',
-    // });
 };
 
 /**
