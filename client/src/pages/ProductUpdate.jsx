@@ -26,15 +26,12 @@ const ProductUpdate = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (!productDetail) {
+        if (!productDetail || match.slug !== productDetail.slug) {
             dispatch(getProduct(match.slug));
         } else {
             setProduct(productDetail);
         }
-
-        // dispatch(getProduct(match.slug)).then((p) => {
-        //     setProduct({ ...product, ...p.data });
-        // });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productDetail]);
 
     const handleChange = (e) => {
@@ -118,7 +115,6 @@ const ProductUpdate = () => {
                         name='quantity'
                         value={product.quantity}
                         onChange={handleChange}
-                        
                     />
                 </Form.Group>
                 <Form.Group>
