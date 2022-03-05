@@ -28,7 +28,7 @@ export const getCategoriesReducer = (state = { categories: [] }, action) => {
     }
 };
 
-export const getCategoryReducer = (state = { category: {} }, action) => {
+export const getCategoryReducer = (state = {}, action) => {
     const { type, payload } = action;
     switch (type) {
         case GET_CATEGORY_SUCCESS:
@@ -42,9 +42,7 @@ export const getCategoryReducer = (state = { category: {} }, action) => {
                 error: payload,
             };
         case GET_CATEGORY_RESET:
-            return {
-                category: {},
-            };
+            return {};
         default:
             return state;
     }

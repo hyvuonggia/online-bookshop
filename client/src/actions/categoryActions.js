@@ -33,7 +33,6 @@ export const getCategory = (slug) => async (dispatch) => {
         const response = await axios.get(
             `http://localhost:5000/api/categories/${slug}`,
         );
-        
         dispatch({
             type: GET_CATEGORY_SUCCESS,
             payload: response.data,
@@ -73,35 +72,36 @@ export const createCategory = (name) => async (dispatch, getState) => {
     return response;
 };
 
-export const updateCategory = (slug, category) => async (dispatch, getState) => {
-    try {
-        const {
-            userLogin: { user },
-        } = getState();
+export const updateCategory =
+    (slug, category) => async (dispatch, getState) => {
+        try {
+            const {
+                userLogin: { user },
+            } = getState();
 
-        const config = {
-            headers: {
-                Authorization: user.token.token,
-            },
-        };
+            const config = {
+                headers: {
+                    Authorization: user.token.token,
+                },
+            };
 
-        const response = await axios.put(
-            `http://localhost:5000/api/categories/${slug}`,
-            category,
-            config,
-        );
-        dispatch({
-            type: UPDATE_CATEGORY_SUCCESS,
-            payload: response.data,
-        });
-        return response;
-    } catch (error) {
-        dispatch({
-            type: UPDATE_CATEGORY_FAIL,
-            payload: error.response.data,
-        });
-    }
-};
+            const response = await axios.put(
+                `http://localhost:5000/api/categories/${slug}`,
+                category,
+                config,
+            );
+            dispatch({
+                type: UPDATE_CATEGORY_SUCCESS,
+                payload: response.data,
+            });
+            return response;
+        } catch (error) {
+            dispatch({
+                type: UPDATE_CATEGORY_FAIL,
+                payload: error.response.data,
+            });
+        }
+    };
 
 export const deleteCategory = (slug) => async (dispatch, getState) => {
     try {

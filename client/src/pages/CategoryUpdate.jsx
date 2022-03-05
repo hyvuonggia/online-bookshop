@@ -14,20 +14,16 @@ const CategoryUpdate = () => {
 
     const [name, setName] = useState('');
 
-    const { category } = useSelector((state) => state.getCategory);
-
-    //TODO: Pre-fill category when update
+    // const { category } = useSelector((state) => state.getCategory);
 
     useEffect(() => {
-        dispatch(getCategory(match.slug));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
+        dispatch(getCategory(match.slug)).then((c) => setName(c.data.name));
+    }, [dispatch, match.slug]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateCategory(match.slug, { name }))
             .then((res) => {
-                setName('');
                 toast.success(`"${res.data.name}" updated`);
                 dispatch({
                     type: GET_CATEGORY_RESET,
@@ -52,7 +48,7 @@ const CategoryUpdate = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </Form.Group>
-                <Button type='submit' variant='dark'>
+                <Button type='submit' variant='dark' disabled={!name}>
                     Submit
                 </Button>
             </Form>
