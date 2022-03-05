@@ -36,8 +36,8 @@ const FileUpload = ({ product, setProduct, setLoading }) => {
                 },
                 'base64',
             );
+            setLoading(false)
         }
-        setLoading(false)
     };
     return (
         <Form.Group>

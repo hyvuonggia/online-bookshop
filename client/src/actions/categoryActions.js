@@ -23,10 +23,7 @@ export const getCategories = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_CATEGORIES_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: error.response.data,
         });
     }
 };
@@ -46,10 +43,7 @@ export const getCategory = (slug) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_CATEGORY_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: error.response.data,
         });
     }
 };
@@ -104,10 +98,7 @@ export const updateCategory = (slug, category) => async (dispatch, getState) => 
     } catch (error) {
         dispatch({
             type: UPDATE_CATEGORY_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: error.response.data,
         });
     }
 };
@@ -135,10 +126,7 @@ export const deleteCategory = (slug) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: DELETE_CATEGORY_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: error.response.data,
         });
     }
 };

@@ -50,15 +50,16 @@ const ProductCreate = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(createProduct(product));
-        setProduct({
-            title: '',
-            author: '',
-            description: '',
-            price: '',
-            quantity: '',
-            category: '',
-            image: '',
-        });
+        // setProduct({
+        //     title: '',
+        //     author: '',
+        //     description: '',
+        //     price: '',
+        //     quantity: '',
+        //     category: '',
+        //     image: '',
+        // });
+        window.location.reload();
     };
 
     const handleChange = (e) => {
@@ -74,6 +75,23 @@ const ProductCreate = () => {
     return (
         <FormContainer onSubmit>
             <h1>Add new product</h1>
+            <img
+                src={
+                    product.image
+                        ? product.image.url
+                        : 'https://crossfitbbros.com/bbros-1/wp-content/uploads/2021/01/no-photo-available.png'
+                }
+                alt='preview'
+                width='100px'
+                height='auto'
+            />
+            <Form.Group>
+                <FileUpload
+                    product={product}
+                    setProduct={setProduct}
+                    setLoading={setLoading}
+                />
+            </Form.Group>
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
                     <Form.Label>Title</Form.Label>
@@ -139,11 +157,7 @@ const ProductCreate = () => {
                         ))}
                     </Form.Select>
                 </Form.Group>
-                <FileUpload
-                    product={product}
-                    setProduct={setProduct}
-                    setLoading={setLoading}
-                />
+
                 <Button
                     variant='dark'
                     type='submit'
@@ -152,7 +166,7 @@ const ProductCreate = () => {
                         !product.price ||
                         !product.quantity ||
                         !product.category ||
-                        // !product.image ||
+                        !product.image ||
                         loading
                     }
                 >

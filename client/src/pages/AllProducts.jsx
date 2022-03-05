@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Button, ButtonGroup, Card, Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { LinkContainer } from 'react-router-bootstrap';
 import { toast } from 'react-toastify';
 import { deleteProduct, getProductsLimit } from '../actions/productActions';
 import { DELETE_PRODUCT_RESET } from '../constants/productConstants';
@@ -21,7 +22,7 @@ const AllProducts = () => {
             dispatch(getProductsLimit(100));
             toast.success(`Book "${product.title}" deleted`);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, success]);
 
     const handleDelete = (slug) => {
@@ -60,9 +61,13 @@ const AllProducts = () => {
                                     size='md'
                                     style={{ width: '100%' }}
                                 >
-                                    <Button variant='dark'>
-                                        <i className='fas fa-pen' />
-                                    </Button>
+                                    <LinkContainer
+                                        to={`/admin/product/${product.slug}`}
+                                    >
+                                        <Button variant='dark'>
+                                            <i className='fas fa-pen' />
+                                        </Button>
+                                    </LinkContainer>
                                     <Button
                                         variant='danger'
                                         onClick={() =>

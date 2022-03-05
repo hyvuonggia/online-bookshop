@@ -5,6 +5,8 @@ import {
     DELETE_PRODUCT_FAIL,
     DELETE_PRODUCT_SUCCESS,
     GET_PRODUCTS_LIMIT_SUCCESS,
+    GET_PRODUCT_FAIL,
+    GET_PRODUCT_SUCCESS,
 } from '../constants/productConstants';
 
 export const createProduct = (product) => async (dispatch, getState) => {
@@ -39,7 +41,7 @@ export const createProduct = (product) => async (dispatch, getState) => {
 
 export const getProductsLimit = (limit) => async (dispatch) => {
     const response = await axios.get(
-        `http://localhost:5000/api/products/${limit}`,
+        `http://localhost:5000/api/products/limit/${limit}`,
     );
     dispatch({
         type: GET_PRODUCTS_LIMIT_SUCCESS,
@@ -69,6 +71,23 @@ export const deleteProduct = (slug) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: DELETE_PRODUCT_FAIL,
+            payload: error.response.data,
+        });
+    }
+};
+
+export const getProduct = (slug) => async (dispatch) => {
+    try {
+        const response = await axios.get(
+            `http://localhost:5000/api/products/${slug}`,
+        );
+        dispatch({
+            type: GET_PRODUCT_SUCCESS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_PRODUCT_FAIL,
             payload: error.response.data,
         });
     }

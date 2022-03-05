@@ -49,7 +49,7 @@ export const createCategory = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-export const readCategory = async (req, res) => {
+export const getCategory = async (req, res) => {
     const category = await Category.findOne({ slug: req.params.slug });
     if (category) {
         res.json(category);

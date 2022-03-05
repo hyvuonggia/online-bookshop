@@ -3,7 +3,7 @@ import {
     createCategory,
     deleteCategory,
     listCategories,
-    readCategory,
+    getCategory,
     updateCategory,
 } from '../controllers/categoryControllers.js';
 import { adminCheck, authCheck } from '../middlewares/authMiddleware.js';
@@ -17,7 +17,7 @@ router
 
 router
     .route('/:slug')
-    .get(readCategory)
+    .get(getCategory)
     .put(authCheck, adminCheck, updateCategory)
     .delete(authCheck, adminCheck, deleteCategory);
 

@@ -39,3 +39,12 @@ export const deleteProduct = async (req, res) => {
         res.status(404).send('Book not found');
     }
 };
+
+export const getProduct = async (req, res) => {
+    const product = await Product.findOne({ slug: req.params.slug });
+    if (product) {
+        res.json(product);
+    } else {
+        res.status(404).send('Product not found');
+    }
+};
