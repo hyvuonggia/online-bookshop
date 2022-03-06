@@ -3,6 +3,7 @@ import { Button, Form, InputGroup, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { getCategories } from '../actions/categoryActions';
 import { getProduct, updateProduct } from '../actions/productActions';
 import FileUpload from '../components/FileUpload';
 import FormContainer from '../components/FormContainer';
@@ -28,6 +29,7 @@ const ProductUpdate = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        dispatch(getCategories());
         if (!productDetail || match.slug !== productDetail.slug) {
             dispatch(getProduct(match.slug));
         } else {
@@ -114,14 +116,6 @@ const ProductUpdate = () => {
                 <Form.Group>
                     <Form.Label>Category</Form.Label>
                     <Form.Select name='category' onChange={handleChange}>
-                        <option
-                            value={
-                                productDetail.category &&
-                                productDetail.category._id
-                            }
-                        >
-                            ---Please select---
-                        </option>
                         {categories.map((category) => (
                             <option key={category._id} value={category._id}>
                                 {category.name}

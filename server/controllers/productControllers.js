@@ -111,7 +111,7 @@ export const updateProduct = async (req, res) => {
             },
             req.body,
             { new: true },
-        );
+        ).populate('category');
         res.json(updated);
     } catch (error) {
         console.log(error);
