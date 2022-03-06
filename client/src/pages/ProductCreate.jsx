@@ -82,7 +82,6 @@ const ProductCreate = () => {
                         name='title'
                         value={product.title}
                         onChange={handleChange}
-                        autoFocus
                     />
                 </Form.Group>
                 <Form.Group>
@@ -92,7 +91,6 @@ const ProductCreate = () => {
                         name='author'
                         value={product.author}
                         onChange={handleChange}
-                        autoFocus
                     />
                 </Form.Group>
                 <Form.Group>
@@ -102,7 +100,6 @@ const ProductCreate = () => {
                         name='description'
                         value={product.description}
                         onChange={handleChange}
-                        autoFocus
                     />
                 </Form.Group>
                 <Form.Group>
@@ -114,7 +111,6 @@ const ProductCreate = () => {
                             name='price'
                             value={product.price}
                             onChange={handleChange}
-                            autoFocus
                         />
                     </InputGroup>
                 </Form.Group>
@@ -125,7 +121,6 @@ const ProductCreate = () => {
                         name='quantity'
                         value={product.quantity}
                         onChange={handleChange}
-                        autoFocus
                     />
                 </Form.Group>
                 <Form.Group>
