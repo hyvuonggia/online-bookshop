@@ -26,6 +26,7 @@ import CategoryUpdate from './pages/CategoryUpdate';
 import ProductCreate from './pages/ProductCreate';
 import AllProducts from './pages/AllProducts';
 import ProductUpdate from './pages/ProductUpdate';
+import Coupon from './pages/Coupon';
 
 function App() {
     const dispatch = useDispatch();
@@ -112,6 +113,7 @@ function App() {
                                 path='/admin/products/'
                                 element={<AllProducts />}
                             />
+                            <Route path='/admin/coupon/' element={<Coupon />} />
                         </Route>
                     </Route>
                 </Routes>
