@@ -9,6 +9,7 @@ import {
     GET_PRODUCT_FAIL,
     GET_PRODUCT_SUCCESS,
     UPDATE_PRODUCT_FAIL,
+    UPDATE_PRODUCT_RESET,
     UPDATE_PRODUCT_SUCCESS,
 } from '../constants/productConstants.js';
 
@@ -87,13 +88,14 @@ export const updateProductReducer = (state = {}, action) => {
         case UPDATE_PRODUCT_SUCCESS:
             return {
                 success: true,
-                product: payload,
             };
         case UPDATE_PRODUCT_FAIL:
             return {
                 success: false,
                 error: payload,
             };
+        case UPDATE_PRODUCT_RESET:
+            return {};
         default:
             return state;
     }
