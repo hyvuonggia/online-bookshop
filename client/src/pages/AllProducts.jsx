@@ -49,7 +49,7 @@ const AllProducts = () => {
     };
 
     return (
-        <div className='p-5'>
+        <div className='px-5'>
             <h1>Products</h1>
             <Row className='g-4' lg={5} md={2} sm={1}>
                 {products.map((product) => (
@@ -71,11 +71,11 @@ const AllProducts = () => {
                             <Card.Body>
                                 <Card.Title>{product.title}</Card.Title>
                                 <Card.Text>
-                                    {product.description.length < 20
+                                    {product.description.length < 15
                                         ? product.description
                                         : `${product.description.substring(
                                               0,
-                                              20,
+                                              15,
                                           )}...`}
                                 </Card.Text>
                                 <ButtonGroup

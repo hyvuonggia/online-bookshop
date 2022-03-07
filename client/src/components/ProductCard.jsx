@@ -10,8 +10,8 @@ const ProductCard = ({ product }) => {
                     src={product.image.url}
                     variant='top'
                     style={{
-                        height: '200px',
-                        width: '200px',
+                        height: '150px',
+                        width: '250px',
                         objectFit: 'cover',
                     }}
                 />
@@ -19,13 +19,18 @@ const ProductCard = ({ product }) => {
             <Card.Body>
                 <Link
                     to={`/product/${product.slug}`}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: 'none', color: 'black' }}
                 >
                     <Card.Title as='div'>
                         <strong>{product.title}</strong>
                     </Card.Title>
                 </Link>
-                <Card.Text as='div'>{product.description}</Card.Text>
+                <Card.Text as='div'>
+                    {' '}
+                    {product.description.length < 15
+                        ? product.description
+                        : `${product.description.substring(0, 15)}...`}
+                </Card.Text>
                 <Card.Text as='h3'>${product.price}</Card.Text>
             </Card.Body>
         </Card>

@@ -10,14 +10,17 @@ const Home = () => {
     const { products } = useSelector((state) => state.getProductsLimit);
 
     useEffect(() => {
-        dispatch(getProductsLimit(3));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        dispatch(getProductsLimit(8));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <Container>
             <Row>
                 {products.map((product) => (
-                    <Col key={product._id} md={3} lg={4} sm={2}>
+                    <Col
+                        key={product._id}
+                        style={{ display: 'flex', justifyContent: 'center' }}
+                    >
                         <ProductCard product={product} />
                     </Col>
                 ))}
