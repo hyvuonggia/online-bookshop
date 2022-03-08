@@ -6,12 +6,17 @@ import {
     getProductsLimit,
     getProduct,
     updateProduct,
+    getProductsByNewArrivalOrBestSeller,
 } from '../controllers/productControllers.js';
 import { adminCheck, authCheck } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.route('/').get(getProducts).post(authCheck, adminCheck, createProduct);
+router
+    .route('/')
+    .get(getProducts)
+    .post(authCheck, adminCheck, createProduct)
+    .post(getProductsByNewArrivalOrBestSeller);
 router.route('/limit/:limit').get(getProductsLimit);
 router
     .route('/:slug')

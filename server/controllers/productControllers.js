@@ -3,7 +3,7 @@ import Product from '../models/productModel.js';
 
 /**
  * @description Create new book
- * @route /api/products
+ * @route POST /api/products
  * @access private/admin
  *
  * @param {*} req
@@ -27,7 +27,7 @@ export const createProduct = async (req, res) => {
 
 /**
  * @description Get all books
- * @route /api/products
+ * @route GET /api/products
  * @access public
  *
  * @param {*} req
@@ -40,7 +40,7 @@ export const getProducts = async (req, res) => {
 
 /**
  * @description Get all books limit
- * @route /api/products
+ * @route GET /api/products
  * @access public
  *
  * @param {*} req
@@ -55,7 +55,7 @@ export const getProductsLimit = async (req, res) => {
 
 /**
  * @description Delete a book
- * @route /api/products/:slug
+ * @route DELETE /api/products/:slug
  * @access private/admin
  *
  * @param {*} req
@@ -74,7 +74,7 @@ export const deleteProduct = async (req, res) => {
 
 /**
  * @description Get a book
- * @route /api/products/:slug
+ * @route GET /api/products/:slug
  * @access public
  *
  * @param {*} req
@@ -94,7 +94,7 @@ export const getProduct = async (req, res) => {
 
 /**
  * @description Update a book
- * @route /api/products/:slug
+ * @route PUT /api/products/:slug
  * @access private/admin
  *
  * @param {*} req
@@ -117,4 +117,20 @@ export const updateProduct = async (req, res) => {
         console.log(error);
         res.status(400).send('Update failed');
     }
+};
+
+/**
+ * @description Get products by new arrivals or best seller
+ * @route POST /api/products
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const getProductsByNewArrivalOrBestSeller = async (req, res) => {
+    const { sort, order, limit } = req.body;
+    const products = await Product.find({})
+        .populate('category')
+        .sort([[sort, order]])
+        .limit(limit);
+    res.json(products);
 };
