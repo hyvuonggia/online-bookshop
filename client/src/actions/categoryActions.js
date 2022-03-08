@@ -92,6 +92,7 @@ export const updateCategory =
                 category,
                 config,
             );
+            console.log('------------------>response', response);
             dispatch({
                 type: UPDATE_CATEGORY_SUCCESS,
                 payload: response.data,

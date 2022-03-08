@@ -14,6 +14,7 @@ import {
     deleteProductReducer,
     getProductReducer,
     getProductsLimitReducer,
+    getProductsReducer,
     updateProductReducer,
 } from './reducers/productReducers';
 import { uploadImageReducer } from './reducers/imageReducers';
@@ -31,6 +32,7 @@ const reducer = combineReducers({
     deleteProduct: deleteProductReducer,
     getProduct: getProductReducer,
     updateProduct: updateProductReducer,
+    getProducts: getProductsReducer,
 });
 
 const middleware = [thunk];

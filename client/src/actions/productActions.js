@@ -5,6 +5,7 @@ import {
     DELETE_PRODUCT_FAIL,
     DELETE_PRODUCT_SUCCESS,
     GET_PRODUCTS_LIMIT_SUCCESS,
+    GET_PRODUCTS_SUCCESS,
     GET_PRODUCT_FAIL,
     GET_PRODUCT_SUCCESS,
     UPDATE_PRODUCT_FAIL,
@@ -121,4 +122,15 @@ export const updateProduct = (slug, product) => async (dispatch, getState) => {
             payload: error.response.data,
         });
     }
+};
+
+export const getProducts = (sort, order, limit) => async (dispatch) => {
+    const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/products`,
+        { sort, order, limit },
+    );
+    dispatch({
+        type: GET_PRODUCTS_SUCCESS,
+        payload: response.data,
+    });
 };

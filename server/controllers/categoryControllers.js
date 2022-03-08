@@ -68,12 +68,12 @@ export const getCategory = async (req, res) => {
  */
 export const updateCategory = async (req, res) => {
     const { name } = req.body;
+    // TODO: Fix update already existed category
     const updatedCategory = await Category.findOneAndUpdate(
         { slug: req.params.slug },
         { name, slug: slugify(name) },
         { new: true },
     );
-    console.log('UPDATED CATEGORY =>>>>>>>>>>', updatedCategory);
     if (updatedCategory) {
         res.json(updatedCategory);
     } else {

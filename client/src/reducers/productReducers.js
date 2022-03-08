@@ -6,6 +6,7 @@ import {
     DELETE_PRODUCT_RESET,
     DELETE_PRODUCT_SUCCESS,
     GET_PRODUCTS_LIMIT_SUCCESS,
+    GET_PRODUCTS_SUCCESS,
     GET_PRODUCT_FAIL,
     GET_PRODUCT_SUCCESS,
     UPDATE_PRODUCT_FAIL,
@@ -96,6 +97,19 @@ export const updateProductReducer = (state = {}, action) => {
             };
         case UPDATE_PRODUCT_RESET:
             return {};
+        default:
+            return state;
+    }
+};
+
+export const getProductsReducer = (state = { products: [] }, action) => {
+    const { type, payload } = action;
+    switch (type) {
+        case GET_PRODUCTS_SUCCESS:
+            return {
+                success: true,
+                products: payload,
+            };
         default:
             return state;
     }
