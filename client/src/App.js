@@ -27,6 +27,7 @@ import ProductCreate from './pages/ProductCreate';
 import AllProducts from './pages/AllProducts';
 import ProductUpdate from './pages/ProductUpdate';
 import Coupon from './pages/Coupon';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
     const dispatch = useDispatch();
@@ -71,6 +72,7 @@ function App() {
                         path='/forgot/password'
                         element={<ForgotPassword />}
                     />
+                    <Route path='/product/:slug' element={<ProductDetail />} />
                     <Route element={<ProtectedRoute />}>
                         <Route element={<AppLayout />}>
                             <Route
