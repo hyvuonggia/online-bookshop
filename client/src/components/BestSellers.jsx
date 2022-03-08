@@ -4,18 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../actions/productActions';
 import ProductCard from '../components/ProductCard';
 
-const NewArrivals = () => {
+const BestSellers = () => {
     const dispatch = useDispatch();
 
     const { products } = useSelector((state) => state.getProducts);
 
     useEffect(() => {
-        dispatch(getProducts('createdAt', 'desc', 4));
+        dispatch(getProducts('sold', 'desc', 4));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <>
-            <h2 className='text-center p-4'>NEW ARRIVALS</h2>
+            <h2 className='text-center p-4'>BEST SELLERS</h2>
             <Row>
                 {products.map((product) => (
                     <Col
@@ -32,4 +32,4 @@ const NewArrivals = () => {
     );
 };
 
-export default NewArrivals;
+export default BestSellers;
