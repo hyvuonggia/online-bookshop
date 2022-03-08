@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../actions/productActions';
+import { getProductsByCreatedDate } from '../actions/productActions';
+// import { getProducts } from '../actions/productActions';
 import ProductCard from '../components/ProductCard';
 
 const NewArrivals = () => {
     const dispatch = useDispatch();
 
-    const { products } = useSelector((state) => state.getProducts);
+    const { products } = useSelector((state) => state.getProductsByCreatedDate);
 
     useEffect(() => {
-        dispatch(getProducts('createdAt', 'desc', 4));
+        dispatch(getProductsByCreatedDate());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

@@ -6,7 +6,8 @@ import {
     getProductsLimit,
     getProduct,
     updateProduct,
-    getProductsByNewArrivalOrBestSeller,
+    getProductsByCreatedDate,
+    getProductsBySold,
 } from '../controllers/productControllers.js';
 import { adminCheck, authCheck } from '../middlewares/authMiddleware.js';
 
@@ -15,10 +16,13 @@ const router = express.Router();
 router
     .route('/')
     .get(getProducts)
-    .post(getProductsByNewArrivalOrBestSeller)
     .post(authCheck, adminCheck, createProduct);
 
 router.route('/limit/:limit').get(getProductsLimit);
+
+router.route('/new-arrivals').get(getProductsByCreatedDate);
+
+router.route('/best-sellers').get(getProductsBySold);
 
 router
     .route('/:slug')

@@ -13,7 +13,6 @@ import {
 } from '../constants/categoryConstants';
 
 export const getCategories = () => async (dispatch) => {
-    console.log('process.env.REACT_APP_API_URL', process.env.REACT_APP_API_URL);
     try {
         const response = await axios.get(
             `${process.env.REACT_APP_API_URL}/categories`,
@@ -92,7 +91,6 @@ export const updateCategory =
                 category,
                 config,
             );
-            console.log('------------------>response', response);
             dispatch({
                 type: UPDATE_CATEGORY_SUCCESS,
                 payload: response.data,

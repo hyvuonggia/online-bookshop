@@ -34,6 +34,11 @@ const ProductCreate = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        dispatch(getCategories());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
         dispatch({
             type: CREATE_PRODUCT_RESET,
         });
@@ -44,8 +49,8 @@ const ProductCreate = () => {
         } else {
             toast.error(error);
         }
-        dispatch(getCategories());
-    }, [dispatch, createdProduct, success, error]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [success]);
 
     const handleSubmit = (e) => {
         e.preventDefault();

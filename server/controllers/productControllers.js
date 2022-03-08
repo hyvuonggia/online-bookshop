@@ -85,7 +85,6 @@ export const getProduct = async (req, res) => {
         'category',
     );
     if (product) {
-        console.log('==================>', product);
         res.json(product);
     } else {
         res.status(404).send('Product not found');
@@ -121,16 +120,30 @@ export const updateProduct = async (req, res) => {
 
 /**
  * @description Get products by new arrivals or best seller
- * @route POST /api/products
+ * @route GET /api/products/new-arrivals
  *
  * @param {*} req
  * @param {*} res
  */
-export const getProductsByNewArrivalOrBestSeller = async (req, res) => {
-    const { sort, order, limit } = req.body;
+export const getProductsByCreatedDate = async (req, res) => {
     const products = await Product.find({})
         .populate('category')
-        .sort([[sort, order]])
-        .limit(limit);
+        .sort([['createdAt', 'desc']])
+        .limit(4);
+    res.json(products);
+};
+
+/**
+ * @description Get products by new arrivals or best seller
+ * @route GET /api/products/best-sellers
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const getProductsBySold = async (req, res) => {
+    const products = await Product.find({})
+        .populate('category')
+        .sort([['sold', 'desc']])
+        .limit(4);
     res.json(products);
 };

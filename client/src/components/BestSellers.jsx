@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../actions/productActions';
+import { getProductsBySold } from '../actions/productActions';
+// import { getProducts } from '../actions/productActions';
 import ProductCard from '../components/ProductCard';
 
 const BestSellers = () => {
     const dispatch = useDispatch();
 
-    const { products } = useSelector((state) => state.getProducts);
+    const { products } = useSelector((state) => state.getProductsBySold);
 
     useEffect(() => {
-        dispatch(getProducts('sold', 'desc', 4));
+        // dispatch(getProducts('sold', 'desc', 4));
+        dispatch(getProductsBySold());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

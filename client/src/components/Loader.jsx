@@ -1,19 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Spinner } from 'react-bootstrap';
 
 const Loader = () => {
     return (
-        // <Fragment>
-        //     {/* <div
-        //         style={{
-        //             position: 'fixed',
-        //             width: '100%',
-        //             height: '100%',
-        //             background: 'rgba(0,0,0,0.2)',
-        //         }}
-        //     ></div> */}
-
-        // </Fragment>
         <Spinner
             variant='primary'
             animation='border'
