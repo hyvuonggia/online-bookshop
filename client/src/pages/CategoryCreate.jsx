@@ -100,7 +100,7 @@ const CategoryCreate = () => {
                         .map((category) => (
                             <tr key={category._id}>
                                 <td width='100%'>{category.name}</td>
-                                <td>
+                                {/* <td>
                                     <Link
                                         to={`/admin/category/${category.slug}`}
                                     >
@@ -108,7 +108,7 @@ const CategoryCreate = () => {
                                             <i className='fas fa-pencil' />
                                         </Button>
                                     </Link>
-                                </td>
+                                </td> */}
                                 <td>
                                     <Button
                                         variant='danger'
