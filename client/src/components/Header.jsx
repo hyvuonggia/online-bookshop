@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
@@ -17,8 +16,7 @@ const Header = () => {
         dispatch(logout());
         navigate('/');
     };
-
-    // FIXME: Header have <a> tag inside another <a> tag
+    
     return (
         <div>
             <Navbar variant='dark' bg='dark' expand='lg'>
@@ -46,51 +44,52 @@ const Header = () => {
                                         }`}
                                         id='basic-nav-dropdown'
                                         className='pt-2'
+                                        menuVariant='dark'
                                     >
                                         {user && user.role === 'user' ? (
-                                            <NavDropdown.Item>
-                                                <Link
-                                                    to='/user/history'
-                                                    style={{
-                                                        textDecoration: 'none',
-                                                    }}
-                                                >
+                                            <LinkContainer
+                                                to='/user/history'
+                                                style={{
+                                                    textDecoration: 'none',
+                                                }}
+                                            >
+                                                <NavDropdown.Item>
                                                     Dashboard
-                                                </Link>
-                                            </NavDropdown.Item>
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
                                         ) : (
-                                            <NavDropdown.Item>
-                                                <Link
-                                                    to='/admin/dashboard'
-                                                    style={{
-                                                        textDecoration: 'none',
-                                                    }}
-                                                >
+                                            <LinkContainer
+                                                to='/admin/dashboard'
+                                                style={{
+                                                    textDecoration: 'none',
+                                                }}
+                                            >
+                                                <NavDropdown.Item>
                                                     Dashboard
-                                                </Link>
-                                            </NavDropdown.Item>
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
                                         )}
 
-                                        <NavDropdown.Item>
-                                            <Link
-                                                to='/user/password'
-                                                style={{
-                                                    textDecoration: 'none',
-                                                }}
-                                            >
+                                        <LinkContainer
+                                            to='/user/password'
+                                            style={{
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            <NavDropdown.Item>
                                                 Password
-                                            </Link>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item>
-                                            <Link
-                                                to='/user/wishlist'
-                                                style={{
-                                                    textDecoration: 'none',
-                                                }}
-                                            >
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
+                                        <LinkContainer
+                                            to='/user/wishlist'
+                                            style={{
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            <NavDropdown.Item>
                                                 Wishlist
-                                            </Link>
-                                        </NavDropdown.Item>
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
                                     </NavDropdown>
                                     <Button
                                         className='logout-btn mt-2'

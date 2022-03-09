@@ -95,7 +95,7 @@ const SideBarNav = () => {
                     </Link>
                     <Link
                         to='/user/wishlist'
-                        key='history'
+                        key='wishlist'
                         style={{ textDecoration: 'none' }}
                     >
                         <div className='sidebar-menu-item'>
