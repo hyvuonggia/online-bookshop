@@ -54,7 +54,7 @@ const AllProducts = () => {
             <Row className='g-4' lg={5} md={2} sm={1}>
                 {products.map((product) => (
                     <Col key={product._id}>
-                        <Card style={{ minHeight: '350px' }}>
+                        <Card style={{ minHeight: '350px' }} className='p-1'>
                             <Card.Img
                                 variant='top'
                                 src={
@@ -65,7 +65,7 @@ const AllProducts = () => {
                                 style={{
                                     height: '200px',
                                     width: 'auto',
-                                    objectFit: 'cover',
+                                    objectFit: 'contain',
                                 }}
                             />
                             <Card.Body>

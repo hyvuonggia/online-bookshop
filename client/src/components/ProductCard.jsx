@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
                     style={{
                         height: '150px',
                         width: '250px',
-                        objectFit: 'cover',
+                        objectFit: 'contain',
                     }}
                 />
             </Link>

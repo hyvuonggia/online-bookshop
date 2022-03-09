@@ -35,7 +35,7 @@ const ProductCreate = () => {
 
     useEffect(() => {
         dispatch(getCategories());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -49,7 +49,7 @@ const ProductCreate = () => {
         } else {
             toast.error(error);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [success]);
 
     const handleSubmit = (e) => {
@@ -102,6 +102,8 @@ const ProductCreate = () => {
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         type='text'
+                        as='textarea'
+                        rows={5}
                         name='description'
                         value={product.description}
                         onChange={handleChange}

@@ -87,6 +87,8 @@ const ProductUpdate = () => {
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         type='text'
+                        as='textarea'
+                        rows={5}
                         name='description'
                         value={product.description}
                         onChange={handleChange}
