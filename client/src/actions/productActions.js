@@ -2,6 +2,8 @@ import axios from 'axios';
 import {
     CREATE_PRODUCT_FAIL,
     CREATE_PRODUCT_SUCCESS,
+    CREATE_REVIEW_FAIL,
+    CREATE_REVIEW_SUCCESS,
     DELETE_PRODUCT_FAIL,
     DELETE_PRODUCT_SUCCESS,
     GET_PRODUCTS_BY_CREATED_DATE_SUCCESS,
@@ -125,17 +127,6 @@ export const updateProduct = (slug, product) => async (dispatch, getState) => {
     }
 };
 
-// export const getProducts = (sort, order, limit) => async (dispatch) => {
-//     const response = await axios.post(
-//         `${process.env.REACT_APP_API_URL}/products`,
-//         { sort, order, limit },
-//     );
-//     dispatch({
-//         type: GET_PRODUCTS_SUCCESS,
-//         payload: response.data,
-//     });
-// };
-
 export const getProductsByCreatedDate = () => async (dispatch) => {
     const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/products/new-arrivals`,
@@ -154,4 +145,34 @@ export const getProductsBySold = () => async (dispatch) => {
         type: GET_PRODUCTS_BY_SOLD_SUCCESS,
         payload: response.data,
     });
+};
+
+export const createReview = (slug, review) => async (dispatch, getState) => {
+    console.log('==============================>review', review);
+    try {
+        const {
+            userLogin: { user },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: user.token.token,
+            },
+        };
+        await axios.post(
+            `${process.env.REACT_APP_API_URL}/products/${slug}/reviews`,
+            review,
+            config,
+        );
+
+        dispatch({
+            type: CREATE_REVIEW_SUCCESS,
+        });
+    } catch (error) {
+        dispatch({
+            type: CREATE_REVIEW_FAIL,
+            payload: error.response.data,
+        });
+        // console.log(error.response.data);
+    }
 };

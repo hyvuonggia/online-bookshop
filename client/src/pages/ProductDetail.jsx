@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, Button } from 'react-bootstrap';
+import {
+    Alert,
+    Col,
+    Container,
+    Row,
+    Button,
+    ListGroup,
+    Form,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getProduct } from '../actions/productActions';
+import { toast } from 'react-toastify';
+import { createReview, getProduct } from '../actions/productActions';
+import { CREATE_REVIEW_RESET } from '../constants/productConstants';
 
 const ProductDetail = () => {
     const match = useParams();
@@ -16,9 +26,21 @@ const ProductDetail = () => {
         quantity: '',
         category: '',
         image: '',
+        reviews: [],
+        numReviews: 0,
+    });
+
+    const [review, setReview] = useState({
+        rating: '',
+        comment: '',
     });
 
     const { product: productDetail } = useSelector((state) => state.getProduct);
+
+    const { user } = useSelector((state) => state.userLogin);
+
+    const { success: successCreateReview, error: errorCreateReview } =
+        useSelector((state) => state.createReview);
 
     useEffect(() => {
         if (!productDetail || productDetail.slug !== match.slug) {
@@ -26,7 +48,29 @@ const ProductDetail = () => {
         } else {
             setProduct(productDetail);
         }
-    }, [dispatch, match.slug, productDetail]);
+    }, [dispatch, match.slug, productDetail, review]);
+
+    useEffect(() => {
+        if (successCreateReview) {
+            toast.success('Review submitted');
+            dispatch({ type: CREATE_REVIEW_RESET });
+        }
+    }, [dispatch, successCreateReview]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createReview(match.slug, review));
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setReview((prev) => {
+            return {
+                ...prev,
+                [name]: value,
+            };
+        });
+    };
 
     return (
         <Container className='p-5 h-100'>
@@ -115,6 +159,71 @@ const ProductDetail = () => {
                             </Button>
                         </Col>
                     </Row>
+                </Col>
+            </Row>
+            <Row className='mt-5'>
+                <Col>
+                    <h3>Reviews</h3>
+                    {errorCreateReview && (
+                        <Alert variant='danger'>{errorCreateReview}</Alert>
+                    )}
+                    {product.reviews.length === 0 && (
+                        <Alert variant='warning'>No reviews yet</Alert>
+                    )}
+                    <ListGroup variant='flush'>
+                        <ListGroup.Item>
+                            <h4>Leave a review</h4>
+                            {user ? (
+                                <Form onSubmit={handleSubmit}>
+                                    <Form.Group controlId='rating'>
+                                        <Form.Label>Rating</Form.Label>
+                                        <Form.Control
+                                            as='select'
+                                            value={review.rating}
+                                            name='rating'
+                                            onChange={handleChange}
+                                        >
+                                            <option value=''>Select</option>
+                                            <option value='1'>1</option>
+                                            <option value='2'>2</option>
+                                            <option value='3'>3</option>
+                                            <option value='4'>4</option>
+                                            <option value='5'>5</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Form.Group controlId='comment'>
+                                        <Form.Label>Comment</Form.Label>
+                                        <Form.Control
+                                            as='textarea'
+                                            row={3}
+                                            name='comment'
+                                            onChange={handleChange}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                    <Button
+                                        variant='dark'
+                                        type='submit'
+                                        className='mt-2'
+                                    >
+                                        Submit
+                                    </Button>
+                                </Form>
+                            ) : (
+                                <Alert variant='warning'>
+                                    Please <Link to='/login'>sign in</Link> to
+                                    write review
+                                </Alert>
+                            )}
+                        </ListGroup.Item>
+                        {product.reviews.map((review) => (
+                            <ListGroup.Item key={review._id}>
+                                <strong>{review.name}</strong>
+                                <div>{review.rating}</div>
+                                <p>{review.createdAt.substring(0, 10)}</p>
+                                <p>{review.comment}</p>
+                            </ListGroup.Item>
+                        ))}
+                    </ListGroup>
                 </Col>
             </Row>
         </Container>

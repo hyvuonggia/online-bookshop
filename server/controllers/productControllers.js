@@ -158,34 +158,40 @@ export const getProductsBySold = async (req, res) => {
  * @param {*} res
  */
 export const createProductReview = async (req, res) => {
-    const { rating, comment } = req.body;
-    const user = await User.findOne({ email: req.user.email });
-    const product = await Product.findOne({ slug: req.params.slug });
-    if (product) {
-        const alreadyReviewed = product.reviews.find(
-            (r) => r.user._id.toString() === user._id.toString(),
-        );
-        if (alreadyReviewed) {
-            res.status(400).send('Already reviewed');
-        }
-        const review = {
-            name: user.name,
-            rating: Number(rating),
-            comment,
-            user,
-        };
-        product.reviews.push(review);
-        product.numReviews = product.reviews.length;
-        product.rating =
-            product.reviews.reduce((acc, item) => {
-                return Number(item.rating) + Number(acc);
-            }, 0) / product.reviews.length;
+    try {
+        const { rating, comment } = req.body;
+        const user = await User.findOne({ email: req.user.email });
+        const product = await Product.findOne({ slug: req.params.slug });
+        if (product) {
+            const alreadyReviewed = product.reviews.find(
+                (r) => r.user._id.toString() === user._id.toString(),
+            );
+            if (alreadyReviewed) {
+                res.status(400).send('Already reviewed');
+                return;
+            }
+            const review = {
+                name: user.name,
+                rating: Number(rating),
+                comment,
+                user,
+            };
+            product.reviews.push(review);
+            product.numReviews = product.reviews.length;
+            product.rating =
+                product.reviews.reduce((acc, item) => {
+                    return Number(item.rating) + Number(acc);
+                }, 0) / product.reviews.length;
 
-        await product.save();
-        res.status(201).json({
-            message: 'Review added',
-        });
-    } else {
-        res.status(404).send('Product not found');
+            await product.save();
+            res.status(201).json({
+                message: 'Review added',
+            });
+        } else {
+            res.status(404).send('Product not found');
+        }
+    } catch (error) {
+        console.log(error);
+        res.send(error.message);
     }
 };

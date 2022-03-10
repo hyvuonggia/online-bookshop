@@ -11,6 +11,7 @@ import {
 } from './reducers/categoryReducers';
 import {
     createProductReducer,
+    createReviewReducer,
     deleteProductReducer,
     getProductReducer,
     getProductsByCreatedDateReducer,
@@ -35,6 +36,7 @@ const reducer = combineReducers({
     updateProduct: updateProductReducer,
     getProductsByCreatedDate: getProductsByCreatedDateReducer,
     getProductsBySold: getProductsBySoldReducer,
+    createReview: createReviewReducer,
 });
 
 const middleware = [thunk];
