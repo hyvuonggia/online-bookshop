@@ -51,7 +51,7 @@ const AllProducts = () => {
     return (
         <div className='px-5'>
             <h1>Products</h1>
-            <Row className='g-4' lg={5} md={2} sm={1}>
+            <Row className='g-4' lg={4} md={2} sm={1}>
                 {products.map((product) => (
                     <Col key={product._id}>
                         <Card style={{ minHeight: '350px' }} className='p-1'>

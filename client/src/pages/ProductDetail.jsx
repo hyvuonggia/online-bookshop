@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getProduct } from '../actions/productActions';
 
 const ProductDetail = () => {
@@ -63,9 +63,17 @@ const ProductDetail = () => {
                                             <strong>Category:</strong>
                                         </td>
                                         <td className='float-end'>
-                                            {product.category
-                                                ? product.category.name
-                                                : 'Unknown'}
+                                            <Link
+                                                to={
+                                                    product.category
+                                                        ? `/category/${product.category.slug}`
+                                                        : ''
+                                                }
+                                            >
+                                                {product.category
+                                                    ? product.category.name
+                                                    : 'Unknown'}
+                                            </Link>
                                         </td>
                                     </tr>
                                     <tr>

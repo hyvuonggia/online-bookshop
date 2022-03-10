@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import reviewSchema from './reviewModel.js';
 
 const productSchema = new mongoose.Schema(
     {
@@ -29,7 +30,7 @@ const productSchema = new mongoose.Schema(
         category: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Category',
-            required: true,
+            // required: true,
         },
         quantity: {
             type: Number,
@@ -41,18 +42,17 @@ const productSchema = new mongoose.Schema(
         image: {
             type: Object,
         },
-        // shipping: {
-        //     type: String,
-        //     enum: ['Yes', 'No'],
-        // },
-        // rating: [
-        //     {
-        //         star: Number,
-        //         postedBy: {
-        //             type: mongoose.Schema.Types.ObjectId
-        //         }
-        //     }
-        // ]
+        reviews: [reviewSchema],
+        rating: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        numReviews: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
     },
     { timestamps: true },
 );

@@ -8,15 +8,13 @@ import {
     updateProduct,
     getProductsByCreatedDate,
     getProductsBySold,
+    createProductReview,
 } from '../controllers/productControllers.js';
 import { adminCheck, authCheck } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router
-    .route('/')
-    .get(getProducts)
-    .post(authCheck, adminCheck, createProduct);
+router.route('/').get(getProducts).post(authCheck, adminCheck, createProduct);
 
 router.route('/limit/:limit').get(getProductsLimit);
 
@@ -30,4 +28,5 @@ router
     .put(authCheck, adminCheck, updateProduct)
     .delete(authCheck, adminCheck, deleteProduct);
 
+router.route('/:slug/reviews').post(authCheck, createProductReview);
 export default router;

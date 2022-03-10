@@ -1,5 +1,6 @@
 import slugify from 'slugify';
 import Product from '../models/productModel.js';
+import User from '../models/userModel.js';
 
 /**
  * @description Create new book
@@ -146,4 +147,45 @@ export const getProductsBySold = async (req, res) => {
         .sort([['sold', 'desc']])
         .limit(4);
     res.json(products);
+};
+
+/**
+ * @description Create review for product
+ * @route POST /api/products/:slug/reviews
+ * @access private
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const createProductReview = async (req, res) => {
+    const { rating, comment } = req.body;
+    const user = await User.findOne({ email: req.user.email });
+    const product = await Product.findOne({ slug: req.params.slug });
+    if (product) {
+        const alreadyReviewed = product.reviews.find(
+            (r) => r.user._id.toString() === user._id.toString(),
+        );
+        if (alreadyReviewed) {
+            res.status(400).send('Already reviewed');
+        }
+        const review = {
+            name: user.name,
+            rating: Number(rating),
+            comment,
+            user,
+        };
+        product.reviews.push(review);
+        product.numReviews = product.reviews.length;
+        product.rating =
+            product.reviews.reduce((acc, item) => {
+                return Number(item.rating) + Number(acc);
+            }, 0) / product.reviews.length;
+
+        await product.save();
+        res.status(201).json({
+            message: 'Review added',
+        });
+    } else {
+        res.status(404).send('Product not found');
+    }
 };

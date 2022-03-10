@@ -6,6 +6,7 @@ import userRoutes from './routes/userRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import cloudinaryRoutes from './routes/cloudinaryRoutes.js';
+import morgan from 'morgan';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ mongoose
     .then(() => console.log('DB CONNECTED'))
     .catch((error) => console.error(error));
 
+app.use(morgan('dev'));
 app.use(express.json({ limit: '5mb' }));
 app.use(cors());
 
