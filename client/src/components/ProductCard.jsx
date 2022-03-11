@@ -5,7 +5,7 @@ import Rating from './Rating';
 
 const ProductCard = ({ product }) => {
     return (
-        <Card className='m-3 p-1 rounded' style={{ width: 'fit-content' }}>
+        <Card className='m-3 p-2 rounded' style={{ width: 'fit-content' }}>
             <Link to={`/product/${product.slug}`}>
                 <Card.Img
                     src={product.image.url}
@@ -34,7 +34,10 @@ const ProductCard = ({ product }) => {
                         ? product.description
                         : `${product.description.substring(0, 15)}...`}
                 </Card.Text>
-                <Card.Text as='h3'>${product.price}</Card.Text>
+                <br />
+                <Card.Text as='h3' className='text-center'>
+                    <strong>$ {product.price}</strong>
+                </Card.Text>
             </Card.Body>
         </Card>
     );
