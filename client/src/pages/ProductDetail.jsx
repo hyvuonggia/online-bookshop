@@ -44,6 +44,7 @@ const ProductDetail = () => {
         useSelector((state) => state.createReview);
 
     useEffect(() => {
+        dispatch({ type: CREATE_REVIEW_RESET });
         if (!productDetail || productDetail.slug !== match.slug) {
             dispatch(getProduct(match.slug));
         } else {
@@ -55,11 +56,6 @@ const ProductDetail = () => {
         if (successCreateReview) {
             toast.success('Review submitted');
             dispatch(getProduct(match.slug));
-            dispatch({ type: CREATE_REVIEW_RESET });
-            setReview({
-                rating: 0,
-                comment: '',
-            });
         }
     }, [dispatch, match.slug, successCreateReview]);
 
