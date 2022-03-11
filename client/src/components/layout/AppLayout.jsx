@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import SideBarNav from '../sidebar/SideBarNav';
+import SideBarNav from '../SideBarNav';
 
 const AppLayout = () => {
     return (

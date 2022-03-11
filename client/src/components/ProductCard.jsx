@@ -1,12 +1,13 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import Rating from './Rating';
+import '../css/ProductCard.scss';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const ProductCard = ({ product }) => {
     return (
-        <Card className='m-3 p-2 rounded' style={{ width: 'fit-content' }}>
-            <Link to={`/product/${product.slug}`}>
+        <LinkContainer to={`/product/${product.slug}`}>
+            <Card className='m-3 p-2 rounded' style={{ width: 'fit-content' }}>
                 <Card.Img
                     src={product.image.url}
                     variant='top'
@@ -16,30 +17,25 @@ const ProductCard = ({ product }) => {
                         objectFit: 'contain',
                     }}
                 />
-            </Link>
-            <Card.Body>
-                <Link
-                    to={`/product/${product.slug}`}
-                    style={{ textDecoration: 'none', color: 'black' }}
-                >
+                <Card.Body>
                     <Card.Title as='div'>
                         <strong>{product.title}</strong>
                     </Card.Title>
                     <Rating value={product.rating} />{' '}
                     {`(${product.numReviews} reviews)`}
-                </Link>
-                <Card.Text as='div'>
-                    {' '}
-                    {product.description.length < 15
-                        ? product.description
-                        : `${product.description.substring(0, 15)}...`}
-                </Card.Text>
-                <br />
-                <Card.Text as='h3' className='text-center'>
-                    <strong>$ {product.price}</strong>
-                </Card.Text>
-            </Card.Body>
-        </Card>
+                    <Card.Text as='div'>
+                        {' '}
+                        {product.description.length < 15
+                            ? product.description
+                            : `${product.description.substring(0, 15)}...`}
+                    </Card.Text>
+                    <br />
+                    <Card.Text as='h3' className='text-center'>
+                        <strong>$ {product.price}</strong>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+        </LinkContainer>
     );
 };
 

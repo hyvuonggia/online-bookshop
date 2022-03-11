@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../actions/userActions';
+import '../css/Header.scss';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const Header = () => {
         dispatch(logout());
         navigate('/');
     };
-    
+
     return (
         <div>
             <Navbar variant='dark' bg='dark' expand='lg'>

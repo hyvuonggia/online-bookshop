@@ -22,7 +22,7 @@ const CategoryList = () => {
             ) : (
                 <Row>
                     {categories.map((category) => (
-                        <Col className='text-center'>
+                        <Col className='text-center' key={category._id}>
                             <LinkContainer to={`/category/${category.slug}`}>
                                 <Button>{category.name}</Button>
                             </LinkContainer>

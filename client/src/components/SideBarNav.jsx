@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './SideBarNav.scss';
+import '../css/SideBarNav.scss';
 
 const SideBarNav = () => {
     const userLogin = useSelector((state) => state.userLogin);
