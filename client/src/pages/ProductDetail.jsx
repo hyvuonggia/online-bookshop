@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createReview, getProduct } from '../actions/productActions';
+import Rating from '../components/Rating';
 import { CREATE_REVIEW_RESET } from '../constants/productConstants';
 
 const ProductDetail = () => {
@@ -31,7 +32,7 @@ const ProductDetail = () => {
     });
 
     const [review, setReview] = useState({
-        rating: '',
+        rating: 0,
         comment: '',
     });
 
@@ -53,9 +54,14 @@ const ProductDetail = () => {
     useEffect(() => {
         if (successCreateReview) {
             toast.success('Review submitted');
+            dispatch(getProduct(match.slug));
             dispatch({ type: CREATE_REVIEW_RESET });
+            setReview({
+                rating: 0,
+                comment: '',
+            });
         }
-    }, [dispatch, successCreateReview]);
+    }, [dispatch, match.slug, successCreateReview]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -84,7 +90,9 @@ const ProductDetail = () => {
                 </Col>
                 <Col className='ms-5'>
                     <h3>{product.title}</h3>
-                    <hr></hr>
+                    <Rating value={product.rating} />{' '}
+                    {`(${product.numReviews} reviews)`}
+                    <hr />
                     <p>
                         {product.description
                             ? product.description
@@ -163,7 +171,6 @@ const ProductDetail = () => {
             </Row>
             <Row className='mt-5'>
                 <Col>
-                    <h3>Reviews</h3>
                     {errorCreateReview && (
                         <Alert variant='danger'>{errorCreateReview}</Alert>
                     )}
@@ -182,20 +189,35 @@ const ProductDetail = () => {
                                             value={review.rating}
                                             name='rating'
                                             onChange={handleChange}
+                                            style={{
+                                                width: 'fit-content',
+                                                appearance: 'menulist',
+                                            }}
                                         >
-                                            <option value=''>Select</option>
-                                            <option value='1'>1</option>
-                                            <option value='2'>2</option>
-                                            <option value='3'>3</option>
-                                            <option value='4'>4</option>
-                                            <option value='5'>5</option>
+                                            <option value=''>
+                                                ---Please select---
+                                            </option>
+                                            <option value='1'>
+                                                1 - Very Bad
+                                            </option>
+                                            <option value='2'>2 - Bad</option>
+                                            <option value='3'>
+                                                3 - Average
+                                            </option>
+                                            <option value='4'>4 - Good</option>
+                                            <option value='5'>
+                                                5 - Excellent
+                                            </option>
                                         </Form.Control>
                                     </Form.Group>
-                                    <Form.Group controlId='comment'>
+                                    <Form.Group
+                                        controlId='comment'
+                                        className='mt-3'
+                                    >
                                         <Form.Label>Comment</Form.Label>
                                         <Form.Control
                                             as='textarea'
-                                            row={3}
+                                            row={4}
                                             name='comment'
                                             onChange={handleChange}
                                         ></Form.Control>
@@ -218,7 +240,9 @@ const ProductDetail = () => {
                         {product.reviews.map((review) => (
                             <ListGroup.Item key={review._id}>
                                 <strong>{review.name}</strong>
-                                <div>{review.rating}</div>
+                                <div>
+                                    <Rating value={review.rating} text='' />
+                                </div>
                                 <p>{review.createdAt.substring(0, 10)}</p>
                                 <p>{review.comment}</p>
                             </ListGroup.Item>
