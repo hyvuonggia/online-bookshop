@@ -1,5 +1,6 @@
 import Category from '../models/categoryModel.js';
 import slugify from 'slugify';
+import Product from '../models/productModel.js';
 
 /**
  * @description List all categories
@@ -52,7 +53,10 @@ export const createCategory = async (req, res) => {
 export const getCategory = async (req, res) => {
     const category = await Category.findOne({ slug: req.params.slug });
     if (category) {
-        res.json(category);
+        const products = await Product.find({
+            category: category._id,
+        }).populate('category');
+        res.json({ category, products });
     } else {
         res.status(404).send('Category not found');
     }
