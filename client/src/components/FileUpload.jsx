@@ -32,7 +32,12 @@ const FileUpload = ({ product, setProduct, setLoading }) => {
                 100,
                 0,
                 (uri) => {
-                    dispatch(uploadImage(uri)).then(() => setLoading(false));
+                    dispatch(uploadImage(uri))
+                        .then(() => setLoading(false))
+                        .catch((error) => {
+                            setLoading(false);
+                            console.log(error);
+                        });
                 },
                 'base64',
             );

@@ -13,17 +13,21 @@ cloudinary.config({
  * @description Upload image
  * @route /api/cloudinary/upload
  * @access private/admin
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 export const upload = async (req, res) => {
-    let result = await cloudinary.uploader.upload(req.body.image, {
-        public_id: `${Date.now()}`,
-        resource_type: 'auto',
-    });
-    res.json({
-        public_id: result.public_id,
-        url: result.secure_url,
-    });
+    try {
+        let result = await cloudinary.uploader.upload(req.body.image, {
+            public_id: `${Date.now()}`,
+            resource_type: 'auto',
+        });
+        res.json({
+            public_id: result.public_id,
+            url: result.secure_url,
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
 };
