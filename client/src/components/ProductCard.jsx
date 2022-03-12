@@ -6,14 +6,20 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const ProductCard = ({ product }) => {
     return (
-        <LinkContainer to={`/product/${product.slug}`}>
-            <Card className='m-3 p-2 rounded' style={{ width: 'fit-content' }}>
+        <LinkContainer
+            to={`/product/${product.slug}`}
+            className='text-center w-100'
+        >
+            <Card
+                className='m-3 p-3 rounded text-center'
+                style={{ width: '250px' }}
+            >
                 <Card.Img
                     src={product.image.url}
                     variant='top'
                     style={{
                         height: '150px',
-                        width: '250px',
+                        width: 'auto',
                         objectFit: 'contain',
                     }}
                 />
