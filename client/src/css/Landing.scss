@@ -32,11 +32,13 @@
         background-image: url('../assets/welcome.jpg');
     }
 
-    &-caption {
+    &-item {
         height: 100%;
-        position: unset !important;
-        margin-top: 15rem;
+    }
 
+    &-caption {
+        position: unset !important;
+        margin: 200px auto;
         h1 {
             color: white;
             font-family: cursive;
