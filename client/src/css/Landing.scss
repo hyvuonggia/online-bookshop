@@ -1,0 +1,46 @@
+// .background {
+//     height: 100vh;;
+//     background-attachment: fixed;
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+//     .container {
+//         height: 70%;
+//         background: rgba($color: #000000, $alpha: 0.6);
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+
+// h1 {
+//     color: white;
+//     font-family: cursive;
+//     font-size: 60px;
+// }
+//     }
+// }
+
+.carousel {
+    height: 75vh;
+
+    &-inner {
+        height: 100%;
+        background-image: url('../assets/welcome.jpg');
+    }
+
+    &-caption {
+        height: 100%;
+        position: unset !important;
+        margin-top: 15rem;
+
+        h1 {
+            color: white;
+            font-family: cursive;
+            font-size: 60px;
+        }
+    }
+}

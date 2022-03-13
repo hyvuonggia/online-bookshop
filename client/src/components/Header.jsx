@@ -19,108 +19,104 @@ const Header = () => {
     };
 
     return (
-        <div>
-            <Navbar variant='dark' bg='dark' expand='lg'>
-                <Container>
-                    <LinkContainer to='/'>
-                        <Navbar.Brand>
-                            <img
-                                src='/logo.svg'
-                                width='30'
-                                height='30'
-                                className='d-inline-block align-top me-1'
-                                alt='logo'
-                            />
-                            Bookshop
-                        </Navbar.Brand>
-                    </LinkContainer>
-                    <Navbar.Toggle aria-controls='basic-navbar-nav' />
-                    <Navbar.Collapse id='basic-navbar-nav'>
-                        <Nav className='ms-auto'>
-                            {user ? (
-                                <Fragment>
-                                    <NavDropdown
-                                        title={`Welcome ${
-                                            user.email.split('@')[0]
-                                        }`}
-                                        id='basic-nav-dropdown'
-                                        className='pt-2'
-                                        menuVariant='dark'
-                                    >
-                                        {user && user.role === 'user' ? (
-                                            <LinkContainer
-                                                to='/user/history'
-                                                style={{
-                                                    textDecoration: 'none',
-                                                }}
-                                            >
-                                                <NavDropdown.Item>
-                                                    Dashboard
-                                                </NavDropdown.Item>
-                                            </LinkContainer>
-                                        ) : (
-                                            <LinkContainer
-                                                to='/admin/dashboard'
-                                                style={{
-                                                    textDecoration: 'none',
-                                                }}
-                                            >
-                                                <NavDropdown.Item>
-                                                    Dashboard
-                                                </NavDropdown.Item>
-                                            </LinkContainer>
-                                        )}
+        <Navbar variant='dark' bg='dark' expand='lg'>
+            <Container>
+                <LinkContainer to='/'>
+                    <Navbar.Brand>
+                        <img
+                            src='/logo.svg'
+                            width='30'
+                            height='30'
+                            className='d-inline-block align-top me-1'
+                            alt='logo'
+                        />
+                        Bookshop
+                    </Navbar.Brand>
+                </LinkContainer>
+                <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                <Navbar.Collapse id='basic-navbar-nav'>
+                    <Nav className='ms-auto'>
+                        {user ? (
+                            <Fragment>
+                                <NavDropdown
+                                    title={`${user.email.split('@')[0]}`}
+                                    id='basic-nav-dropdown'
+                                    className='pt-2'
+                                    menuVariant='dark'
+                                >
+                                    {user && user.role === 'user' ? (
+                                        <LinkContainer
+                                            to='/user/history'
+                                            style={{
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            <NavDropdown.Item>
+                                                Dashboard
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
+                                    ) : (
+                                        <LinkContainer
+                                            to='/admin/dashboard'
+                                            style={{
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            <NavDropdown.Item>
+                                                Dashboard
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
+                                    )}
 
-                                        <LinkContainer
-                                            to='/user/password'
-                                            style={{
-                                                textDecoration: 'none',
-                                            }}
-                                        >
-                                            <NavDropdown.Item>
-                                                Password
-                                            </NavDropdown.Item>
-                                        </LinkContainer>
-                                        <LinkContainer
-                                            to='/user/wishlist'
-                                            style={{
-                                                textDecoration: 'none',
-                                            }}
-                                        >
-                                            <NavDropdown.Item>
-                                                Wishlist
-                                            </NavDropdown.Item>
-                                        </LinkContainer>
-                                    </NavDropdown>
-                                    <Button
-                                        className='logout-btn mt-2'
-                                        variant='danger'
-                                        onClick={logoutHandler}
+                                    <LinkContainer
+                                        to='/user/password'
+                                        style={{
+                                            textDecoration: 'none',
+                                        }}
                                     >
-                                        Logout
-                                    </Button>
-                                </Fragment>
-                            ) : (
-                                <>
-                                    <LinkContainer to='/login'>
-                                        <Nav.Link>
-                                            <i className='fas fa-user me-1'></i>
-                                            Login
-                                        </Nav.Link>
+                                        <NavDropdown.Item>
+                                            Password
+                                        </NavDropdown.Item>
                                     </LinkContainer>
-                                    <LinkContainer to='/register'>
-                                        <Nav.Link>
-                                            <i className='fa-solid fa-user-plus me-1'></i>
-                                            Register
-                                        </Nav.Link>
+                                    <LinkContainer
+                                        to='/user/wishlist'
+                                        style={{
+                                            textDecoration: 'none',
+                                        }}
+                                    >
+                                        <NavDropdown.Item>
+                                            Wishlist
+                                        </NavDropdown.Item>
                                     </LinkContainer>
-                                </>
-                            )}
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-        </div>
+                                </NavDropdown>
+                                <Button
+                                    className='logout-btn mt-2'
+                                    variant='danger'
+                                    onClick={logoutHandler}
+                                >
+                                    Logout
+                                </Button>
+                            </Fragment>
+                        ) : (
+                            <>
+                                <LinkContainer to='/login'>
+                                    <Nav.Link>
+                                        <i className='fas fa-user me-1'></i>
+                                        Login
+                                    </Nav.Link>
+                                </LinkContainer>
+                                <LinkContainer to='/register'>
+                                    <Nav.Link>
+                                        <i className='fa-solid fa-user-plus me-1'></i>
+                                        Register
+                                    </Nav.Link>
+                                </LinkContainer>
+                            </>
+                        )}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 };
 
