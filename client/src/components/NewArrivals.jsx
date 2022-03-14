@@ -15,7 +15,7 @@ const NewArrivals = () => {
 
     useEffect(() => {
         setLoading(true);
-        dispatch(getProductsByCreatedDate()).then(() => setLoading(false));
+        dispatch(getProductsByCreatedDate(5)).then(() => setLoading(false));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <>
             <Landing />
-            <Container className='mt-5'>
+            <Container fluid className='mt-5'>
                 <NewArrivals />
                 <BestSellers />
                 <CategoryList />

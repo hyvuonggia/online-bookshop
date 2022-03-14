@@ -127,19 +127,22 @@ export const updateProduct = (slug, product) => async (dispatch, getState) => {
     }
 };
 
-export const getProductsByCreatedDate = () => async (dispatch) => {
-    const response = await axios.get(
+export const getProductsByCreatedDate = (limit) => async (dispatch) => {
+    const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/products/new-arrivals`,
+        {limit},
     );
+    console.log('========>', response);
     dispatch({
         type: GET_PRODUCTS_BY_CREATED_DATE_SUCCESS,
         payload: response.data,
     });
 };
 
-export const getProductsBySold = () => async (dispatch) => {
-    const response = await axios.get(
+export const getProductsBySold = (limit) => async (dispatch) => {
+    const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/products/best-sellers`,
+        {limit},
     );
     dispatch({
         type: GET_PRODUCTS_BY_SOLD_SUCCESS,

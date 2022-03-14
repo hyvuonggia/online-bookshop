@@ -29,6 +29,7 @@ import ProductUpdate from './pages/ProductUpdate';
 import Coupon from './pages/Coupon';
 import ProductDetail from './pages/ProductDetail';
 import Category from './pages/Category';
+import Shop from './pages/Shop';
 
 function App() {
     const dispatch = useDispatch();
@@ -75,6 +76,8 @@ function App() {
                     />
                     <Route path='/product/:slug' element={<ProductDetail />} />
                     <Route path='/category/:slug' element={<Category />} />
+                    <Route path='/shop' element={<Shop />} />
+
                     <Route element={<ProtectedRoute />}>
                         <Route element={<AppLayout />}>
                             <Route
@@ -91,6 +94,7 @@ function App() {
                             />
                         </Route>
                     </Route>
+
                     <Route element={<AdminRoute />}>
                         <Route element={<AppLayout />}>
                             <Route

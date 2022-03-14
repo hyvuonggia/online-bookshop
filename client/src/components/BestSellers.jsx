@@ -13,7 +13,7 @@ const BestSellers = () => {
 
     useEffect(() => {
         setLoading(true);
-        dispatch(getProductsBySold()).then(() => setLoading(false));
+        dispatch(getProductsBySold(5)).then(() => setLoading(false));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
