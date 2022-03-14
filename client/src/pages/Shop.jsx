@@ -12,7 +12,7 @@ const Shop = () => {
 
     useEffect(() => {
         dispatch(getProducts());
-    }, []);
+    }, [dispatch]);
 
     const handleKeywordChange = (e) => {
         setKeyword(e.target.value.toLowerCase());
