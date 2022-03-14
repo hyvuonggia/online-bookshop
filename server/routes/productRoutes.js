@@ -9,6 +9,7 @@ import {
     getProductsByCreatedDate,
     getProductsBySold,
     createProductReview,
+    searchFilters,
 } from '../controllers/productControllers.js';
 import { adminCheck, authCheck } from '../middlewares/authMiddleware.js';
 
@@ -18,9 +19,9 @@ router.route('/').get(getProducts).post(authCheck, adminCheck, createProduct);
 
 router.route('/limit/:limit').get(getProductsLimit);
 
-router.route('/new-arrivals').get(getProductsByCreatedDate);
+router.route('/new-arrivals').post(getProductsByCreatedDate);
 
-router.route('/best-sellers').get(getProductsBySold);
+router.route('/best-sellers').post(getProductsBySold);
 
 router
     .route('/:slug')
@@ -29,4 +30,7 @@ router
     .delete(authCheck, adminCheck, deleteProduct);
 
 router.route('/:slug/reviews').post(authCheck, createProductReview);
+
+router.route('/search/filters').post(searchFilters);
+
 export default router;

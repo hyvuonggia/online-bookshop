@@ -127,10 +127,11 @@ export const updateProduct = async (req, res) => {
  * @param {*} res
  */
 export const getProductsByCreatedDate = async (req, res) => {
+    const { limit } = req.body;
     const products = await Product.find({})
         .populate('category')
         .sort([['createdAt', 'desc']])
-        .limit(4);
+        .limit(limit);
     res.json(products);
 };
 
@@ -142,10 +143,11 @@ export const getProductsByCreatedDate = async (req, res) => {
  * @param {*} res
  */
 export const getProductsBySold = async (req, res) => {
+    const { limit } = req.body;
     const products = await Product.find({})
         .populate('category')
         .sort([['sold', 'desc']])
-        .limit(4);
+        .limit(limit);
     res.json(products);
 };
 
@@ -194,4 +196,20 @@ export const createProductReview = async (req, res) => {
         console.log(error);
         res.send(error.message);
     }
+};
+
+export const searchFilters = async (req, res) => {
+    const { query } = req.body;
+
+    if (query) {
+        console.log('query', query);
+        await handleQuery(req, res, query);
+    }
+};
+
+const handleQuery = async (req, res, query) => {
+    const products = await Product.find({ $text: { $search: query } }).populate(
+        'category',
+    );
+    res.json(products);
 };
