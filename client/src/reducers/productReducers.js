@@ -11,6 +11,7 @@ import {
     GET_PRODUCTS_BY_CREATED_DATE_SUCCESS,
     GET_PRODUCTS_BY_SOLD_SUCCESS,
     GET_PRODUCTS_LIMIT_SUCCESS,
+    GET_PRODUCTS_SUCCESS,
     GET_PRODUCT_FAIL,
     GET_PRODUCT_SUCCESS,
     UPDATE_PRODUCT_FAIL,
@@ -41,6 +42,18 @@ export const getProductsLimitReducer = (state = { products: [] }, action) => {
     const { type, payload } = action;
     switch (type) {
         case GET_PRODUCTS_LIMIT_SUCCESS:
+            return {
+                products: payload,
+            };
+        default:
+            return state;
+    }
+};
+
+export const getProductsReducer = (state = { products: [] }, action) => {
+    const { type, payload } = action;
+    switch (type) {
+        case GET_PRODUCTS_SUCCESS:
             return {
                 products: payload,
             };

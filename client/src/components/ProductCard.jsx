@@ -23,17 +23,17 @@ const ProductCard = ({ product }) => {
                         objectFit: 'contain',
                     }}
                 />
-                <Card.Body>
-                    <Card.Title as='div'>
+                <Card.Body className='p-0 mt-2'>
+                    <Card.Title as='h4'>
                         <strong>{product.title}</strong>
                     </Card.Title>
                     <Rating value={product.rating} />{' '}
                     {`(${product.numReviews} reviews)`}
                     <Card.Text as='div'>
                         {' '}
-                        {product.description.length < 15
+                        {product.description.length < 30
                             ? product.description
-                            : `${product.description.substring(0, 15)}...`}
+                            : `${product.description.substring(0, 30)}...`}
                     </Card.Text>
                     <br />
                     <Card.Text as='h3' className='text-center'>

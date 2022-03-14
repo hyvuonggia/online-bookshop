@@ -3,7 +3,7 @@ import {
     createProduct,
     deleteProduct,
     getProducts,
-    getProductsLimit,
+    // getProductsLimit,
     getProduct,
     updateProduct,
     getProductsByCreatedDate,
@@ -17,7 +17,7 @@ const router = express.Router();
 
 router.route('/').get(getProducts).post(authCheck, adminCheck, createProduct);
 
-router.route('/limit/:limit').get(getProductsLimit);
+// router.route('/limit/:limit').get(getProductsLimit);
 
 router.route('/new-arrivals').post(getProductsByCreatedDate);
 

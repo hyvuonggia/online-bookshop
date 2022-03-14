@@ -8,7 +8,8 @@ import {
     DELETE_PRODUCT_SUCCESS,
     GET_PRODUCTS_BY_CREATED_DATE_SUCCESS,
     GET_PRODUCTS_BY_SOLD_SUCCESS,
-    GET_PRODUCTS_LIMIT_SUCCESS,
+    // GET_PRODUCTS_LIMIT_SUCCESS,
+    GET_PRODUCTS_SUCCESS,
     GET_PRODUCT_FAIL,
     GET_PRODUCT_SUCCESS,
     UPDATE_PRODUCT_FAIL,
@@ -45,12 +46,22 @@ export const createProduct = (product) => async (dispatch, getState) => {
     }
 };
 
-export const getProductsLimit = (limit) => async (dispatch) => {
+// export const getProductsLimit = (limit) => async (dispatch) => {
+//     const response = await axios.get(
+//         `${process.env.REACT_APP_API_URL}/products/limit/${limit}`,
+//     );
+//     dispatch({
+//         type: GET_PRODUCTS_LIMIT_SUCCESS,
+//         payload: response.data,
+//     });
+// };
+
+export const getProducts = () => async (dispatch) => {
     const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/products/limit/${limit}`,
+        `${process.env.REACT_APP_API_URL}/products`,
     );
     dispatch({
-        type: GET_PRODUCTS_LIMIT_SUCCESS,
+        type: GET_PRODUCTS_SUCCESS,
         payload: response.data,
     });
 };

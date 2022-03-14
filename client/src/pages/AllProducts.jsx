@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Card, Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { toast } from 'react-toastify';
-import { deleteProduct, getProductsLimit } from '../actions/productActions';
+import { deleteProduct, getProducts } from '../actions/productActions';
 import {
     DELETE_PRODUCT_RESET,
     UPDATE_PRODUCT_RESET,
@@ -13,7 +13,7 @@ import {
 const AllProducts = () => {
     const dispatch = useDispatch();
 
-    const { products } = useSelector((state) => state.getProductsLimit);
+    const { products } = useSelector((state) => state.getProducts);
     const { success, product } = useSelector((state) => state.deleteProduct);
     const { success: updateSuccess } = useSelector(
         (state) => state.updateProduct,
@@ -23,9 +23,9 @@ const AllProducts = () => {
         dispatch({
             type: DELETE_PRODUCT_RESET,
         });
-        dispatch(getProductsLimit(100));
+        dispatch(getProducts());
         if (success) {
-            dispatch(getProductsLimit(100));
+            dispatch(getProducts());
             toast.success(`Book "${product.title}" deleted`);
         }
 
@@ -34,7 +34,7 @@ const AllProducts = () => {
 
     useEffect(() => {
         if (updateSuccess) {
-            dispatch(getProductsLimit(100));
+            dispatch(getProducts());
             // toast.success(`Updated`);
         }
         dispatch({

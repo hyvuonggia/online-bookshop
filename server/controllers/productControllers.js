@@ -39,20 +39,20 @@ export const getProducts = async (req, res) => {
     res.json(products);
 };
 
-/**
- * @description Get all books limit
- * @route GET /api/products
- * @access public
- *
- * @param {*} req
- * @param {*} res
- */
-export const getProductsLimit = async (req, res) => {
-    const products = await Product.find({})
-        .limit(req.params.limit)
-        .populate('category');
-    res.json(products);
-};
+// /**
+//  * @description Get all books limit
+//  * @route GET /api/products
+//  * @access public
+//  *
+//  * @param {*} req
+//  * @param {*} res
+//  */
+// export const getProductsLimit = async (req, res) => {
+//     const products = await Product.find({})
+//         .limit(req.params.limit)
+//         .populate('category');
+//     res.json(products);
+// };
 
 /**
  * @description Delete a book
@@ -147,7 +147,7 @@ export const getProductsBySold = async (req, res) => {
     const products = await Product.find({})
         .populate('category')
         .sort([['sold', 'desc']])
-        .limit(limit);
+        .limit(4);
     res.json(products);
 };
 
