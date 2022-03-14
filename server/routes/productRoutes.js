@@ -9,6 +9,7 @@ import {
     getProductsByCreatedDate,
     getProductsBySold,
     createProductReview,
+    getProductsByRating,
     // searchFilters,
 } from '../controllers/productControllers.js';
 import { adminCheck, authCheck } from '../middlewares/authMiddleware.js';
@@ -22,6 +23,8 @@ router.route('/').get(getProducts).post(authCheck, adminCheck, createProduct);
 router.route('/new-arrivals').post(getProductsByCreatedDate);
 
 router.route('/best-sellers').post(getProductsBySold);
+
+router.route('/most-rated').post(getProductsByRating);
 
 router
     .route('/:slug')

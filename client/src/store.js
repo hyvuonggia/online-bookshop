@@ -15,6 +15,7 @@ import {
     deleteProductReducer,
     getProductReducer,
     getProductsByCreatedDateReducer,
+    getProductsByMostRatedReducer,
     getProductsBySoldReducer,
     getProductsLimitReducer,
     getProductsReducer,
@@ -38,6 +39,7 @@ const reducer = combineReducers({
     updateProduct: updateProductReducer,
     getProductsByCreatedDate: getProductsByCreatedDateReducer,
     getProductsBySold: getProductsBySoldReducer,
+    getProductsMostRated: getProductsByMostRatedReducer,
     createReview: createReviewReducer,
 });
 

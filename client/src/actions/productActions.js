@@ -7,6 +7,7 @@ import {
     DELETE_PRODUCT_FAIL,
     DELETE_PRODUCT_SUCCESS,
     GET_PRODUCTS_BY_CREATED_DATE_SUCCESS,
+    GET_PRODUCTS_BY_MOST_RATED_SUCCESS,
     GET_PRODUCTS_BY_SOLD_SUCCESS,
     // GET_PRODUCTS_LIMIT_SUCCESS,
     GET_PRODUCTS_SUCCESS,
@@ -141,7 +142,7 @@ export const updateProduct = (slug, product) => async (dispatch, getState) => {
 export const getProductsByCreatedDate = (limit) => async (dispatch) => {
     const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/products/new-arrivals`,
-        {limit},
+        { limit },
     );
     console.log('========>', response);
     dispatch({
@@ -153,10 +154,21 @@ export const getProductsByCreatedDate = (limit) => async (dispatch) => {
 export const getProductsBySold = (limit) => async (dispatch) => {
     const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/products/best-sellers`,
-        {limit},
+        { limit },
     );
     dispatch({
         type: GET_PRODUCTS_BY_SOLD_SUCCESS,
+        payload: response.data,
+    });
+};
+
+export const getProductsByMostRated = (limit) => async (dispatch) => {
+    const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/products/most-rated`,
+        { limit },
+    );
+    dispatch({
+        type: GET_PRODUCTS_BY_MOST_RATED_SUCCESS,
         payload: response.data,
     });
 };

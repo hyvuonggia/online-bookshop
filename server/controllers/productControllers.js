@@ -120,7 +120,7 @@ export const updateProduct = async (req, res) => {
 };
 
 /**
- * @description Get products by new arrivals or best seller
+ * @description Get products by created date
  * @route GET /api/products/new-arrivals
  *
  * @param {*} req
@@ -136,7 +136,7 @@ export const getProductsByCreatedDate = async (req, res) => {
 };
 
 /**
- * @description Get products by new arrivals or best seller
+ * @description Get products by sold
  * @route GET /api/products/best-sellers
  *
  * @param {*} req
@@ -147,7 +147,26 @@ export const getProductsBySold = async (req, res) => {
     const products = await Product.find({})
         .populate('category')
         .sort([['sold', 'desc']])
-        .limit(4);
+        .limit(limit);
+    res.json(products);
+};
+
+/**
+ * @description Get products by rating
+ * @route GET /api/products/best-sellers
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const getProductsByRating = async (req, res) => {
+    const { limit } = req.body;
+    const products = await Product.find({})
+        .populate('category')
+        .sort([
+            ['rating', 'desc'],
+            ['numReviews', 'desc'],
+        ])
+        .limit(limit);
     res.json(products);
 };
 

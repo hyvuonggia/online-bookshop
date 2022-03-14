@@ -9,6 +9,7 @@ import {
     DELETE_PRODUCT_RESET,
     DELETE_PRODUCT_SUCCESS,
     GET_PRODUCTS_BY_CREATED_DATE_SUCCESS,
+    GET_PRODUCTS_BY_MOST_RATED_SUCCESS,
     GET_PRODUCTS_BY_SOLD_SUCCESS,
     GET_PRODUCTS_LIMIT_SUCCESS,
     GET_PRODUCTS_SUCCESS,
@@ -140,6 +141,23 @@ export const getProductsBySoldReducer = (state = { products: [] }, action) => {
     const { type, payload } = action;
     switch (type) {
         case GET_PRODUCTS_BY_SOLD_SUCCESS:
+            return {
+                success: true,
+                products: payload,
+            };
+
+        default:
+            return state;
+    }
+};
+
+export const getProductsByMostRatedReducer = (
+    state = { products: [] },
+    action,
+) => {
+    const { type, payload } = action;
+    switch (type) {
+        case GET_PRODUCTS_BY_MOST_RATED_SUCCESS:
             return {
                 success: true,
                 products: payload,

@@ -3,6 +3,7 @@ import User from '../models/userModel.js';
 /**
  * @description create new user
  * @route POST /api/users
+ * @access public
  */
 export const createUser = async (req, res) => {
     const { name, email } = req.user;
@@ -29,7 +30,7 @@ export const createUser = async (req, res) => {
 };
 
 /**
- * @description create new user
+ * @description get current user
  * @route GET /api/users/current-user
  */
 export const getCurrentUser = async (req, res) => {

@@ -4,12 +4,14 @@ import BestSellers from '../components/BestSellers';
 import CategoryList from '../components/CategoryList';
 import NewArrivals from '../components/NewArrivals';
 import Landing from '../components/Landing';
+import MostRated from '../components/MostRated';
 
 const Home = () => {
     return (
         <>
             <Landing />
             <Container fluid className='mt-5'>
+                <MostRated />
                 <NewArrivals />
                 <BestSellers />
                 <CategoryList />
