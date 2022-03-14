@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import RegisterComplete from './pages/RegisterComplete';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getIdTokenResult, onAuthStateChanged } from 'firebase/auth';
+import { getIdTokenResult, onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './firebase';
 import { LOGGED_IN_USER } from './constants/userConstants';
 import ForgotPassword from './pages/ForgotPassword';
@@ -35,10 +35,9 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const idTokenResult = await getIdTokenResult(user);
-                // console.log('user', user);
                 dispatch(getCurrentUser(idTokenResult.token)).then((res) =>
                     dispatch({
                         type: LOGGED_IN_USER,
@@ -53,8 +52,6 @@ function App() {
                 );
             }
         });
-
-        return unsubscribe;
     }, [dispatch]);
 
     return (
