@@ -29,7 +29,7 @@ const SideBarNav = () => {
                     >
                         <div className='sidebar-menu-item'>
                             <div className='sidebar-menu-item-text'>
-                                Product
+                                Create product
                             </div>
                         </div>
                     </Link>
@@ -40,7 +40,7 @@ const SideBarNav = () => {
                     >
                         <div className='sidebar-menu-item'>
                             <div className='sidebar-menu-item-text'>
-                                Products
+                                List products
                             </div>
                         </div>
                     </Link>
@@ -51,7 +51,7 @@ const SideBarNav = () => {
                     >
                         <div className='sidebar-menu-item'>
                             <div className='sidebar-menu-item-text'>
-                                Category
+                                List categories
                             </div>
                         </div>
                     </Link>
@@ -71,7 +71,7 @@ const SideBarNav = () => {
                     >
                         <div className='sidebar-menu-item'>
                             <div className='sidebar-menu-item-text'>
-                                Password
+                                Change password
                             </div>
                         </div>
                     </Link>
@@ -111,7 +111,7 @@ const SideBarNav = () => {
                     >
                         <div className='sidebar-menu-item'>
                             <div className='sidebar-menu-item-text'>
-                                Password
+                                Change password
                             </div>
                         </div>
                     </Link>

@@ -86,7 +86,11 @@ const ProductDetail = () => {
                 <Row>
                     <Col lg={4} className='pe-3 d-flex justify-content-center'>
                         <img
-                            src={product && product.image.url}
+                            src={
+                                product.image
+                                    ? product.image.url
+                                    : 'https://crossfitbbros.com/bbros-1/wp-content/uploads/2021/01/no-photo-available.png'
+                            }
                             alt='bookcover'
                             style={{ width: '100%' }}
                         />

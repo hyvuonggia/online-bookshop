@@ -71,7 +71,7 @@ const ProductCreate = () => {
 
     return (
         <FormContainer onSubmit>
-            <h1>Add new product</h1>
+            <h1 className='mt-3'>Add new product</h1>
             <Form.Group>
                 <FileUpload
                     product={product}
@@ -142,7 +142,12 @@ const ProductCreate = () => {
                     </Form.Select>
                 </Form.Group>
 
-                <Button variant='dark' type='submit' disabled={loading}>
+                <Button
+                    className='mt-3'
+                    variant='dark'
+                    type='submit'
+                    disabled={loading}
+                >
                     {loading ? (
                         <>
                             <Spinner

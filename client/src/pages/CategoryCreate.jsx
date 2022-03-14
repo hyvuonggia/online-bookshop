@@ -65,42 +65,54 @@ const CategoryCreate = () => {
     return (
         <Fragment>
             <Form onSubmit={handleSubmit}>
-                <Form.Group>
+                <Form.Group className='pt-3'>
                     <Form.Label>New Category</Form.Label>
                     <Form.Control
                         type='text'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        style={{ width: '500px' }}
                     />
                 </Form.Group>
-                <Button type='submit' variant='dark'>
+                <Button
+                    type='submit'
+                    variant='dark'
+                    className='my-3'
+                    disabled={!name}
+                >
                     Submit
                 </Button>
             </Form>
             {/* {JSON.stringify(categories)} */}
-            <br></br>
-            <input
+            <Form.Control
                 placeholder='Search category'
-                style={{ width: '20%' }}
-                className='mb-3'
+                style={{ width: '500px' }}
+                className='my-3'
                 value={keyword}
                 onChange={handleKeywordChange}
             />
-            <Table
-                striped
-                bordered
-                responsive
-                className='table-sm'
-                style={{ width: '700px' }}
-                size='sm'
+            <div
+                style={{
+                    height: '60vh',
+                    overflow: 'auto',
+                    border: '2px black solid',
+                }}
             >
-                <tbody>
-                    {categories
-                        .filter(searchedKeyword(keyword))
-                        .map((category) => (
-                            <tr key={category._id}>
-                                <td width='100%'>{category.name}</td>
-                                {/* <td>
+                <Table
+                    striped
+                    bordered
+                    responsive
+                    className='table-sm'
+                    style={{ width: '100%' }}
+                    size='sm'
+                >
+                    <tbody>
+                        {categories
+                            .filter(searchedKeyword(keyword))
+                            .map((category) => (
+                                <tr key={category._id}>
+                                    <td width='100%'>{category.name}</td>
+                                    {/* <td>
                                     <Link
                                         to={`/admin/category/${category.slug}`}
                                     >
@@ -109,20 +121,21 @@ const CategoryCreate = () => {
                                         </Button>
                                     </Link>
                                 </td> */}
-                                <td>
-                                    <Button
-                                        variant='danger'
-                                        onClick={() =>
-                                            handleDelete(category.slug)
-                                        }
-                                    >
-                                        <i className='fas fa-trash' />
-                                    </Button>
-                                </td>
-                            </tr>
-                        ))}
-                </tbody>
-            </Table>
+                                    <td>
+                                        <Button
+                                            variant='danger'
+                                            onClick={() =>
+                                                handleDelete(category.slug)
+                                            }
+                                        >
+                                            <i className='fas fa-trash' />
+                                        </Button>
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </Table>
+            </div>
         </Fragment>
     );
 };

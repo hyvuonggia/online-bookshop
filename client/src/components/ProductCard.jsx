@@ -15,7 +15,11 @@ const ProductCard = ({ product }) => {
                 style={{ width: '250px' }}
             >
                 <Card.Img
-                    src={product.image.url}
+                    src={
+                        product.image
+                            ? product.image.url
+                            : 'https://crossfitbbros.com/bbros-1/wp-content/uploads/2021/01/no-photo-available.png'
+                    }
                     variant='top'
                     style={{
                         height: '150px',

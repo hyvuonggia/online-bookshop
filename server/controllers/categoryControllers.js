@@ -11,7 +11,7 @@ import Product from '../models/productModel.js';
  * @param {*} res
  */
 export const listCategories = async (req, res) => {
-    const categories = await Category.find({});
+    const categories = await Category.find({}).sort('name');
     if (categories) {
         res.json(categories);
     } else {

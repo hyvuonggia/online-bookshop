@@ -35,13 +35,13 @@ export const createProduct = async (req, res) => {
  * @param {*} res
  */
 export const getProducts = async (req, res) => {
-    const products = await Product.find({});
+    const products = await Product.find({}).sort('title');
     res.json(products);
 };
 
 // /**
 //  * @description Get all books limit
-//  * @route GET /api/products
+//  * @route GET /api/products/limit/:limit
 //  * @access public
 //  *
 //  * @param {*} req
@@ -198,18 +198,18 @@ export const createProductReview = async (req, res) => {
     }
 };
 
-export const searchFilters = async (req, res) => {
-    const { query } = req.body;
+// export const searchFilters = async (req, res) => {
+//     const { query } = req.body;
 
-    if (query) {
-        console.log('query', query);
-        await handleQuery(req, res, query);
-    }
-};
+//     if (query) {
+//         console.log('query', query);
+//         await handleQuery(req, res, query);
+//     }
+// };
 
-const handleQuery = async (req, res, query) => {
-    const products = await Product.find({ $text: { $search: query } }).populate(
-        'category',
-    );
-    res.json(products);
-};
+// const handleQuery = async (req, res, query) => {
+//     const products = await Product.find({ $text: { $search: query } }).populate(
+//         'category',
+//     );
+//     res.json(products);
+// };
