@@ -56,7 +56,7 @@ const ForgotPassword = () => {
                         password
                     </Form.Text>
                 </Form.Group>
-                <Button type='submit' variant='black' className='mt-3'>
+                <Button type='submit' variant='dark' className='mt-3'>
                     Submit
                 </Button>
             </Form>
