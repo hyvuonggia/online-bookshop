@@ -7,6 +7,7 @@ import categoryRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import cloudinaryRoutes from './routes/cloudinaryRoutes.js';
 import morgan from 'morgan';
+import path from 'path';
 
 dotenv.config();
 
@@ -28,8 +29,18 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cloudinary', cloudinaryRoutes);
 
+const __dirname = path.resolve();
+
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('../client/build'));
+    app.use(express.static(path.join(__dirname, '/client/build')));
+
+    app.get('*', (req, res) =>
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')),
+    );
+} else {
+    app.get('/', (req, res) => {
+        res.send('API is running');
+    });
 }
 
 const port = process.env.PORT || 5000;
