@@ -130,7 +130,6 @@ export const updateProduct = (slug, product) => async (dispatch, getState) => {
 
 export const getProductsByCreatedDate = (limit) => async (dispatch) => {
     const response = await axios.post(`/api/products/new-arrivals`, { limit });
-    console.log('========>', response);
     dispatch({
         type: GET_PRODUCTS_BY_CREATED_DATE_SUCCESS,
         payload: response.data,
@@ -154,7 +153,6 @@ export const getProductsByMostRated = (limit) => async (dispatch) => {
 };
 
 export const createReview = (slug, review) => async (dispatch, getState) => {
-    console.log('==============================>review', review);
     try {
         const {
             userLogin: { user },

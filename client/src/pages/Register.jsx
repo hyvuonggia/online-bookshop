@@ -22,11 +22,6 @@ const Register = () => {
         }
     }, [user, navigate]);
 
-    console.log(
-        '===============>',
-        process.env.REACT_APP_REGISTER_REDIRECT_URL,
-    );
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const config = {
