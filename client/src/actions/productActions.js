@@ -29,11 +29,7 @@ export const createProduct = (product) => async (dispatch, getState) => {
             },
         };
 
-        const response = await axios.post(
-            `${process.env.REACT_APP_API_URL}/products`,
-            product,
-            config,
-        );
+        const response = await axios.post(`/api/products`, product, config);
         dispatch({
             type: CREATE_PRODUCT_SUCCESS,
             payload: response.data,
@@ -49,7 +45,7 @@ export const createProduct = (product) => async (dispatch, getState) => {
 
 // export const getProductsLimit = (limit) => async (dispatch) => {
 //     const response = await axios.get(
-//         `${process.env.REACT_APP_API_URL}/products/limit/${limit}`,
+//         `/api/products/limit/${limit}`,
 //     );
 //     dispatch({
 //         type: GET_PRODUCTS_LIMIT_SUCCESS,
@@ -58,9 +54,7 @@ export const createProduct = (product) => async (dispatch, getState) => {
 // };
 
 export const getProducts = () => async (dispatch) => {
-    const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/products`,
-    );
+    const response = await axios.get(`/api/products`);
     dispatch({
         type: GET_PRODUCTS_SUCCESS,
         payload: response.data,
@@ -78,10 +72,7 @@ export const deleteProduct = (slug) => async (dispatch, getState) => {
                 Authorization: user.token.token,
             },
         };
-        const response = await axios.delete(
-            `${process.env.REACT_APP_API_URL}/products/${slug}`,
-            config,
-        );
+        const response = await axios.delete(`/api/products/${slug}`, config);
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,
             payload: response.data,
@@ -96,9 +87,7 @@ export const deleteProduct = (slug) => async (dispatch, getState) => {
 
 export const getProduct = (slug) => async (dispatch) => {
     try {
-        const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/products/${slug}`,
-        );
+        const response = await axios.get(`/api/products/${slug}`);
         dispatch({
             type: GET_PRODUCT_SUCCESS,
             payload: response.data,
@@ -123,7 +112,7 @@ export const updateProduct = (slug, product) => async (dispatch, getState) => {
             },
         };
         const response = await axios.put(
-            `${process.env.REACT_APP_API_URL}/products/${slug}`,
+            `/api/products/${slug}`,
             product,
             config,
         );
@@ -140,10 +129,7 @@ export const updateProduct = (slug, product) => async (dispatch, getState) => {
 };
 
 export const getProductsByCreatedDate = (limit) => async (dispatch) => {
-    const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/products/new-arrivals`,
-        { limit },
-    );
+    const response = await axios.post(`/api/products/new-arrivals`, { limit });
     console.log('========>', response);
     dispatch({
         type: GET_PRODUCTS_BY_CREATED_DATE_SUCCESS,
@@ -152,10 +138,7 @@ export const getProductsByCreatedDate = (limit) => async (dispatch) => {
 };
 
 export const getProductsBySold = (limit) => async (dispatch) => {
-    const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/products/best-sellers`,
-        { limit },
-    );
+    const response = await axios.post(`/api/products/best-sellers`, { limit });
     dispatch({
         type: GET_PRODUCTS_BY_SOLD_SUCCESS,
         payload: response.data,
@@ -163,10 +146,7 @@ export const getProductsBySold = (limit) => async (dispatch) => {
 };
 
 export const getProductsByMostRated = (limit) => async (dispatch) => {
-    const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/products/most-rated`,
-        { limit },
-    );
+    const response = await axios.post(`/api/products/most-rated`, { limit });
     dispatch({
         type: GET_PRODUCTS_BY_MOST_RATED_SUCCESS,
         payload: response.data,
@@ -185,11 +165,7 @@ export const createReview = (slug, review) => async (dispatch, getState) => {
                 Authorization: user.token.token,
             },
         };
-        await axios.post(
-            `${process.env.REACT_APP_API_URL}/products/${slug}/reviews`,
-            review,
-            config,
-        );
+        await axios.post(`/api/products/${slug}/reviews`, review, config);
 
         dispatch({
             type: CREATE_REVIEW_SUCCESS,

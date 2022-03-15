@@ -15,7 +15,7 @@ import {
 export const getCategories = () => async (dispatch) => {
     try {
         const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/categories`,
+            `/api/categories`,
         );
         dispatch({
             type: GET_CATEGORIES_SUCCESS,
@@ -32,7 +32,7 @@ export const getCategories = () => async (dispatch) => {
 export const getCategory = (slug) => async (dispatch) => {
     try {
         const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/categories/${slug}`,
+            `/api/categories/${slug}`,
         );
         dispatch({
             type: GET_CATEGORY_SUCCESS,
@@ -60,7 +60,7 @@ export const createCategory = (name) => async (dispatch, getState) => {
     };
 
     const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/categories`,
+        `/api/categories`,
         { name },
         config,
     );
@@ -87,7 +87,7 @@ export const updateCategory =
             };
 
             const response = await axios.put(
-                `${process.env.REACT_APP_API_URL}/categories/${slug}`,
+                `/api/categories/${slug}`,
                 category,
                 config,
             );
@@ -117,7 +117,7 @@ export const deleteCategory = (slug) => async (dispatch, getState) => {
         };
 
         const response = await axios.delete(
-            `${process.env.REACT_APP_API_URL}/categories/${slug}`,
+            `/api/categories/${slug}`,
             config,
         );
         dispatch({
