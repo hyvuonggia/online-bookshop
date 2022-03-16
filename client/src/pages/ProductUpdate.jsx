@@ -126,7 +126,12 @@ const ProductUpdate = () => {
                     </Form.Select>
                 </Form.Group>
 
-                <Button variant='dark' type='submit' disabled={loading}>
+                <Button
+                    variant='dark'
+                    type='submit'
+                    className='mt-3'
+                    disabled={loading}
+                >
                     {loading ? (
                         <>
                             <Spinner

@@ -104,11 +104,13 @@ const ProductDetail = () => {
                             <Rating value={product.rating} />{' '}
                             {`(${product.numReviews} reviews)`}
                             <hr />
-                            <p>
-                                {product.description
-                                    ? product.description
-                                    : 'No Description'}
-                            </p>
+                            <Row>
+                                <p>
+                                    {product.description
+                                        ? product.description
+                                        : 'No Description'}
+                                </p>
+                            </Row>
                             <Row>
                                 <Col lg={6}>
                                     <table className='w-100'>

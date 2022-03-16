@@ -33,12 +33,13 @@ const ProductCard = ({ product }) => {
                     </Card.Title>
                     <Rating value={product.rating} />{' '}
                     {`(${product.numReviews} reviews)`}
-                    <Card.Text as='div'>
+                    {/* <Card.Text as='div'>
                         {' '}
-                        {product.description.length < 30
+                        {product.description.length < 15
                             ? product.description
-                            : `${product.description.substring(0, 30)}...`}
-                    </Card.Text>
+                            : `${product.description.substring(0, 15)}...`}
+                    </Card.Text> */}
+                    <br />
                     <br />
                     <Card.Text as='h3' className='text-center'>
                         <strong>$ {product.price}</strong>

@@ -80,13 +80,21 @@ const AllProducts = () => {
                                 />
                                 <Card.Body>
                                     <Card.Title>{product.title}</Card.Title>
-                                    <Card.Text>
-                                        {product.description.length < 25
+                                    <Card.Text
+                                        style={{
+                                            textOverflow: 'ellipsis',
+                                            whiteSpace: 'nowrap',
+                                            overflow: 'hidden',
+                                            width: '100%',
+                                        }}
+                                    >
+                                        {/* {product.description.length < 30
                                             ? product.description
                                             : `${product.description.substring(
                                                   0,
-                                                  25,
-                                              )}...`}
+                                                  30,
+                                              )}...`} */}
+                                        {product.description}
                                     </Card.Text>
                                     <ButtonGroup
                                         size='md'

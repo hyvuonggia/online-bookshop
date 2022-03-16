@@ -48,7 +48,12 @@ const CategoryUpdate = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </Form.Group>
-                <Button type='submit' variant='dark' disabled={!name}>
+                <Button
+                    type='submit'
+                    variant='dark'
+                    disabled={!name}
+                    className='mt-3'
+                >
                     Submit
                 </Button>
             </Form>
