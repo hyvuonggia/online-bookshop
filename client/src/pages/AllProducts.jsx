@@ -62,7 +62,7 @@ const AllProducts = () => {
                     {products.map((product) => (
                         <Col key={product._id}>
                             <Card
-                                style={{ minHeight: '350px' }}
+                                style={{ minHeight: '350px', height: '100%' }}
                                 className='p-1'
                             >
                                 <Card.Img
@@ -96,14 +96,20 @@ const AllProducts = () => {
                                               )}...`} */}
                                         {product.description}
                                     </Card.Text>
+                                    <br />
+                                    <br />
                                     <ButtonGroup
                                         size='md'
                                         style={{ width: '100%' }}
+                                        className='position-absolute bottom-0 start-50 translate-middle-x'
                                     >
                                         <LinkContainer
                                             to={`/admin/product/${product.slug}`}
                                         >
-                                            <Button variant='dark'>
+                                            <Button
+                                                variant='dark'
+                                                className='py-3'
+                                            >
                                                 <i className='fas fa-pen' />
                                             </Button>
                                         </LinkContainer>
@@ -112,6 +118,7 @@ const AllProducts = () => {
                                             onClick={() =>
                                                 handleDelete(product.slug)
                                             }
+                                            className='py-3'
                                         >
                                             <i className='fas fa-trash' />
                                         </Button>

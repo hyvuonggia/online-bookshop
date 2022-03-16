@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
             className='text-center w-100'
         >
             <Card
-                className='m-3 p-3 rounded text-center'
+                className='m-3 p-3 rounded text-center h-100'
                 style={{ width: '250px' }}
             >
                 <Card.Img

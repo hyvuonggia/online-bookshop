@@ -109,7 +109,7 @@ const Shop = () => {
                                 Can not find books with your filter
                             </Alert>
                         )}
-                        <Row>
+                        <Row className='g-4'>
                             {products
                                 .filter(searchedKeyword(keyword))
                                 .map((product) => (
