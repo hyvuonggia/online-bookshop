@@ -25,7 +25,7 @@ const Shop = () => {
 
     useEffect(() => {
         dispatch(getCategories());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         setLoading(true);

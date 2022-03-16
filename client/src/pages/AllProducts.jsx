@@ -58,7 +58,7 @@ const AllProducts = () => {
             {loading ? (
                 <Loader />
             ) : (
-                <Row className='g-4' lg={5}>
+                <Row className='g-4' lg={3}>
                     {products.map((product) => (
                         <Col key={product._id}>
                             <Card
@@ -81,11 +81,11 @@ const AllProducts = () => {
                                 <Card.Body>
                                     <Card.Title>{product.title}</Card.Title>
                                     <Card.Text>
-                                        {product.description.length < 15
+                                        {product.description.length < 25
                                             ? product.description
                                             : `${product.description.substring(
                                                   0,
-                                                  15,
+                                                  25,
                                               )}...`}
                                     </Card.Text>
                                     <ButtonGroup
