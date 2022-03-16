@@ -217,18 +217,18 @@ export const createProductReview = async (req, res) => {
     }
 };
 
-// export const searchFilters = async (req, res) => {
-//     const { query } = req.body;
+const handleQuery = async (req, res, query) => {
+    const products = await Product.find({ $text: { $search: query } }).populate(
+        'category',
+    );
+    res.json(products);
+};
 
-//     if (query) {
-//         console.log('query', query);
-//         await handleQuery(req, res, query);
-//     }
-// };
+export const searchFilters = async (req, res) => {
+    const { query } = req.body;
 
-// const handleQuery = async (req, res, query) => {
-//     const products = await Product.find({ $text: { $search: query } }).populate(
-//         'category',
-//     );
-//     res.json(products);
-// };
+    if (query) {
+        console.log('query', query);
+        await handleQuery(req, res, query);
+    }
+};

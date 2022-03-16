@@ -21,7 +21,6 @@ const Category = () => {
     });
 
     useEffect(() => {
-        console.log('USEEFFECT');
         setLoading(true);
         if (!categoryDetail || categoryDetail.category.slug !== match.slug) {
             dispatch(getCategory(match.slug)).then(() => setLoading(false));

@@ -83,191 +83,204 @@ const ProductDetail = () => {
             {loading ? (
                 <Loader />
             ) : (
-                <Row>
-                    <Col lg={4} className='pe-3 d-flex justify-content-center'>
-                        <img
-                            src={
-                                product.image
-                                    ? product.image.url
-                                    : 'https://crossfitbbros.com/bbros-1/wp-content/uploads/2021/01/no-photo-available.png'
-                            }
-                            alt='bookcover'
-                            style={{ width: '100%' }}
-                        />
-                    </Col>
-                    <Col className='ms-5'>
-                        <h3>{product.title}</h3>
-                        <Rating value={product.rating} />{' '}
-                        {`(${product.numReviews} reviews)`}
-                        <hr />
-                        <p>
-                            {product.description
-                                ? product.description
-                                : 'No Description'}
-                        </p>
-                        <Row>
-                            <Col lg={6}>
-                                <table className='w-100'>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <strong>Author:</strong>
-                                            </td>
-                                            <td className='float-end'>
-                                                {product.author}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>Category:</strong>
-                                            </td>
-                                            <td className='float-end'>
-                                                <Link
-                                                    to={
-                                                        product.category
-                                                            ? `/category/${product.category.slug}`
-                                                            : ''
-                                                    }
+                <>
+                    <Row>
+                        <Col
+                            lg={4}
+                            className='pe-3 d-flex justify-content-center'
+                        >
+                            <img
+                                src={
+                                    product.image
+                                        ? product.image.url
+                                        : 'https://crossfitbbros.com/bbros-1/wp-content/uploads/2021/01/no-photo-available.png'
+                                }
+                                alt='bookcover'
+                                style={{ width: '100%' }}
+                            />
+                        </Col>
+                        <Col className='ms-5'>
+                            <h3>{product.title}</h3>
+                            <Rating value={product.rating} />{' '}
+                            {`(${product.numReviews} reviews)`}
+                            <hr />
+                            <p>
+                                {product.description
+                                    ? product.description
+                                    : 'No Description'}
+                            </p>
+                            <Row>
+                                <Col lg={6}>
+                                    <table className='w-100'>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Author:</strong>
+                                                </td>
+                                                <td className='float-end'>
+                                                    {product.author}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Category:</strong>
+                                                </td>
+                                                <td className='float-end'>
+                                                    <Link
+                                                        to={
+                                                            product.category
+                                                                ? `/category/${product.category.slug}`
+                                                                : ''
+                                                        }
+                                                    >
+                                                        {product.category
+                                                            ? product.category
+                                                                  .name
+                                                            : 'Unknown'}
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>In Stock:</strong>
+                                                </td>
+                                                <td className='float-end'>
+                                                    {product.quantity}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Sold:</strong>
+                                                </td>
+                                                <td className='float-end'>
+                                                    {product.sold}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>Price:</strong>
+                                                </td>
+                                                <td className='float-end'>
+                                                    ${product.price}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </Col>
+                                <Col>
+                                    <Button
+                                        className='w-100 p-3'
+                                        variant='info'
+                                    >
+                                        <i className='fas fa-heart me-2' />
+                                        Add to Wishlist
+                                    </Button>
+                                    <br />
+                                    <Button
+                                        className='w-100 p-3 mt-4'
+                                        variant='dark'
+                                    >
+                                        <i className='fas fa-cart-shopping me-2' />
+                                        Add to Cart
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row className='mt-5'>
+                        <Col>
+                            {errorCreateReview && (
+                                <Alert variant='danger'>
+                                    {errorCreateReview}
+                                </Alert>
+                            )}
+                            {product.reviews.length === 0 && (
+                                <Alert variant='warning'>No reviews yet</Alert>
+                            )}
+                            <ListGroup variant='flush'>
+                                <ListGroup.Item>
+                                    <h4>Leave a review</h4>
+                                    {user ? (
+                                        <Form onSubmit={handleSubmit}>
+                                            <Form.Group controlId='rating'>
+                                                <Form.Label>Rating</Form.Label>
+                                                <Form.Control
+                                                    as='select'
+                                                    value={review.rating}
+                                                    name='rating'
+                                                    onChange={handleChange}
+                                                    style={{
+                                                        width: 'fit-content',
+                                                        appearance: 'menulist',
+                                                    }}
                                                 >
-                                                    {product.category
-                                                        ? product.category.name
-                                                        : 'Unknown'}
-                                                </Link>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>In Stock:</strong>
-                                            </td>
-                                            <td className='float-end'>
-                                                {product.quantity}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>Sold:</strong>
-                                            </td>
-                                            <td className='float-end'>
-                                                {product.sold}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>Price:</strong>
-                                            </td>
-                                            <td className='float-end'>
-                                                ${product.price}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </Col>
-                            <Col>
-                                <Button className='w-100 p-3' variant='info'>
-                                    <i className='fas fa-heart me-2' />
-                                    Add to Wishlist
-                                </Button>
-                                <br />
-                                <Button
-                                    className='w-100 p-3 mt-4'
-                                    variant='dark'
-                                >
-                                    <i className='fas fa-cart-shopping me-2' />
-                                    Add to Cart
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            )}
-            {loading ? (
-                <Loader />
-            ) : (
-                <Row className='mt-5'>
-                    <Col>
-                        {errorCreateReview && (
-                            <Alert variant='danger'>{errorCreateReview}</Alert>
-                        )}
-                        {product.reviews.length === 0 && (
-                            <Alert variant='warning'>No reviews yet</Alert>
-                        )}
-                        <ListGroup variant='flush'>
-                            <ListGroup.Item>
-                                <h4>Leave a review</h4>
-                                {user ? (
-                                    <Form onSubmit={handleSubmit}>
-                                        <Form.Group controlId='rating'>
-                                            <Form.Label>Rating</Form.Label>
-                                            <Form.Control
-                                                as='select'
-                                                value={review.rating}
-                                                name='rating'
-                                                onChange={handleChange}
-                                                style={{
-                                                    width: 'fit-content',
-                                                    appearance: 'menulist',
-                                                }}
+                                                    <option value=''>
+                                                        ---Please select---
+                                                    </option>
+                                                    <option value='1'>
+                                                        1 - Very Bad
+                                                    </option>
+                                                    <option value='2'>
+                                                        2 - Bad
+                                                    </option>
+                                                    <option value='3'>
+                                                        3 - Average
+                                                    </option>
+                                                    <option value='4'>
+                                                        4 - Good
+                                                    </option>
+                                                    <option value='5'>
+                                                        5 - Excellent
+                                                    </option>
+                                                </Form.Control>
+                                            </Form.Group>
+                                            <Form.Group
+                                                controlId='comment'
+                                                className='mt-3'
                                             >
-                                                <option value=''>
-                                                    ---Please select---
-                                                </option>
-                                                <option value='1'>
-                                                    1 - Very Bad
-                                                </option>
-                                                <option value='2'>
-                                                    2 - Bad
-                                                </option>
-                                                <option value='3'>
-                                                    3 - Average
-                                                </option>
-                                                <option value='4'>
-                                                    4 - Good
-                                                </option>
-                                                <option value='5'>
-                                                    5 - Excellent
-                                                </option>
-                                            </Form.Control>
-                                        </Form.Group>
-                                        <Form.Group
-                                            controlId='comment'
-                                            className='mt-3'
-                                        >
-                                            <Form.Label>Comment</Form.Label>
-                                            <Form.Control
-                                                as='textarea'
-                                                row={4}
-                                                name='comment'
-                                                onChange={handleChange}
-                                            ></Form.Control>
-                                        </Form.Group>
-                                        <Button
-                                            variant='dark'
-                                            type='submit'
-                                            className='mt-2'
-                                        >
-                                            Submit
-                                        </Button>
-                                    </Form>
-                                ) : (
-                                    <Alert variant='warning'>
-                                        Please <Link to='/login'>sign in</Link>{' '}
-                                        to write review
-                                    </Alert>
-                                )}
-                            </ListGroup.Item>
-                            {product.reviews.map((review) => (
-                                <ListGroup.Item key={review._id}>
-                                    <strong>{review.name}</strong>
-                                    <div>
-                                        <Rating value={review.rating} text='' />
-                                    </div>
-                                    <p>{review.createdAt.substring(0, 10)}</p>
-                                    <p>{review.comment}</p>
+                                                <Form.Label>Comment</Form.Label>
+                                                <Form.Control
+                                                    as='textarea'
+                                                    row={4}
+                                                    name='comment'
+                                                    onChange={handleChange}
+                                                ></Form.Control>
+                                            </Form.Group>
+                                            <Button
+                                                variant='dark'
+                                                type='submit'
+                                                className='mt-2'
+                                            >
+                                                Submit
+                                            </Button>
+                                        </Form>
+                                    ) : (
+                                        <Alert variant='warning'>
+                                            Please{' '}
+                                            <Link to='/login'>sign in</Link> to
+                                            write review
+                                        </Alert>
+                                    )}
                                 </ListGroup.Item>
-                            ))}
-                        </ListGroup>
-                    </Col>
-                </Row>
+                                {product.reviews.map((review) => (
+                                    <ListGroup.Item key={review._id}>
+                                        <strong>{review.name}</strong>
+                                        <div>
+                                            <Rating
+                                                value={review.rating}
+                                                text=''
+                                            />
+                                        </div>
+                                        <p>
+                                            {review.createdAt.substring(0, 10)}
+                                        </p>
+                                        <p>{review.comment}</p>
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                        </Col>
+                    </Row>
+                </>
             )}
         </Container>
     );
