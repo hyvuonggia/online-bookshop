@@ -25,17 +25,14 @@ const Shop = () => {
     );
 
     useEffect(() => {
-        dispatch({
-            type: GET_CATEGORY_RESET,
-        });
-    }, [dispatch]);
-
-    useEffect(() => {
         dispatch(getCategories());
     }, [dispatch]);
 
     useEffect(() => {
         setLoading(true);
+        dispatch({
+            type: GET_CATEGORY_RESET,
+        });
         if (productsList.length === 0) {
             dispatch(getProducts());
         } else {
