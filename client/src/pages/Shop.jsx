@@ -39,7 +39,7 @@ const Shop = () => {
             setProducts(productsList);
             setLoading(false);
         }
-    }, [dispatch, productsList]);
+    }, [dispatch, productsList, categoryDetail]);
 
     useEffect(() => {
         if (categoryDetail) {
