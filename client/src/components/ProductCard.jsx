@@ -41,7 +41,10 @@ const ProductCard = ({ product }) => {
                     </Card.Text> */}
                     <br />
                     <br />
-                    <Card.Text as='h3' className='text-center'>
+                    <Card.Text
+                        as='h3'
+                        className='position-absolute bottom-0 start-50 translate-middle-x'
+                    >
                         <strong>$ {product.price}</strong>
                     </Card.Text>
                 </Card.Body>

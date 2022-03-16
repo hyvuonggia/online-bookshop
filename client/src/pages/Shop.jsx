@@ -5,6 +5,7 @@ import { getProducts } from '../actions/productActions';
 import ProductCard from '../components/ProductCard';
 import Loader from '../components/Loader';
 import { getCategories, getCategory } from '../actions/categoryActions';
+import { GET_CATEGORY_RESET } from '../constants/categoryConstants';
 
 const Shop = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,12 @@ const Shop = () => {
     const { category: categoryDetail } = useSelector(
         (state) => state.getCategory,
     );
+
+    useEffect(() => {
+        dispatch({
+            type: GET_CATEGORY_RESET,
+        });
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(getCategories());
@@ -53,7 +60,11 @@ const Shop = () => {
 
     const handleCheck = (e) => {
         setLoading(true);
-        dispatch(getCategory(e.target.value));
+        if (e.target.value === 'all') {
+            dispatch(getProducts());
+        } else {
+            dispatch(getCategory(e.target.value));
+        }
     };
 
     return (
@@ -70,12 +81,18 @@ const Shop = () => {
                     <hr />
                     <Form.Group className='my-3'>
                         <Form.Label>Category</Form.Label>
+                        <Form.Check
+                            type='radio'
+                            label='All'
+                            name='category'
+                            value='all'
+                            onChange={handleCheck}
+                        />
                         {categoriesList.map((category) => (
                             <Form.Check
                                 type='radio'
                                 label={category.name}
                                 name='category'
-                                variant='dark'
                                 value={category.slug}
                                 key={category._id}
                                 onChange={handleCheck}
