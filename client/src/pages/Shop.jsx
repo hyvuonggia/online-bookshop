@@ -29,17 +29,20 @@ const Shop = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        setLoading(true);
         dispatch({
             type: GET_CATEGORY_RESET,
         });
+    }, [categoryDetail, dispatch]);
+
+    useEffect(() => {
+        setLoading(true);
         if (productsList.length === 0) {
             dispatch(getProducts());
         } else {
             setProducts(productsList);
             setLoading(false);
         }
-    }, [dispatch, productsList, categoryDetail]);
+    }, [dispatch, productsList]);
 
     useEffect(() => {
         if (categoryDetail) {
