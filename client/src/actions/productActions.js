@@ -53,13 +53,17 @@ export const createProduct = (product) => async (dispatch, getState) => {
 //     });
 // };
 
-export const getProducts = () => async (dispatch) => {
-    const response = await axios.get(`/api/products`);
-    dispatch({
-        type: GET_PRODUCTS_SUCCESS,
-        payload: response.data,
-    });
-};
+export const getProducts =
+    (sort = 'title', order = 'asc') =>
+    async (dispatch) => {
+        const response = await axios.get(
+            `/api/products?sort=${sort}&order=${order}`,
+        );
+        dispatch({
+            type: GET_PRODUCTS_SUCCESS,
+            payload: response.data,
+        });
+    };
 
 export const deleteProduct = (slug) => async (dispatch, getState) => {
     try {

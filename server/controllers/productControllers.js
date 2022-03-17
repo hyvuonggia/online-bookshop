@@ -35,7 +35,9 @@ export const createProduct = async (req, res) => {
  * @param {*} res
  */
 export const getProducts = async (req, res) => {
-    const products = await Product.find({}).sort('title');
+    const sort = req.query.sort;
+    const order = req.query.order;
+    const products = await Product.find({}).sort([[sort, order]]);
     res.json(products);
 };
 
