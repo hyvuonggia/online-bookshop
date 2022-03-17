@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsByCreatedDate } from '../actions/productActions';
 // import { getProducts } from '../actions/productActions';
-import ProductCard from '../components/ProductCard';
+import ProductCard from './ProductCard';
 import Loader from './Loader';
 
 const NewArrivals = () => {
@@ -20,7 +20,7 @@ const NewArrivals = () => {
     }, []);
     return (
         <>
-            <h2 className='text-center p-4'>NEW ARRIVALS</h2>
+            <h2 className='text-center p-4'>LATEST BOOKS</h2>
             {loading ? (
                 <Loader />
             ) : (

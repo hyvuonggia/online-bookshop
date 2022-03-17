@@ -1,4 +1,6 @@
 import {
+    CREATE_CATEGORY_FAIL,
+    CREATE_CATEGORY_SUCCESS,
     DELETE_CATEGORY_FAIL,
     DELETE_CATEGORY_SUCCESS,
     GET_CATEGORIES_FAIL,
@@ -51,12 +53,12 @@ export const getCategoryReducer = (state = {}, action) => {
 export const createCategoryReducer = (state = {}, action) => {
     const { type, payload } = action;
     switch (type) {
-        case GET_CATEGORY_SUCCESS:
+        case CREATE_CATEGORY_SUCCESS:
             return {
                 ...state,
                 category: payload,
             };
-        case GET_CATEGORY_FAIL:
+        case CREATE_CATEGORY_FAIL:
             return {
                 ...state,
                 error: payload,

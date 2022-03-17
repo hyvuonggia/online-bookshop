@@ -17,14 +17,14 @@ export const createUser = async (req, res) => {
     );
 
     if (user) {
-        console.log('USER UPDATED', user);
+        // console.log('USER UPDATED', user);
         res.json(user);
     } else {
         const newUser = await new User({
             name: email.split('@')[0],
             email,
         }).save();
-        console.log('USER CREATED', newUser);
+        // console.log('USER CREATED', newUser);
         res.json(newUser);
     }
 };

@@ -18,7 +18,9 @@ const MostRated = () => {
     }, []);
     return (
         <>
-            <h2 className='text-center p-4'>MOST RATED</h2>
+            <h2 className='text-center p-4' id='most-rated'>
+                MOST RATED
+            </h2>
             {loading ? (
                 <Loader />
             ) : (
