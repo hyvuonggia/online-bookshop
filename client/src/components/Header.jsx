@@ -69,6 +69,16 @@ const Header = () => {
                                     )}
 
                                     <LinkContainer
+                                        to='/shop'
+                                        style={{
+                                            textDecoration: 'none',
+                                        }}
+                                    >
+                                        <NavDropdown.Item>
+                                            Shop
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer
                                         to='/user/password'
                                         style={{
                                             textDecoration: 'none',
