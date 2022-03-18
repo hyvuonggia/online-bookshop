@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const Cart = () => {
     const match = useParams();
@@ -26,11 +26,11 @@ const Cart = () => {
     }, [dispatch, match.slug]);
 
     const handleRemoveFromCart = (slug) => {
-        console.log(slug);
+        dispatch(removeFromCart(slug));
     };
 
     const handleCheckout = () => {
-        console.log('checkout');
+        navigate('/login?redirect=shipping');
     };
 
     return (
