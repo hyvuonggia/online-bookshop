@@ -1,5 +1,12 @@
-import React, { Fragment } from 'react';
-import { Button, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import React, { Fragment, useEffect } from 'react';
+import {
+    Badge,
+    Button,
+    Container,
+    Nav,
+    Navbar,
+    NavDropdown,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +19,8 @@ const Header = () => {
 
     const userLogin = useSelector((state) => state.userLogin);
     const { user } = userLogin;
+
+    const { cartItems } = useSelector((state) => state.cart);
 
     const logoutHandler = () => {
         dispatch(logout());
@@ -85,7 +94,12 @@ const Header = () => {
                                         }}
                                     >
                                         <NavDropdown.Item>
-                                            Cart
+                                            Cart{' '}
+                                            {cartItems.length === 0 ? null : (
+                                                <Badge bg='danger'>
+                                                    {cartItems.length}
+                                                </Badge>
+                                            )}
                                         </NavDropdown.Item>
                                     </LinkContainer>
 
