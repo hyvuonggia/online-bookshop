@@ -53,11 +53,12 @@ const Login = () => {
                         _id: res.data._id,
                     },
                 });
-                if (res.data.role === 'admin') {
-                    navigate('/admin/dashboard');
-                } else {
-                    navigate('/user/history');
-                }
+                // if (res.data.role === 'admin') {
+                //     navigate('/admin/dashboard');
+                // } else {
+                //     navigate('/user/history');
+                // }
+                navigate('/');
             });
 
             toast.success('Login successful');
@@ -84,11 +85,12 @@ const Login = () => {
                             _id: res.data._id,
                         },
                     });
-                    if (res.data.role === 'admin') {
-                        navigate('/admin/dashboard');
-                    } else {
-                        navigate('/user/history');
-                    }
+                    // if (res.data.role === 'admin') {
+                    //     navigate('/admin/dashboard');
+                    // } else {
+                    //     navigate('/user/history');
+                    // }
+                    navigate('/');
                 });
                 toast.success('Login successful');
                 navigate('/');
