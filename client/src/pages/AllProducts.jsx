@@ -53,8 +53,9 @@ const AllProducts = () => {
 
     return (
         <div className='px-5'>
-            <h1 className='py-3 text-center'>Products</h1>
+            <h1 className='py-5 text-center'>Products</h1>
             <hr />
+            <br />
             {loading ? (
                 <Loader />
             ) : (

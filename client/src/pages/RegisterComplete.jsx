@@ -84,7 +84,7 @@ const RegisterComplete = () => {
 
     return (
         <FormContainer>
-            <h4>Complete your registration</h4>
+            <h1 className='my-5'>Complete your registration</h1>
             <Form onSubmit={handleSubmit} method='post'>
                 <Form.Group>
                     <Form.Control

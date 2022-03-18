@@ -40,7 +40,7 @@ const Register = () => {
 
     return (
         <FormContainer>
-            <h1>Register</h1>
+            <h1 className='my-5'>Register</h1>
             <Form onSubmit={handleSubmit} method='post' className='mt-5'>
                 <Form.Group>
                     <Form.Label>Email address</Form.Label>

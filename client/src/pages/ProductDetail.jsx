@@ -9,7 +9,7 @@ import {
     Form,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createReview, getProduct } from '../actions/productActions';
 import Loader from '../components/Loader';
@@ -19,6 +19,7 @@ import { CREATE_REVIEW_RESET } from '../constants/productConstants';
 const ProductDetail = () => {
     const match = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [product, setProduct] = useState({
         title: '',
@@ -76,6 +77,10 @@ const ProductDetail = () => {
                 [name]: value,
             };
         });
+    };
+
+    const handleAddToCart = () => {
+        navigate(`/cart/${match.slug}`);
     };
 
     return (
@@ -181,6 +186,7 @@ const ProductDetail = () => {
                                     <Button
                                         className='w-100 p-3 mt-4'
                                         variant='dark'
+                                        onClick={handleAddToCart}
                                     >
                                         <i className='fas fa-cart-shopping me-2' />
                                         Add to Cart

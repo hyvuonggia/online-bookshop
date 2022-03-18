@@ -27,9 +27,9 @@ const PasswordUpdate = () => {
     return (
         <FormContainer>
             {loading ? (
-                <h1 className='mt-4'>Loading...</h1>
+                <h1 className='my-5'>Loading...</h1>
             ) : (
-                <h1 className='mt-4'>Update password</h1>
+                <h1 className='my-5'>Update password</h1>
             )}
             <Form onSubmit={handleSubmit} method='post' className='mt-5'>
                 <Form.Group className='my-3'>

@@ -101,9 +101,12 @@ const Login = () => {
 
     return (
         <>
-            {/* {loading && <Loader />} */}
             <FormContainer>
-                {loading ? <h1>Loading...</h1> : <h1>Login</h1>}
+                {loading ? (
+                    <h1 className='my-5'>Loading...</h1>
+                ) : (
+                    <h1 className='my-5'>Login</h1>
+                )}
                 <Form onSubmit={handleSubmit} method='post' className='mt-5'>
                     <Form.Group>
                         <Form.Label>Email address</Form.Label>
