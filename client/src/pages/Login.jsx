@@ -9,26 +9,29 @@ import { auth, googleAuthProvider } from '../firebase';
 import { toast } from 'react-toastify';
 import FormContainer from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LOGGED_IN_USER } from '../constants/userConstants';
 import { createUser } from '../actions/userActions';
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const redirect = location.search ? location.search.split('=')[1] : '/';
+
     const userLogin = useSelector((state) => state.userLogin);
     const { user } = userLogin;
 
     useEffect(() => {
-        if (user && user.token) {
-            navigate('/');
+        if (user) {
+            navigate(redirect);
         }
-    }, [user, navigate]);
+    }, [navigate, user, redirect]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -58,7 +61,7 @@ const Login = () => {
                 // } else {
                 //     navigate('/user/history');
                 // }
-                navigate('/');
+                // navigate('/');
             });
 
             toast.success('Login successful');
@@ -90,10 +93,10 @@ const Login = () => {
                     // } else {
                     //     navigate('/user/history');
                     // }
-                    navigate('/');
+                    // navigate('/');
                 });
                 toast.success('Login successful');
-                navigate('/');
+                // navigate('/');
             })
             .catch((error) => {
                 console.error(error);
