@@ -79,15 +79,16 @@ const Header = () => {
                                         </NavDropdown.Item>
                                     </LinkContainer>
                                     <LinkContainer
-                                        to='/user/password'
+                                        to='/cart'
                                         style={{
                                             textDecoration: 'none',
                                         }}
                                     >
                                         <NavDropdown.Item>
-                                            Password
+                                            Cart
                                         </NavDropdown.Item>
                                     </LinkContainer>
+
                                     <LinkContainer
                                         to='/user/wishlist'
                                         style={{
@@ -96,6 +97,16 @@ const Header = () => {
                                     >
                                         <NavDropdown.Item>
                                             Wishlist
+                                        </NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer
+                                        to='/user/password'
+                                        style={{
+                                            textDecoration: 'none',
+                                        }}
+                                    >
+                                        <NavDropdown.Item>
+                                            Password
                                         </NavDropdown.Item>
                                     </LinkContainer>
                                 </NavDropdown>

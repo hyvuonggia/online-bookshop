@@ -11,7 +11,7 @@ Authorization: eyJhbGciOiJSUzI1NiIsImtpZCI6ImNmNWQ4ZTc0ZjNjNDg2ZWU1MDNkNWVlYzkzY
 
 ###
 
-GET http://localhost:5000/api/categories/category-1
+GET http://localhost:5000/api/products/kjhgfds
 
 ###
 

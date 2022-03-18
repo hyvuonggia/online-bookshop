@@ -30,6 +30,7 @@ import Coupon from './pages/Coupon';
 import ProductDetail from './pages/ProductDetail';
 import Category from './pages/Category';
 import Shop from './pages/Shop';
+import Cart from './pages/Cart';
 
 function App() {
     const dispatch = useDispatch();
@@ -74,7 +75,10 @@ function App() {
                     <Route path='/product/:slug' element={<ProductDetail />} />
                     <Route path='/category/:slug' element={<Category />} />
                     <Route path='/shop' element={<Shop />} />
-
+                    <Route path='/cart'>
+                        <Route path=':slug' element={<Cart />} />
+                        <Route path='' element={<Cart />} />
+                    </Route>
                     <Route element={<ProtectedRoute />}>
                         <Route element={<AppLayout />}>
                             <Route

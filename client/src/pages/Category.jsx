@@ -28,14 +28,14 @@ const Category = () => {
             setCategory(categoryDetail);
             setLoading(false);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [categoryDetail]);
 
     return loading ? (
         <Loader />
     ) : (
         <>
-            <h1 className='text-center mt-5'>{`${category.products.length} Book(s) With This Category`}</h1>
+            <h1 className='text-center my-5'>{`${category.products.length} Book(s) With This Category`}</h1>
             <Container>
                 <Row>
                     {category.products.map((product) => (
