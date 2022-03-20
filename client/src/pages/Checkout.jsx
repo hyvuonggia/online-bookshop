@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, ListGroup, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCart } from '../actions/cartActions';
+import Loader from '../components/Loader';
 
 const Checkout = () => {
-    const { cartItems } = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+
+    const [cart, setCart] = useState({
+        products: [],
+        cartTotal: 0,
+    });
+    const [loading, setLoading] = useState(false);
+
+    const { cart: cartDetail } = useSelector((state) => state.getCart);
+
+    useEffect(() => {
+        // console.log('cartDetail', cartDetail);
+        setLoading(true);
+        if (!cartDetail) {
+            dispatch(getCart());
+        } else {
+            setCart(cartDetail);
+            setLoading(false);
+        }
+    }, [cartDetail, dispatch]);
 
     const saveAddressToDb = () => {};
 
-    return (
+    return loading ? (
+        <Loader />
+    ) : (
         <Container>
             <Row>
                 <Col md={6}>
@@ -25,6 +48,20 @@ const Checkout = () => {
                 <Col md={6}>
                     <h2 className='my-5'>Order Summary</h2>
                     <ListGroup variant='flush'>
+                        {cart.products.map((product) => (
+                            <ListGroup.Item key={product._id}>
+                                <Row>
+                                    <Col>
+                                        <div>{product.product.title}</div>
+                                    </Col>
+                                    <Col>
+                                        <div className='float-end'>
+                                            ${product.price}
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </ListGroup.Item>
+                        ))}
                         <ListGroup.Item>
                             <Row>
                                 <Col>
@@ -32,11 +69,7 @@ const Checkout = () => {
                                 </Col>
                                 <Col>
                                     <h3 className='float-end'>
-                                        $
-                                        {cartItems.reduce(
-                                            (acc, item) => acc + item.price,
-                                            0,
-                                        )}
+                                        ${cart.cartTotal}
                                     </h3>
                                 </Col>
                             </Row>

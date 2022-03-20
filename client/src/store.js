@@ -22,7 +22,7 @@ import {
     updateProductReducer,
 } from './reducers/productReducers';
 import { uploadImageReducer } from './reducers/imageReducers';
-import { cartReducer, saveCartReducer } from './reducers/cartReducers';
+import { cartReducer, getCartReducer, saveCartReducer } from './reducers/cartReducers';
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -44,6 +44,7 @@ const reducer = combineReducers({
     createReview: createReviewReducer,
     cart: cartReducer,
     saveCart: saveCartReducer,
+    getCart: getCartReducer,
 });
 
 const middleware = [thunk];

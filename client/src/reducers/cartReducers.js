@@ -1,6 +1,8 @@
 import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
+    GET_CART_FAIL,
+    GET_CART_SUCCESS,
     SAVE_CART_FAIL,
     SAVE_CART_SUCCESS,
 } from '../constants/cartConstants';
@@ -49,6 +51,24 @@ export const saveCartReducer = (state = {}, action) => {
                 message: payload,
             };
         case SAVE_CART_FAIL:
+            return {
+                success: false,
+                error: payload,
+            };
+        default:
+            return state;
+    }
+};
+
+export const getCartReducer = (state = {}, action) => {
+    const { type, payload } = action;
+    switch (type) {
+        case GET_CART_SUCCESS:
+            return {
+                success: true,
+                cart: payload
+            };
+        case GET_CART_FAIL:
             return {
                 success: false,
                 error: payload,

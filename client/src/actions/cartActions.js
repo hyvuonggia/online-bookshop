@@ -2,6 +2,8 @@ import axios from 'axios';
 import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
+    GET_CART_FAIL,
+    GET_CART_SUCCESS,
     SAVE_CART_FAIL,
     SAVE_CART_SUCCESS,
 } from '../constants/cartConstants';
@@ -65,5 +67,32 @@ export const userCart = (cart) => async (dispatch, getState) => {
             payload: error.response.data,
         });
         // console.log(error);
+    }
+};
+
+export const getCart = () => async (dispatch, getState) => {
+    try {
+        const {
+            userLogin: { user },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: user.token.token,
+            },
+        };
+
+        const response = await axios.get(`/api/cart`, config);
+
+        dispatch({
+            type: GET_CART_SUCCESS,
+            payload: response.data,
+        });
+        return response;
+    } catch (error) {
+        dispatch({
+            type: GET_CART_FAIL,
+            payload: error.response.data,
+        });
     }
 };

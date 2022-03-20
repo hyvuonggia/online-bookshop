@@ -38,7 +38,7 @@ const Cart = () => {
         } else {
             dispatch(userCart(cartItems))
                 .then((res) => {
-                    console.log('CART_POST_RES', res);
+                    // console.log('CART_POST_RES', res);
                     if (res.data.ok) {
                         navigate('/checkout');
                     }
@@ -112,7 +112,7 @@ const Cart = () => {
                     )}
                 </Col>
                 <Col md={4}>
-                    <h2 className='my-5'>Order Summary</h2>
+                    <h2 className='my-5'>{`Total (${cartItems.length}) books`}</h2>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                             <Row>
