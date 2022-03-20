@@ -55,3 +55,22 @@ export const userCart = async (req, res) => {
     console.log('newCart ---->', newCart);
     res.json({ ok: true });
 };
+
+/**
+ * @description Get user cart
+ * @route GET /api/cart
+ * @access private
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const getCart = async (req, res) => {
+    const user = await User.findOne({ email: req.user.email });
+
+    const cart = await Cart.findOne({ orderedBy: user._id }).populate(
+        'products.product',
+    );
+
+    const { products, cartTotal, totalAfterDiscount } = cart;
+    res.json({ products, cartTotal, totalAfterDiscount });
+};
