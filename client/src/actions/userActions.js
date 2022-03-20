@@ -1,5 +1,9 @@
 import { signOut } from 'firebase/auth';
-import { LOGOUT } from '../constants/userConstants';
+import {
+    LOGOUT,
+    SAVE_USER_ADDRESS_FAIL,
+    SAVE_USER_ADDRESS_SUCCESS,
+} from '../constants/userConstants';
 import { auth } from '../firebase';
 import axios from 'axios';
 
@@ -23,11 +27,7 @@ export const createUser = (authtoken) => async () => {
         },
     };
 
-    const response = await axios.post(
-        `/api/users`,
-        {},
-        config,
-    );
+    const response = await axios.post(`/api/users`, {}, config);
     return response;
 };
 
@@ -38,10 +38,7 @@ export const getCurrentUser = (authtoken) => async () => {
         },
     };
 
-    const response = await axios.get(
-        `/api/users/current-user`,
-        config,
-    );
+    const response = await axios.get(`/api/users/current-user`, config);
     return response;
 };
 
@@ -52,9 +49,35 @@ export const getCurrentAdmin = async (authtoken) => {
         },
     };
 
-    const response = await axios.get(
-        `/api/users/current-admin`,
-        config,
-    );
+    const response = await axios.get(`/api/users/current-admin`, config);
     return response;
+};
+
+export const saveUserAddress = (address) => async (dispatch, getState) => {
+    try {
+        const {
+            userLogin: { user },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: user.token.token,
+            },
+        };
+
+        const response = await axios.post(
+            '/api/users/user/address',
+            { address },
+            config,
+        );
+        dispatch({
+            type: SAVE_USER_ADDRESS_SUCCESS,
+            payload: response.data.address,
+        });
+    } catch (error) {
+        dispatch({
+            type: SAVE_USER_ADDRESS_FAIL,
+            payload: error.response.data,
+        });
+    }
 };

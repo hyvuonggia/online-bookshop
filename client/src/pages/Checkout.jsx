@@ -1,8 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, ListGroup, Row } from 'react-bootstrap';
+import {
+    Button,
+    Col,
+    Container,
+    Form,
+    FormControl,
+    FormGroup,
+    FormLabel,
+    ListGroup,
+    Row,
+    Spinner,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { getCart } from '../actions/cartActions';
-import Loader from '../components/Loader';
+import { saveUserAddress } from '../actions/userActions';
 
 const Checkout = () => {
     const dispatch = useDispatch();
@@ -13,33 +25,120 @@ const Checkout = () => {
     });
     const [loading, setLoading] = useState(false);
 
+    const [shippingAddress, setShippingAddress] = useState({
+        address: '',
+        city: '',
+        postalCode: '',
+        country: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setShippingAddress((prev) => {
+            return {
+                ...prev,
+                [name]: value,
+            };
+        });
+    };
+
     const { cart: cartDetail } = useSelector((state) => state.getCart);
 
     useEffect(() => {
-        // console.log('cartDetail', cartDetail);
-        setLoading(true);
         if (!cartDetail) {
             dispatch(getCart());
         } else {
             setCart(cartDetail);
-            setLoading(false);
         }
     }, [cartDetail, dispatch]);
 
-    const saveAddressToDb = () => {};
+    useEffect(() => {});
 
-    return loading ? (
-        <Loader />
-    ) : (
+    const saveAddressToDb = (e) => {
+        e.preventDefault();
+        console.log('Save address');
+        console.log(shippingAddress);
+        setLoading(true);
+        dispatch(saveUserAddress(shippingAddress))
+            .then(() => {
+                setLoading(false);
+                toast.success('Address saved');
+            })
+            .catch((error) => {
+                setLoading(false);
+                console.log(error);
+                toast.error('Address saved fail');
+            });
+    };
+
+    return (
         <Container>
             <Row>
                 <Col md={6}>
-                    <h2 className='my-5'>Delivery address</h2>
-                    textarea
-                    <br />
-                    <Button variant='dark' onClick={saveAddressToDb}>
-                        Save
-                    </Button>
+                    <h2 className='my-5'>Shipping address</h2>
+                    <Form>
+                        <FormGroup controlId='address'>
+                            <FormLabel>Address</FormLabel>
+                            <FormControl
+                                type='text'
+                                placeholder='Enter address'
+                                name='address'
+                                value={shippingAddress.address}
+                                required
+                                onChange={handleChange}
+                            ></FormControl>
+                        </FormGroup>
+                        <FormGroup controlId='city'>
+                            <FormLabel>City</FormLabel>
+                            <FormControl
+                                type='text'
+                                placeholder='Enter city'
+                                name='city'
+                                value={shippingAddress.city}
+                                required
+                                onChange={handleChange}
+                            ></FormControl>
+                        </FormGroup>
+                        <FormGroup controlId='postalCode'>
+                            <FormLabel>Postal Code</FormLabel>
+                            <FormControl
+                                type='text'
+                                placeholder='Enter postal code'
+                                name='postalCode'
+                                value={shippingAddress.postalCode}
+                                required
+                                onChange={handleChange}
+                            ></FormControl>
+                        </FormGroup>
+                        <FormGroup controlId='country'>
+                            <FormLabel>Country</FormLabel>
+                            <FormControl
+                                type='text'
+                                placeholder='Enter country'
+                                name='country'
+                                value={shippingAddress.country}
+                                required
+                                onChange={handleChange}
+                            ></FormControl>
+                        </FormGroup>
+                        <br />
+                        <Button variant='dark' onClick={saveAddressToDb}>
+                            {loading ? (
+                                <>
+                                    <Spinner
+                                        as='span'
+                                        animation='border'
+                                        size='sm'
+                                        role='status'
+                                        aria-hidden='true'
+                                    />{' '}
+                                    Loading
+                                </>
+                            ) : (
+                                'Save'
+                            )}
+                        </Button>
+                    </Form>
                     <hr />
                     <h2>Apply Coupon</h2>
                     <br />

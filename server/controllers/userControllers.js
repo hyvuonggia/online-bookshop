@@ -44,3 +44,23 @@ export const getCurrentUser = async (req, res) => {
         console.error(error);
     }
 };
+
+/**
+ * @description Save user address
+ * @route POST /api/users/user/address
+ * @access private
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const saveAddress = async (req, res) => {
+    try {
+        const user = await User.findOneAndUpdate(
+            { email: req.user.email },
+            { address: req.body.address },
+        );
+        res.json(user);
+    } catch (error) {
+        res.status(400).send('Save address failed');
+    }
+};

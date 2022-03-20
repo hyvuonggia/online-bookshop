@@ -1,7 +1,10 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { userLoginReducer } from './reducers/userReducers';
+import {
+    saveUserAddressReducer,
+    userLoginReducer,
+} from './reducers/userReducers';
 import {
     createCategoryReducer,
     deleteCategoryReducer,
@@ -22,7 +25,11 @@ import {
     updateProductReducer,
 } from './reducers/productReducers';
 import { uploadImageReducer } from './reducers/imageReducers';
-import { cartReducer, getCartReducer, saveCartReducer } from './reducers/cartReducers';
+import {
+    cartReducer,
+    getCartReducer,
+    saveCartReducer,
+} from './reducers/cartReducers';
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -45,6 +52,7 @@ const reducer = combineReducers({
     cart: cartReducer,
     saveCart: saveCartReducer,
     getCart: getCartReducer,
+    saveUserAddress: saveUserAddressReducer,
 });
 
 const middleware = [thunk];
