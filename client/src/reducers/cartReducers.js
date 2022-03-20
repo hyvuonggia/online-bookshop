@@ -1,4 +1,9 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
+import {
+    CART_ADD_ITEM,
+    CART_REMOVE_ITEM,
+    SAVE_CART_FAIL,
+    SAVE_CART_SUCCESS,
+} from '../constants/cartConstants';
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
     const { type, payload } = action;
@@ -29,6 +34,24 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
                 cartItems: state.cartItems.filter(
                     (x) => x.slug !== action.payload,
                 ),
+            };
+        default:
+            return state;
+    }
+};
+
+export const saveCartReducer = (state = {}, action) => {
+    const { type, payload } = action;
+    switch (type) {
+        case SAVE_CART_SUCCESS:
+            return {
+                success: true,
+                message: payload,
+            };
+        case SAVE_CART_FAIL:
+            return {
+                success: false,
+                error: payload,
             };
         default:
             return state;

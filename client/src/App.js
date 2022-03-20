@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import RegisterComplete from './pages/RegisterComplete';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getIdTokenResult, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getIdTokenResult, onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import { LOGGED_IN_USER } from './constants/userConstants';
 import ForgotPassword from './pages/ForgotPassword';
@@ -80,7 +80,6 @@ function App() {
                         <Route path=':slug' element={<Cart />} />
                         <Route path='' element={<Cart />} />
                     </Route>
-                    <Route path='/checkout' element={<Checkout />} />
                     <Route element={<ProtectedRoute />}>
                         <Route element={<AppLayout />}>
                             <Route
@@ -96,6 +95,7 @@ function App() {
                                 element={<Wishlist />}
                             />
                         </Route>
+                        <Route path='/checkout' element={<Checkout />} />
                     </Route>
 
                     <Route element={<AdminRoute />}>

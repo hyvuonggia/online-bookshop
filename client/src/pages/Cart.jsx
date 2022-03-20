@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addToCart, removeFromCart } from '../actions/cartActions';
+import { addToCart, removeFromCart, userCart } from '../actions/cartActions';
 
 const Cart = () => {
     const match = useParams();
@@ -18,6 +18,9 @@ const Cart = () => {
     const dispatch = useDispatch();
 
     const { cartItems } = useSelector((state) => state.cart);
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const { user } = userLogin;
 
     useEffect(() => {
         if (match.slug) {
@@ -30,8 +33,18 @@ const Cart = () => {
     };
 
     const handleCheckout = () => {
-        console.log('cart', cartItems);
-        navigate('/login?redirect=/checkout');
+        if (!user || !user.token) {
+            navigate('/login?redirect=/cart');
+        } else {
+            dispatch(userCart(cartItems))
+                .then((res) => {
+                    console.log('CART_POST_RES', res);
+                    if (res.data.ok) {
+                        navigate('/checkout');
+                    }
+                })
+                .catch((error) => console.log('cart save error', error));
+        }
     };
 
     return (
