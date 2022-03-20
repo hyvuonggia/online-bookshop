@@ -2,6 +2,14 @@ import Cart from '../models/cartModel.js';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 
+/**
+ * @description Save user cart
+ * @route POST /api/cart
+ * @access private
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 export const userCart = async (req, res) => {
     const { cart } = req.body;
 
