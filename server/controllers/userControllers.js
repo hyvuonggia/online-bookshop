@@ -1,3 +1,4 @@
+import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 
 /**
@@ -79,5 +80,46 @@ export const getAddress = async (req, res) => {
         res.json(user.address);
     } catch (error) {
         res.status(400).send('Save address failed');
+    }
+};
+
+export const addToWishlist = async (req, res) => {
+    try {
+        const { slug } = req.body;
+        const product = await Product.findOne({ slug });
+        const user = await User.findOneAndUpdate(
+            { email: req.user.email },
+            { $addToSet: { wishlist: product._id } },
+            { new: true },
+        );
+        res.json({ message: 'Added to wishlist' });
+    } catch (error) {
+        res.status(400).json({ error: 'Added to wishlist failed' });
+    }
+};
+
+export const getWishlist = async (req, res) => {
+    const user = await User.findOne({ email: req.user.email }).populate({
+        path: 'wishlist',
+        populate: {
+            path: 'category',
+        },
+    });
+    res.json(user.wishlist);
+};
+
+export const removeFromWishlist = async (req, res) => {
+    try {
+        const { slug } = req.body;
+        const product = await Product.findOne({ slug });
+        console.log('==================>product', product);
+        const user = await User.findOneAndUpdate(
+            { email: req.user.email },
+            { $pull: { wishlist: product._id } },
+            { new: true },
+        );
+        res.json({ message: 'Removed from wishlist' });
+    } catch (error) {
+        res.status(400).json({ error: 'Removed from wishlist failed' });
     }
 };

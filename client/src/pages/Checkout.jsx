@@ -139,7 +139,7 @@ const Checkout = () => {
                         <Button
                             variant='dark'
                             onClick={saveAddressToDb}
-                            disabled={loading}
+                            disabled={loading || cart.products.length === 0}
                         >
                             {loading ? (
                                 <>

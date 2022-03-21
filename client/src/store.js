@@ -2,6 +2,9 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
+    addToWishlistReducer,
+    getWishlistReducer,
+    removeFromWishlistReducer,
     saveUserAddressReducer,
     userLoginReducer,
 } from './reducers/userReducers';
@@ -53,6 +56,9 @@ const reducer = combineReducers({
     saveCart: saveCartReducer,
     getCart: getCartReducer,
     saveUserAddress: saveUserAddressReducer,
+    addToWishlist: addToWishlistReducer,
+    getWishlist: getWishlistReducer,
+    removeFromWishlist: removeFromWishlistReducer,
 });
 
 const middleware = [thunk];

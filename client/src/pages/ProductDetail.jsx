@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createReview, getProduct } from '../actions/productActions';
+import { addToWishlist } from '../actions/userActions';
 import Loader from '../components/Loader';
 import Rating from '../components/Rating';
 import { CREATE_REVIEW_RESET } from '../constants/productConstants';
@@ -81,6 +82,11 @@ const ProductDetail = () => {
 
     const handleAddToCart = () => {
         navigate(`/cart/${match.slug}`);
+    };
+
+    const handleAddToWishlist = () => {
+        console.log('add to wishlist');
+        dispatch(addToWishlist(match.slug));
     };
 
     return (
@@ -178,6 +184,7 @@ const ProductDetail = () => {
                                     <Button
                                         className='w-100 p-3'
                                         variant='info'
+                                        onClick={handleAddToWishlist}
                                     >
                                         <i className='fas fa-heart me-2' />
                                         Add to Wishlist
