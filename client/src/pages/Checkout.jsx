@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {
     Button,
@@ -43,6 +44,7 @@ const Checkout = () => {
     };
 
     const { cart: cartDetail } = useSelector((state) => state.getCart);
+    const { user } = useSelector((state) => state.userLogin);
 
     useEffect(() => {
         if (!cartDetail) {
@@ -52,7 +54,19 @@ const Checkout = () => {
         }
     }, [cartDetail, dispatch]);
 
-    useEffect(() => {});
+    useEffect(() => {
+        const fetchAddress = async () => {
+            const config = {
+                headers: {
+                    Authorization: user.token.token,
+                },
+            };
+
+            const { data } = await axios.get('/api/users/user/address', config);
+            setShippingAddress(data);
+        };
+        fetchAddress();
+    }, [user.token.token]);
 
     const saveAddressToDb = (e) => {
         e.preventDefault();
@@ -122,7 +136,11 @@ const Checkout = () => {
                             ></FormControl>
                         </FormGroup>
                         <br />
-                        <Button variant='dark' onClick={saveAddressToDb}>
+                        <Button
+                            variant='dark'
+                            onClick={saveAddressToDb}
+                            disabled={loading}
+                        >
                             {loading ? (
                                 <>
                                     <Spinner

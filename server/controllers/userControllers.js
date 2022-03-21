@@ -64,3 +64,20 @@ export const saveAddress = async (req, res) => {
         res.status(400).send('Save address failed');
     }
 };
+
+/**
+ * @description Get user address
+ * @route GET /api/users/user/address
+ * @access private
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const getAddress = async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.user.email });
+        res.json(user.address);
+    } catch (error) {
+        res.status(400).send('Save address failed');
+    }
+};
