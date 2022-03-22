@@ -25,7 +25,7 @@ const Checkout = () => {
         dispatch({
             type: GET_CART_RESET,
         });
-    }, []);
+    }, [dispatch]);
 
     const [cart, setCart] = useState({
         products: [],
