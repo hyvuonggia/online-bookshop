@@ -16,9 +16,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getCart } from '../actions/cartActions';
 import { saveUserAddress } from '../actions/userActions';
+import { GET_CART_RESET } from '../constants/cartConstants';
 
 const Checkout = () => {
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({
+            type: GET_CART_RESET,
+        });
+    }, []);
 
     const [cart, setCart] = useState({
         products: [],

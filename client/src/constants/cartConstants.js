@@ -6,3 +6,4 @@ export const SAVE_CART_FAIL = 'SAVE_CART_FAIL';
 
 export const GET_CART_SUCCESS = 'GET_CART_SUCCESS';
 export const GET_CART_FAIL = 'GET_CART_FAIL';
+export const GET_CART_RESET = 'GET_CART_RESET';

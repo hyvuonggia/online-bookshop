@@ -2,6 +2,7 @@ import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
     GET_CART_FAIL,
+    GET_CART_RESET,
     GET_CART_SUCCESS,
     SAVE_CART_FAIL,
     SAVE_CART_SUCCESS,
@@ -66,13 +67,15 @@ export const getCartReducer = (state = {}, action) => {
         case GET_CART_SUCCESS:
             return {
                 success: true,
-                cart: payload
+                cart: payload,
             };
         case GET_CART_FAIL:
             return {
                 success: false,
                 error: payload,
             };
+        case GET_CART_RESET:
+            return {};
         default:
             return state;
     }
