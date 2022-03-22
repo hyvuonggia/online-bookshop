@@ -7,7 +7,7 @@ const couponSchema = new mongoose.Schema(
             trim: true,
             unique: true,
             uppercase: true,
-            minlength: [6, 'Too short'],
+            minlength: [3, 'Too short'],
             maxlength: [12, 'Too long'],
         },
 
@@ -18,6 +18,8 @@ const couponSchema = new mongoose.Schema(
         discount: {
             type: Number,
             required: true,
+            min: [0, 'Too small'],
+            max: [100, 'Too large'],
         },
     },
     { timestamps: true },

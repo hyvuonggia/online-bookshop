@@ -80,7 +80,7 @@ const ProductCreate = () => {
                 />
             </Form.Group>
             <Form onSubmit={handleSubmit}>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                         type='text'
@@ -89,7 +89,7 @@ const ProductCreate = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Author</Form.Label>
                     <Form.Control
                         type='text'
@@ -98,7 +98,7 @@ const ProductCreate = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         type='text'
@@ -109,7 +109,7 @@ const ProductCreate = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Price</Form.Label>
                     <InputGroup>
                         <InputGroup.Text variant='dark'>$</InputGroup.Text>
@@ -121,7 +121,7 @@ const ProductCreate = () => {
                         />
                     </InputGroup>
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Quantity</Form.Label>
                     <Form.Control
                         type='number'
@@ -130,7 +130,7 @@ const ProductCreate = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Category</Form.Label>
                     <Form.Select name='category' onChange={handleChange}>
                         <option value={null}>---Please select---</option>

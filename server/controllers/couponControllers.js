@@ -10,12 +10,12 @@ import Coupon from '../models/couponModel.js';
  */
 export const createCoupon = async (req, res) => {
     try {
-        const { name, expiry, discount } = req.body;
+        const { name, expiry, discount } = req.body.coupon;
         const newCoupon = await new Coupon({ name, expiry, discount });
         await newCoupon.save();
         res.json(newCoupon);
     } catch (error) {
-        res.status(400).send('Create coupon failed');
+        res.status(400).send(error.message);
     }
 };
 

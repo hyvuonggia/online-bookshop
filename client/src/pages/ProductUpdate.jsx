@@ -56,7 +56,7 @@ const ProductUpdate = () => {
     };
     return (
         <FormContainer onSubmit>
-            <h1>Update Product</h1>
+            <h1 className='my-5'>Update Product</h1>
             <Form.Group>
                 <FileUpload
                     product={product}
@@ -65,7 +65,7 @@ const ProductUpdate = () => {
                 />
             </Form.Group>
             <Form onSubmit={handleSubmit}>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                         type='text'
@@ -74,7 +74,7 @@ const ProductUpdate = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Author</Form.Label>
                     <Form.Control
                         type='text'
@@ -83,7 +83,7 @@ const ProductUpdate = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         type='text'
@@ -94,7 +94,7 @@ const ProductUpdate = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Price</Form.Label>
                     <InputGroup>
                         <InputGroup.Text variant='dark'>$</InputGroup.Text>
@@ -106,7 +106,7 @@ const ProductUpdate = () => {
                         />
                     </InputGroup>
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Quantity</Form.Label>
                     <Form.Control
                         type='number'
@@ -115,7 +115,7 @@ const ProductUpdate = () => {
                         onChange={handleChange}
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className='mt-2'>
                     <Form.Label>Category</Form.Label>
                     <Form.Select name='category' onChange={handleChange}>
                         {categories.map((category) => (

@@ -30,6 +30,7 @@ export const createCoupon = (coupon) => async (dispatch, getState) => {
             type: CREATE_COUPON_FAIL,
             payload: error.response.data,
         });
+        throw new Error(error.response.data);
     }
 };
 
