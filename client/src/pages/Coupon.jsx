@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import {
+    Alert,
     Button,
     Col,
     Container,
     Form,
-    ListGroup,
     Row,
-    Spinner,
     Table,
 } from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCoupon, getCoupons } from '../actions/couponActions';
+import {
+    createCoupon,
+    deleteCoupon,
+    getCoupons,
+} from '../actions/couponActions';
 import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
 
@@ -25,6 +28,8 @@ const Coupon = () => {
     const [expiry, setExpiry] = useState(new Date());
     const [discount, setDiscount] = useState('');
     const [loading, setLoading] = useState(false);
+    const [loadingDelete, setLoadingDelete] = useState(false);
+    const [loadingGetCoupons, setLoadingGetCoupons] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -33,19 +38,26 @@ const Coupon = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setLoading(true);
+        setLoadingGetCoupons(true);
         dispatch(createCoupon({ name, expiry, discount }))
             .then(() => {
-                setLoading(false);
+                dispatch(getCoupons()).then(() => setLoadingGetCoupons(false));
                 setName('');
                 setExpiry('');
                 setDiscount('');
                 toast.success('Coupon created');
             })
             .catch((error) => {
-                setLoading(false);
                 toast.error(error.message);
+                setLoadingGetCoupons(false);
             });
+    };
+
+    const handleDelete = (couponId) => {
+        setLoadingDelete(true);
+        dispatch(deleteCoupon(couponId)).then(() => {
+            dispatch(getCoupons()).then(() => setLoadingDelete(false));
+        });
     };
 
     return loading ? (
@@ -96,49 +108,59 @@ const Coupon = () => {
                             type='submit'
                             variant='dark'
                         >
-                            {loading ? (
-                                <>
-                                    <Spinner
-                                        as='span'
-                                        animation='border'
-                                        size='sm'
-                                        role='status'
-                                        aria-hidden='true'
-                                    />{' '}
-                                    Loading
-                                </>
-                            ) : (
-                                'Save'
-                            )}
+                            Save
                         </Button>
                     </Form>
                 </Col>
                 <Col md={6}>
-                    <h3 className='my-5'>Coupon list</h3>
-                    <Table>
-                        <tbody>
-                            {coupons &&
-                                coupons.map((coupon) => (
-                                    <tr key={coupon._id}>
-                                        <td width='50%'>
-                                            <strong>{coupon.name}</strong>
-                                        </td>
-                                        <td>{coupon.discount}%</td>
-                                        <td
-                                            width='100%'
-                                            className='text-center'
-                                        >
-                                            {coupon.expiry.substring(0, 10)}
-                                        </td>
-                                        <td width='fit-content'>
-                                            <Button variant='danger'>
-                                                <i className='fas fa-trash' />
-                                            </Button>
-                                        </td>
-                                    </tr>
-                                ))}
-                        </tbody>
-                    </Table>
+                    {loadingDelete ? (
+                        <h3 className='my-5'>Deleting...</h3>
+                    ) : (
+                        <h3 className='my-5'>Coupon list</h3>
+                    )}
+
+                    {coupons && coupons.length === 0 ? (
+                        <Alert variant='warning'>No coupons</Alert>
+                    ) : loadingGetCoupons ? (
+                        <Loader />
+                    ) : (
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Discount (%)</th>
+                                    <th>Expiry date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {coupons &&
+                                    coupons.map((coupon) => (
+                                        <tr key={coupon._id}>
+                                            <td width='40%'>
+                                                <strong>{coupon.name}</strong>
+                                            </td>
+                                            <td width='30%'>
+                                                {coupon.discount}
+                                            </td>
+                                            <td width='100%'>
+                                                {coupon.expiry.substring(0, 10)}
+                                            </td>
+                                            <td width='fit-content'>
+                                                <Button
+                                                    variant='danger'
+                                                    onClick={() =>
+                                                        handleDelete(coupon._id)
+                                                    }
+                                                >
+                                                    <i className='fas fa-trash' />
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </Table>
+                    )}
                 </Col>
             </Row>
         </Container>
