@@ -33,6 +33,11 @@ import {
     getCartReducer,
     saveCartReducer,
 } from './reducers/cartReducers';
+import {
+    createCouponReducer,
+    deleteCouponReducer,
+    getCouponsReducer,
+} from './reducers/couponReducers';
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -59,6 +64,9 @@ const reducer = combineReducers({
     addToWishlist: addToWishlistReducer,
     getWishlist: getWishlistReducer,
     removeFromWishlist: removeFromWishlistReducer,
+    createCoupon: createCouponReducer,
+    getCoupons: getCouponsReducer,
+    deleteCoupon: deleteCouponReducer,
 });
 
 const middleware = [thunk];
