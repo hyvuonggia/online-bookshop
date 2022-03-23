@@ -1,4 +1,5 @@
 import Cart from '../models/cartModel.js';
+import Coupon from '../models/couponModel.js';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 
@@ -73,4 +74,35 @@ export const getCart = async (req, res) => {
 
     const { products, cartTotal, totalAfterDiscount } = cart;
     res.json({ products, cartTotal, totalAfterDiscount });
+};
+
+export const applyCouponToCart = async (req, res) => {
+    try {
+        const { coupon } = req.body;
+        const validCoupon = await Coupon.findOne({ name: coupon.name });
+        if (validCoupon) {
+            console.log('VALID COUPON', validCoupon);
+            const user = await User.findOne({ email: req.user.email });
+            const { products, cartTotal } = await Cart.findOne({
+                orderedBy: user._id,
+            }).populate('products.product', '_id title price');
+            console.log(
+                'cartTotal',
+                cartTotal,
+                'discount',
+                validCoupon.discount,
+            );
+            const totalAfterDiscount = cartTotal * (discount / 100).toFixed(2);
+            await Cart.findOneAndUpdate(
+                { orderedBy: user._id },
+                { totalAfterDiscount },
+                { new: true },
+            );
+            res.send(totalAfterDiscount);
+        } else {
+            res.status(404).send('Coupon not found');
+        }
+    } catch (error) {
+        throw new Error('Apply coupon failed');
+    }
 };
