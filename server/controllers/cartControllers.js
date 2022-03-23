@@ -76,10 +76,18 @@ export const getCart = async (req, res) => {
     res.json({ products, cartTotal, totalAfterDiscount });
 };
 
+/**
+ * @description Apply coupon to cart
+ * @route POST /api/cart/coupon
+ * @access private
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 export const applyCouponToCart = async (req, res) => {
     try {
         const { coupon } = req.body;
-        const validCoupon = await Coupon.findOne({ name: coupon.name });
+        const validCoupon = await Coupon.findOne({ name: coupon });
         if (validCoupon) {
             console.log('VALID COUPON', validCoupon);
             const user = await User.findOne({ email: req.user.email });
@@ -92,17 +100,20 @@ export const applyCouponToCart = async (req, res) => {
                 'discount',
                 validCoupon.discount,
             );
-            const totalAfterDiscount = cartTotal * (discount / 100).toFixed(2);
+            const totalAfterDiscount =
+                cartTotal * (validCoupon.discount / 100).toFixed(2);
+            console.log('totalAfterDiscount', totalAfterDiscount);
             await Cart.findOneAndUpdate(
                 { orderedBy: user._id },
                 { totalAfterDiscount },
                 { new: true },
             );
-            res.send(totalAfterDiscount);
+            res.json(totalAfterDiscount);
         } else {
             res.status(404).send('Coupon not found');
         }
     } catch (error) {
+        console.log(error);
         throw new Error('Apply coupon failed');
     }
 };
