@@ -32,6 +32,7 @@ const Checkout = () => {
         cartTotal: 0,
     });
     const [loading, setLoading] = useState(false);
+    const [coupon, setCoupon] = useState('');
 
     const [shippingAddress, setShippingAddress] = useState({
         address: '',
@@ -92,6 +93,50 @@ const Checkout = () => {
             });
     };
 
+    const showProductSummary = () => {
+        return cart.products.map((product) => (
+            <ListGroup.Item key={product._id}>
+                <Row>
+                    <Col>
+                        <div>{product.product.title}</div>
+                    </Col>
+                    <Col>
+                        <div className='float-end'>${product.price}</div>
+                    </Col>
+                </Row>
+            </ListGroup.Item>
+        ));
+    };
+
+    const showApplyCoupon = () => {
+        return (
+            <>
+                <Form>
+                    <Form.Group>
+                        <Form.Control
+                            type='text'
+                            value={coupon}
+                            onChange={(e) => setCoupon(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Button
+                        type='submit'
+                        className='mt-3'
+                        variant='dark'
+                        onClick={handleApplyCoupon}
+                    >
+                        Apply
+                    </Button>
+                </Form>
+            </>
+        );
+    };
+
+    const handleApplyCoupon = (e) => {
+        e.preventDefault();
+        console.log('apply coupon', coupon);
+    };
+
     return (
         <Container>
             <Row>
@@ -107,10 +152,10 @@ const Checkout = () => {
                                 value={shippingAddress.address}
                                 required
                                 onChange={handleChange}
-                            ></FormControl>
+                            />
                         </FormGroup>
                         <FormGroup controlId='city'>
-                            <FormLabel>City</FormLabel>
+                            <FormLabel className='mt-2'>City</FormLabel>
                             <FormControl
                                 type='text'
                                 placeholder='Enter city'
@@ -118,10 +163,10 @@ const Checkout = () => {
                                 value={shippingAddress.city}
                                 required
                                 onChange={handleChange}
-                            ></FormControl>
+                            />
                         </FormGroup>
                         <FormGroup controlId='postalCode'>
-                            <FormLabel>Postal Code</FormLabel>
+                            <FormLabel className='mt-2'>Postal Code</FormLabel>
                             <FormControl
                                 type='text'
                                 placeholder='Enter postal code'
@@ -129,10 +174,10 @@ const Checkout = () => {
                                 value={shippingAddress.postalCode}
                                 required
                                 onChange={handleChange}
-                            ></FormControl>
+                            />
                         </FormGroup>
                         <FormGroup controlId='country'>
-                            <FormLabel>Country</FormLabel>
+                            <FormLabel className='mt-2'>Country</FormLabel>
                             <FormControl
                                 type='text'
                                 placeholder='Enter country'
@@ -140,7 +185,7 @@ const Checkout = () => {
                                 value={shippingAddress.country}
                                 required
                                 onChange={handleChange}
-                            ></FormControl>
+                            />
                         </FormGroup>
                         <br />
                         <Button
@@ -165,27 +210,14 @@ const Checkout = () => {
                         </Button>
                     </Form>
                     <hr />
-                    <h2>Apply Coupon</h2>
+                    <h3>Apply Coupon</h3>
                     <br />
-                    coupon input and apply coupon
+                    {showApplyCoupon()}
                 </Col>
                 <Col md={6}>
                     <h2 className='my-5'>Order Summary</h2>
                     <ListGroup variant='flush'>
-                        {cart.products.map((product) => (
-                            <ListGroup.Item key={product._id}>
-                                <Row>
-                                    <Col>
-                                        <div>{product.product.title}</div>
-                                    </Col>
-                                    <Col>
-                                        <div className='float-end'>
-                                            ${product.price}
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-                        ))}
+                        {showProductSummary()}
                         <ListGroup.Item>
                             <Row>
                                 <Col>
