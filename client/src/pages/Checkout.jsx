@@ -14,6 +14,7 @@ import {
     Spinner,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { applyCouponToCart, getCart } from '../actions/cartActions';
 import { saveUserAddress } from '../actions/userActions';
@@ -24,6 +25,7 @@ import {
 
 const Checkout = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch({
@@ -145,6 +147,10 @@ const Checkout = () => {
     const handleApplyCoupon = (e) => {
         e.preventDefault();
         dispatch(applyCouponToCart(coupon));
+    };
+
+    const handlePlaceOrder = () => {
+        navigate('/payment');
     };
 
     return (
@@ -274,6 +280,7 @@ const Checkout = () => {
                                 type='button'
                                 className='w-100'
                                 variant='secondary'
+                                onClick={handlePlaceOrder}
                             >
                                 <h5 className='m-0 p-0'>
                                     <i className='fas fa-money-bill me-2' />
