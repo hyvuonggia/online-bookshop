@@ -32,6 +32,7 @@ import Category from './pages/Category';
 import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Payment from './pages/Payment';
 
 function App() {
     const dispatch = useDispatch();
@@ -96,6 +97,7 @@ function App() {
                             />
                         </Route>
                         <Route path='/checkout' element={<Checkout />} />
+                        <Route path='/payment' element={<Payment />} />
                     </Route>
 
                     <Route element={<AdminRoute />}>
