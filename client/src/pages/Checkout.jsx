@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {
+    Alert,
     Button,
     Col,
     Container,
@@ -14,9 +15,12 @@ import {
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { getCart } from '../actions/cartActions';
+import { applyCouponToCart, getCart } from '../actions/cartActions';
 import { saveUserAddress } from '../actions/userActions';
-import { GET_CART_RESET } from '../constants/cartConstants';
+import {
+    APPLY_COUPON_TO_CART_RESET,
+    GET_CART_RESET,
+} from '../constants/cartConstants';
 
 const Checkout = () => {
     const dispatch = useDispatch();
@@ -24,6 +28,9 @@ const Checkout = () => {
     useEffect(() => {
         dispatch({
             type: GET_CART_RESET,
+        });
+        dispatch({
+            type: APPLY_COUPON_TO_CART_RESET,
         });
     }, [dispatch]);
 
@@ -33,7 +40,6 @@ const Checkout = () => {
     });
     const [loading, setLoading] = useState(false);
     const [coupon, setCoupon] = useState('');
-
     const [shippingAddress, setShippingAddress] = useState({
         address: '',
         city: '',
@@ -53,6 +59,10 @@ const Checkout = () => {
 
     const { cart: cartDetail } = useSelector((state) => state.getCart);
     const { user } = useSelector((state) => state.userLogin);
+    const {
+        totalAfterDiscount: getTotalAfterDiscount,
+        error: applyCouponError,
+    } = useSelector((state) => state.applyCouponToCart);
 
     useEffect(() => {
         if (!cartDetail) {
@@ -134,7 +144,7 @@ const Checkout = () => {
 
     const handleApplyCoupon = (e) => {
         e.preventDefault();
-        console.log('apply coupon', coupon);
+        dispatch(applyCouponToCart(coupon));
     };
 
     return (
@@ -212,6 +222,12 @@ const Checkout = () => {
                     <hr />
                     <h3>Apply Coupon</h3>
                     <br />
+                    {getTotalAfterDiscount && (
+                        <Alert variant='success'>Coupon applied</Alert>
+                    )}
+                    {applyCouponError && (
+                        <Alert variant='danger'>{applyCouponError}</Alert>
+                    )}
                     {showApplyCoupon()}
                 </Col>
                 <Col md={6}>
@@ -219,16 +235,39 @@ const Checkout = () => {
                     <ListGroup variant='flush'>
                         {showProductSummary()}
                         <ListGroup.Item>
-                            <Row>
-                                <Col>
-                                    <h3>Total:</h3>
-                                </Col>
-                                <Col>
-                                    <h3 className='float-end'>
-                                        ${cart.cartTotal}
-                                    </h3>
-                                </Col>
-                            </Row>
+                            {getTotalAfterDiscount ? (
+                                <Row>
+                                    <Col>
+                                        <h3>Total:</h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className='float-end'>
+                                            ${getTotalAfterDiscount}
+                                        </h3>
+                                        <span className='float-end me-2'>
+                                            <h3
+                                                style={{
+                                                    textDecoration:
+                                                        'line-through',
+                                                }}
+                                            >
+                                                ${cart.cartTotal}
+                                            </h3>
+                                        </span>
+                                    </Col>
+                                </Row>
+                            ) : (
+                                <Row>
+                                    <Col>
+                                        <h3>Total:</h3>
+                                    </Col>
+                                    <Col>
+                                        <h3 className='float-end'>
+                                            ${cart.cartTotal}
+                                        </h3>
+                                    </Col>
+                                </Row>
+                            )}
                         </ListGroup.Item>
                         <ListGroup.Item className='text-center'>
                             <Button

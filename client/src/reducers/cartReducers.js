@@ -1,5 +1,6 @@
 import {
     APPLY_COUPON_TO_CART_FAIL,
+    APPLY_COUPON_TO_CART_RESET,
     APPLY_COUPON_TO_CART_SUCCESS,
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
@@ -94,6 +95,8 @@ export const applyCouponToCartReducer = (state = {}, action) => {
             return {
                 error: payload,
             };
+        case APPLY_COUPON_TO_CART_RESET:
+            return {};
 
         default:
             return state;
