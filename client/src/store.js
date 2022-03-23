@@ -29,6 +29,7 @@ import {
 } from './reducers/productReducers';
 import { uploadImageReducer } from './reducers/imageReducers';
 import {
+    applyCouponToCartReducer,
     cartReducer,
     getCartReducer,
     saveCartReducer,
@@ -67,6 +68,7 @@ const reducer = combineReducers({
     createCoupon: createCouponReducer,
     getCoupons: getCouponsReducer,
     deleteCoupon: deleteCouponReducer,
+    applyCouponToCart: applyCouponToCartReducer,
 });
 
 const middleware = [thunk];

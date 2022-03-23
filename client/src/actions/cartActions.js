@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {
+    APPLY_COUPON_TO_CART_FAIL,
+    APPLY_COUPON_TO_CART_SUCCESS,
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
     GET_CART_FAIL,
@@ -93,6 +95,38 @@ export const getCart = () => async (dispatch, getState) => {
         dispatch({
             type: GET_CART_FAIL,
             payload: error.response.data,
+        });
+    }
+};
+
+export const applyCouponToCart = (coupon) => async (dispatch, getState) => {
+    try {
+        const {
+            userLogin: { user },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: user.token.token,
+            },
+        };
+
+        const response = await axios.post(
+            `/api/cart/coupon`,
+            { coupon },
+            config,
+        );
+        dispatch({
+            type: APPLY_COUPON_TO_CART_SUCCESS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch({
+            type: APPLY_COUPON_TO_CART_FAIL,
+            payload:
+                error.response.status === 404
+                    ? error.response.data
+                    : error.message,
         });
     }
 };
