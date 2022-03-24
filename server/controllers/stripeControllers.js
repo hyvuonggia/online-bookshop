@@ -21,7 +21,5 @@ export const createPaymentIntent = async (req, res) => {
     });
     res.send({
         clientSecret: paymentIntent.client_secret,
-        cartTotal,
-        finalAmount,
     });
 };
