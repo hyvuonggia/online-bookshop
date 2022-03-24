@@ -33,6 +33,7 @@ import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Payment from './pages/Payment';
+import '@stripe/stripe-js';
 
 function App() {
     const dispatch = useDispatch();
