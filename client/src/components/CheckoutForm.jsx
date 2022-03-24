@@ -9,6 +9,9 @@ const CheckoutForm = () => {
     const elements = useElements();
 
     const { user } = useSelector((state) => state.userLogin);
+    const { totalAfterDiscount } = useSelector(
+        (state) => state.applyCouponToCart,
+    );
 
     const [succeeded, setSucceeded] = useState(false);
     const [error, setError] = useState(null);
@@ -26,7 +29,7 @@ const CheckoutForm = () => {
 
             const response = await axios.post(
                 '/api/stripe/create-payment-intent',
-                {},
+                { totalAfterDiscount },
                 config,
             );
             return response;
