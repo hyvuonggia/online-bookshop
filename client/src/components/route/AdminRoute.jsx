@@ -15,11 +15,9 @@ const AdminRoute = () => {
         if (user && user.token) {
             getCurrentAdmin(user.token.token)
                 .then((res) => {
-                    // console.log('CURRENT ADMIN RES', res);
                     setOk(true);
                 })
                 .catch((error) => {
-                    // console.error('CURRENT ADMIN ERROR', error);
                     setOk(false);
                 });
         }
