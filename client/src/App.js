@@ -100,7 +100,6 @@ function App() {
                         <Route path='/checkout' element={<Checkout />} />
                         <Route path='/payment' element={<Payment />} />
                     </Route>
-
                     <Route element={<AdminRoute />}>
                         <Route element={<AppLayout />}>
                             <Route
