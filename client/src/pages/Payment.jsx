@@ -8,7 +8,6 @@ import '../css/Payment.scss';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 const Payment = () => {
-    console.log('stripePromise', stripePromise);
     return (
         <Container>
             <h1 className='my-5'>Payment</h1>

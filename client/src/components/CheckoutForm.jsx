@@ -39,7 +39,7 @@ const CheckoutForm = () => {
             console.log('create payment intent', res.data);
             setClientSecret(res.data.clientSecret);
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const cardStyle = {
@@ -92,13 +92,15 @@ const CheckoutForm = () => {
 
     return (
         <div>
-            {error && <Alert variant='danger'>{error}</Alert>}
-            {succeeded && <Alert variant='success'>Payment successful!</Alert>}
             <Form
                 className='stripe-form'
                 id='payment-form'
                 onSubmit={handleSubmit}
             >
+                {error && <Alert variant='danger'>{error}</Alert>}
+                {succeeded && (
+                    <Alert variant='success'>Payment successful!</Alert>
+                )}
                 <CardElement
                     id='card-element'
                     options={cardStyle}
