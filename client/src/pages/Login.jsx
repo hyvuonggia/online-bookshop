@@ -144,16 +144,15 @@ const Login = () => {
                         <i className='fa-solid fa-xl fa-envelope me-2'></i>
                         Login with Email/Password
                     </Button>
+                    <Button
+                        variant='danger'
+                        className='login-btn'
+                        onClick={googleLogin}
+                    >
+                        <i className='fa-brands fa-xl fa-google me-2'></i>
+                        Login with Google account
+                    </Button>
                 </Form>
-                <Button
-                    type='submit'
-                    variant='danger'
-                    className='login-btn'
-                    onClick={googleLogin}
-                >
-                    <i className='fa-brands fa-xl fa-google me-2'></i>
-                    Login with Google account
-                </Button>
                 <div className='mt-2'>
                     <Link to='/forgot/password'>Forgot your password?</Link>
                 </div>

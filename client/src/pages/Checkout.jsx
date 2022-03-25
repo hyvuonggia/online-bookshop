@@ -120,30 +120,6 @@ const Checkout = () => {
         ));
     };
 
-    const showApplyCoupon = () => {
-        return (
-            <>
-                <Form>
-                    <Form.Group>
-                        <Form.Control
-                            type='text'
-                            value={coupon}
-                            onChange={(e) => setCoupon(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Button
-                        type='submit'
-                        className='mt-3'
-                        variant='dark'
-                        onClick={handleApplyCoupon}
-                    >
-                        Apply
-                    </Button>
-                </Form>
-            </>
-        );
-    };
-
     const handleApplyCoupon = (e) => {
         e.preventDefault();
         dispatch(applyCouponToCart(coupon));
@@ -158,7 +134,7 @@ const Checkout = () => {
             <Row>
                 <Col md={6}>
                     <h2 className='my-5'>Shipping address</h2>
-                    <Form>
+                    <Form className='ms-5'>
                         <FormGroup controlId='address'>
                             <FormLabel>Address</FormLabel>
                             <FormControl
@@ -226,15 +202,31 @@ const Checkout = () => {
                         </Button>
                     </Form>
                     <hr />
-                    <h3>Apply Coupon</h3>
+                    <h3 className='mt-4'>Apply Coupon</h3>
                     <br />
-                    {getTotalAfterDiscount && (
-                        <Alert variant='success'>Coupon applied</Alert>
-                    )}
-                    {applyCouponError && (
-                        <Alert variant='danger'>{applyCouponError}</Alert>
-                    )}
-                    {showApplyCoupon()}
+                    <Form className='ms-5'>
+                        {getTotalAfterDiscount && (
+                            <Alert variant='success'>Coupon applied</Alert>
+                        )}
+                        {applyCouponError && (
+                            <Alert variant='danger'>{applyCouponError}</Alert>
+                        )}
+                        <Form.Group>
+                            <Form.Control
+                                type='text'
+                                value={coupon}
+                                onChange={(e) => setCoupon(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Button
+                            type='submit'
+                            className='mt-3'
+                            variant='dark'
+                            onClick={handleApplyCoupon}
+                        >
+                            Apply
+                        </Button>
+                    </Form>
                 </Col>
                 <Col md={6}>
                     <h2 className='my-5'>Order Summary</h2>

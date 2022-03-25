@@ -63,7 +63,7 @@ const CategoryCreate = () => {
         c.name.toLowerCase().includes(keyword);
 
     return (
-        <Fragment>
+        <Fragment className='pt-5'>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className='pt-3'>
                     <Form.Label>New Category</Form.Label>
@@ -71,7 +71,7 @@ const CategoryCreate = () => {
                         type='text'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        style={{ width: '500px' }}
+                        style={{ width: '100%' }}
                     />
                 </Form.Group>
                 <Button

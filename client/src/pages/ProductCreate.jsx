@@ -72,15 +72,8 @@ const ProductCreate = () => {
     return (
         <FormContainer onSubmit>
             <h1 className='my-5'>Add new product</h1>
-            <Form.Group>
-                <FileUpload
-                    product={product}
-                    setProduct={setProduct}
-                    setLoading={setLoading}
-                />
-            </Form.Group>
             <Form onSubmit={handleSubmit}>
-                <Form.Group className='mt-2'>
+                <Form.Group>
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                         type='text'
@@ -141,7 +134,13 @@ const ProductCreate = () => {
                         ))}
                     </Form.Select>
                 </Form.Group>
-
+                <Form.Group className='mt-2'>
+                    <FileUpload
+                        product={product}
+                        setProduct={setProduct}
+                        setLoading={setLoading}
+                    />
+                </Form.Group>
                 <Button
                     className='mt-3'
                     variant='dark'

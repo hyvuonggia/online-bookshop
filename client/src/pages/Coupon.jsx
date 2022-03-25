@@ -65,7 +65,7 @@ const Coupon = () => {
     ) : (
         <Container>
             <Row>
-                <Col md={6}>
+                <Col>
                     <h1 className='my-5'>Coupon</h1>
                     <Form>
                         <Form.Group>
@@ -112,7 +112,7 @@ const Coupon = () => {
                         </Button>
                     </Form>
                 </Col>
-                <Col md={6}>
+                <Col>
                     {loadingDelete ? (
                         <h3 className='my-5'>Deleting...</h3>
                     ) : (

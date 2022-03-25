@@ -57,15 +57,9 @@ const ProductUpdate = () => {
     return (
         <FormContainer onSubmit>
             <h1 className='my-5'>Update Product</h1>
-            <Form.Group>
-                <FileUpload
-                    product={product}
-                    setProduct={setProduct}
-                    setLoading={setLoading}
-                />
-            </Form.Group>
+
             <Form onSubmit={handleSubmit}>
-                <Form.Group className='mt-2'>
+                <Form.Group>
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                         type='text'
@@ -124,6 +118,14 @@ const ProductUpdate = () => {
                             </option>
                         ))}
                     </Form.Select>
+                </Form.Group>
+
+                <Form.Group className='mt-2'>
+                    <FileUpload
+                        product={product}
+                        setProduct={setProduct}
+                        setLoading={setLoading}
+                    />
                 </Form.Group>
 
                 <Button

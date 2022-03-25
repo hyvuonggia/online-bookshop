@@ -110,7 +110,7 @@ const ProductDetail = () => {
                                 style={{ width: '100%' }}
                             />
                         </Col>
-                        <Col className='ms-5'>
+                        <Col>
                             <h3>{product.title}</h3>
                             <Rating value={product.rating} />{' '}
                             {`(${product.numReviews} reviews)`}
@@ -202,98 +202,77 @@ const ProductDetail = () => {
                             </Row>
                         </Col>
                     </Row>
+                    <hr />
                     <Row className='mt-5'>
-                        <Col>
-                            {errorCreateReview && (
-                                <Alert variant='danger'>
-                                    {errorCreateReview}
-                                </Alert>
-                            )}
-                            {product.reviews.length === 0 && (
-                                <Alert variant='warning'>No reviews yet</Alert>
-                            )}
-                            <ListGroup variant='flush'>
-                                <ListGroup.Item>
-                                    <h4>Leave a review</h4>
-                                    {user ? (
-                                        <Form onSubmit={handleSubmit}>
-                                            <Form.Group controlId='rating'>
-                                                <Form.Label>Rating</Form.Label>
-                                                <Form.Control
-                                                    as='select'
-                                                    value={review.rating}
-                                                    name='rating'
-                                                    onChange={handleChange}
-                                                    style={{
-                                                        width: 'fit-content',
-                                                        appearance: 'menulist',
-                                                    }}
-                                                >
-                                                    <option value=''>
-                                                        ---Please select---
-                                                    </option>
-                                                    <option value='1'>
-                                                        1 - Very Bad
-                                                    </option>
-                                                    <option value='2'>
-                                                        2 - Bad
-                                                    </option>
-                                                    <option value='3'>
-                                                        3 - Average
-                                                    </option>
-                                                    <option value='4'>
-                                                        4 - Good
-                                                    </option>
-                                                    <option value='5'>
-                                                        5 - Excellent
-                                                    </option>
-                                                </Form.Control>
-                                            </Form.Group>
-                                            <Form.Group
-                                                controlId='comment'
-                                                className='mt-3'
-                                            >
-                                                <Form.Label>Comment</Form.Label>
-                                                <Form.Control
-                                                    as='textarea'
-                                                    row={4}
-                                                    name='comment'
-                                                    onChange={handleChange}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                            <Button
-                                                variant='dark'
-                                                type='submit'
-                                                className='mt-2'
-                                            >
-                                                Submit
-                                            </Button>
-                                        </Form>
-                                    ) : (
-                                        <Alert variant='warning'>
-                                            Please{' '}
-                                            <Link to='/login'>sign in</Link> to
-                                            write review
-                                        </Alert>
-                                    )}
+                        {errorCreateReview && (
+                            <Alert variant='danger'>{errorCreateReview}</Alert>
+                        )}
+                        {product.reviews.length === 0 && (
+                            <Alert variant='warning'>No reviews yet</Alert>
+                        )}
+                        <h4 className='mb-4'>Leave a review</h4>
+                        {user ? (
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Group controlId='rating'>
+                                    <Form.Label>Rating</Form.Label>
+                                    <Form.Control
+                                        as='select'
+                                        value={review.rating}
+                                        name='rating'
+                                        onChange={handleChange}
+                                        style={{
+                                            width: 'fit-content',
+                                            appearance: 'menulist',
+                                        }}
+                                    >
+                                        <option value=''>
+                                            ---Please select---
+                                        </option>
+                                        <option value='1'>1 - Very Bad</option>
+                                        <option value='2'>2 - Bad</option>
+                                        <option value='3'>3 - Average</option>
+                                        <option value='4'>4 - Good</option>
+                                        <option value='5'>5 - Excellent</option>
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group
+                                    controlId='comment'
+                                    className='mt-3'
+                                >
+                                    <Form.Label>Comment</Form.Label>
+                                    <Form.Control
+                                        as='textarea'
+                                        row={4}
+                                        name='comment'
+                                        onChange={handleChange}
+                                    ></Form.Control>
+                                </Form.Group>
+                                <Button
+                                    variant='dark'
+                                    type='submit'
+                                    className='mt-2'
+                                >
+                                    Submit
+                                </Button>
+                            </Form>
+                        ) : (
+                            <Alert variant='warning'>
+                                Please <Link to='/login'>sign in</Link> to write
+                                review
+                            </Alert>
+                        )}
+                        <ListGroup variant='flush' className='mt-3'>
+                            {product.reviews.map((review) => (
+                                <ListGroup.Item key={review._id}>
+                                    <strong>{review.name}</strong>
+                                    <div>
+                                        <Rating value={review.rating} text='' />
+                                    </div>
+                                    <p>{review.createdAt.substring(0, 10)}</p>
+                                    <p>{review.comment}</p>
                                 </ListGroup.Item>
-                                {product.reviews.map((review) => (
-                                    <ListGroup.Item key={review._id}>
-                                        <strong>{review.name}</strong>
-                                        <div>
-                                            <Rating
-                                                value={review.rating}
-                                                text=''
-                                            />
-                                        </div>
-                                        <p>
-                                            {review.createdAt.substring(0, 10)}
-                                        </p>
-                                        <p>{review.comment}</p>
-                                    </ListGroup.Item>
-                                ))}
-                            </ListGroup>
-                        </Col>
+                            ))}
+                        </ListGroup>
                     </Row>
                 </>
             )}

@@ -61,7 +61,7 @@ function App() {
     return (
         <BrowserRouter>
             <Header />
-            <main>
+            <main className='pb-5'>
                 <ToastContainer />
                 <Routes>
                     <Route path='/' element={<Home />} />
