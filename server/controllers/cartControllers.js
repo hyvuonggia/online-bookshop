@@ -101,7 +101,7 @@ export const applyCouponToCart = async (req, res) => {
                 validCoupon.discount,
             );
             const totalAfterDiscount =
-                cartTotal * (validCoupon.discount / 100).toFixed(2);
+                cartTotal * (1 - validCoupon.discount / 100).toFixed(2);
             console.log('totalAfterDiscount', totalAfterDiscount);
             await Cart.findOneAndUpdate(
                 { orderedBy: user._id },
