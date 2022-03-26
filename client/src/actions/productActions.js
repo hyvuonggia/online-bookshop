@@ -55,7 +55,7 @@ export const createProduct = (product) => async (dispatch, getState) => {
 
 export const getProducts =
     (sort = 'title', order = 'asc') =>
-    async (dispatch) => {
+     async (dispatch) => {
         const response = await axios.get(
             `/api/products?sort=${sort}&order=${order}`,
         );

@@ -35,7 +35,7 @@ app.use('/api/cloudinary', cloudinaryRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/coupons', couponRoutes);
 app.use('/api/stripe', stripeRoutes);
-app.use('/api/order', orderRoutes);
+app.use('/api/orders', orderRoutes);
 
 const __dirname = path.resolve();
 

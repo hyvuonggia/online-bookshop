@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Alert, Button, Form, Spinner } from 'react-bootstrap';
+import { createOrder } from '../actions/orderActions';
+import { APPLY_COUPON_TO_CART_RESET } from '../constants/cartConstants';
 
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
+    const dispatch = useDispatch();
 
     const { user } = useSelector((state) => state.userLogin);
     const { totalAfterDiscount } = useSelector(
@@ -42,24 +45,6 @@ const CheckoutForm = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const cardStyle = {
-        style: {
-            base: {
-                color: '#32325d',
-                fontFamily: 'Arial, sans-serif',
-                fontSmoothing: 'antialiased',
-                fontSize: '16px',
-                '::placeholder': {
-                    color: '#32325d',
-                },
-            },
-            invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a',
-            },
-        },
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setProcessing(true);
@@ -79,7 +64,12 @@ const CheckoutForm = () => {
             setError(`Payment failed: ${payload.error.message}`);
             setProcessing(false);
         } else {
-            console.log(JSON.stringify(payload, null, 4));
+            dispatch(createOrder(payload));
+            dispatch({
+                type: APPLY_COUPON_TO_CART_RESET,
+            });
+            localStorage.removeItem('cartItems');
+            // console.log(JSON.stringify(payload, null, 4));
             setError(null);
             setProcessing(false);
             setSucceeded(true);
@@ -103,7 +93,7 @@ const CheckoutForm = () => {
                 )}
                 <CardElement
                     id='card-element'
-                    options={cardStyle}
+                    // options={cardStyle}
                     onChange={handleChange}
                 />
                 <Button

@@ -39,6 +39,7 @@ import {
     deleteCouponReducer,
     getCouponsReducer,
 } from './reducers/couponReducers';
+import { creatOrderReducer } from './reducers/orderReducers';
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -69,6 +70,7 @@ const reducer = combineReducers({
     getCoupons: getCouponsReducer,
     deleteCoupon: deleteCouponReducer,
     applyCouponToCart: applyCouponToCartReducer,
+    createOrder: creatOrderReducer,
 });
 
 const middleware = [thunk];
