@@ -3,6 +3,14 @@ import Order from '../models/orderModel.js';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 
+/**
+ * @description Create new order
+ * @route POST /api/orders
+ * @access private
+ *
+ * @param {*} req
+ * @param {*} res
+ */
 export const createOrder = async (req, res) => {
     const { paymentIntent } = req.body.stripeResponse;
     const user = await User.findOne({ email: req.user.email });
@@ -28,4 +36,22 @@ export const createOrder = async (req, res) => {
     await newOrder.save();
 
     res.json(newOrder);
+};
+
+/**
+ * @description Create user orders
+ * @route GET /api/orders/user
+ * @access private
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const getUserOrders = async (req, res) => {
+    const user = await User.findOne({ email: req.user.email });
+
+    const orders = await Order.find({ orderedBy: user._id }).populate(
+        'products.product',
+    );
+
+    res.json(orders);
 };
