@@ -9,6 +9,7 @@ import cloudinaryRoutes from './routes/cloudinaryRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
 import couponRoutes from './routes/couponRoutes.js';
 import stripeRoutes from './routes/stripeRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 import morgan from 'morgan';
 import path from 'path';
 
@@ -34,6 +35,7 @@ app.use('/api/cloudinary', cloudinaryRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/coupons', couponRoutes);
 app.use('/api/stripe', stripeRoutes);
+app.use('/api/order', orderRoutes);
 
 const __dirname = path.resolve();
 
