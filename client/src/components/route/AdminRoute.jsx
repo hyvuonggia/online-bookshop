@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -23,13 +23,7 @@ const AdminRoute = () => {
         }
     }, [user]);
 
-    return ok ? (
-        <Fragment>
-            <Outlet />
-        </Fragment>
-    ) : (
-        <LoadingRedirect />
-    );
+    return ok ? <Outlet /> : <LoadingRedirect />;
 };
 
 export default AdminRoute;

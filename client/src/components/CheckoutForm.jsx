@@ -36,7 +36,7 @@ const CheckoutForm = () => {
         };
 
         createPaymentIntent().then((res) => {
-            console.log('create payment intent', res.data);
+            // console.log('create payment intent', res.data);
             setClientSecret(res.data.clientSecret);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
