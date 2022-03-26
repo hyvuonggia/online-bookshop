@@ -64,7 +64,7 @@ const Login = () => {
                 // navigate('/');
             });
 
-            toast.success('Login successful');
+            // toast.success('Login successful');
         } catch (error) {
             console.error(error);
             toast.error(error.message);
@@ -95,7 +95,7 @@ const Login = () => {
                     // }
                     // navigate('/');
                 });
-                toast.success('Login successful');
+                // toast.success('Login successful');
                 // navigate('/');
             })
             .catch((error) => {

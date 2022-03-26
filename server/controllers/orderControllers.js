@@ -1,5 +1,6 @@
 import Cart from '../models/cartModel.js';
 import Order from '../models/orderModel.js';
+import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 
 export const createOrder = async (req, res) => {
@@ -12,6 +13,17 @@ export const createOrder = async (req, res) => {
         orderedBy: user._id,
         products,
     });
+
+    const bulkOption = products.map((item) => {
+        return {
+            updateOne: {
+                filter: { _id: item.product },
+                update: { $inc: { quantity: -1, sold: +1 } },
+            },
+        };
+    });
+
+    await Product.bulkWrite(bulkOption, {});
 
     await newOrder.save();
 

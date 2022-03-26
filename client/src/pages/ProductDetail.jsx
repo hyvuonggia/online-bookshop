@@ -158,7 +158,8 @@ const ProductDetail = () => {
                                                     <strong>In Stock:</strong>
                                                 </td>
                                                 <td className='float-end'>
-                                                    {product.quantity}
+                                                    {productDetail &&
+                                                        productDetail.quantity}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -190,14 +191,24 @@ const ProductDetail = () => {
                                         Add to Wishlist
                                     </Button>
                                     <br />
-                                    <Button
-                                        className='w-100 p-3 mt-4'
-                                        variant='dark'
-                                        onClick={handleAddToCart}
-                                    >
-                                        <i className='fas fa-cart-shopping me-2' />
-                                        Add to Cart
-                                    </Button>
+                                    {product.quantity ? (
+                                        <Button
+                                            className='w-100 p-3 mt-4'
+                                            variant='dark'
+                                            onClick={handleAddToCart}
+                                        >
+                                            <i className='fas fa-cart-shopping me-2' />
+                                            Add to Cart
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            className='w-100 p-3 mt-4'
+                                            variant='dark'
+                                            disabled
+                                        >
+                                            Out of stock
+                                        </Button>
+                                    )}
                                 </Col>
                             </Row>
                         </Col>

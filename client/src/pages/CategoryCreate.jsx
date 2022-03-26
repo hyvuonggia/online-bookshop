@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -63,7 +63,7 @@ const CategoryCreate = () => {
         c.name.toLowerCase().includes(keyword);
 
     return (
-        <Fragment className='pt-5'>
+        <div className='pt-5'>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className='pt-3'>
                     <Form.Label>New Category</Form.Label>
@@ -87,7 +87,7 @@ const CategoryCreate = () => {
             <Form.Control
                 placeholder='Search category'
                 style={{ width: '500px' }}
-                className='my-3'
+                className='mt-5 mb-3'
                 value={keyword}
                 onChange={handleKeywordChange}
             />
@@ -136,7 +136,7 @@ const CategoryCreate = () => {
                     </tbody>
                 </Table>
             </div>
-        </Fragment>
+        </div>
     );
 };
 
