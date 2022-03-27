@@ -43,7 +43,7 @@ const UserHistory = () => {
                         <Card.Body>
                             <Card.Title>ID: {order._id}</Card.Title>
                             <p>STATUS: {order.orderStatus}</p>
-                            <p>TOTAL: $ {order.paymentIntent.amount}</p>
+                            <p>TOTAL: $ {order.paymentIntent.amount / 100}</p>
                             <Table
                                 bordered
                                 responsive
