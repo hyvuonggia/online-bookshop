@@ -130,12 +130,23 @@ const Checkout = () => {
 
     const handlePlaceOrder = () => {
         if (cod) {
-            dispatch(createCashOrder(cart.cartTotal));
-            localStorage.removeItem('cartItems');
-            dispatch({
-                type: CASH_ON_DELIVERY_RESET,
-            });
-            navigate('/user/history');
+            if (getTotalAfterDiscount) {
+                dispatch(createCashOrder(getTotalAfterDiscount)).then(() => {
+                    localStorage.removeItem('cartItems');
+                    dispatch({
+                        type: CASH_ON_DELIVERY_RESET,
+                    });
+                    navigate('/user/history');
+                });
+            } else {
+                dispatch(createCashOrder(cart.cartTotal)).then(() => {
+                    localStorage.removeItem('cartItems');
+                    dispatch({
+                        type: CASH_ON_DELIVERY_RESET,
+                    });
+                    navigate('/user/history');
+                });
+            }
         } else {
             navigate('/payment');
         }

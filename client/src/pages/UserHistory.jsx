@@ -27,7 +27,8 @@ const UserHistory = () => {
         };
 
         fetchOrders();
-    }, [user.token.token]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleExportPDF = (orderId, date, total, products) => {
         const doc = new jsPDF();
