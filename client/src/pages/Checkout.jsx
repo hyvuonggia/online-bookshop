@@ -18,10 +18,12 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { applyCouponToCart, getCart } from '../actions/cartActions';
 import { saveUserAddress } from '../actions/userActions';
+import { createCashOrder } from '../actions/orderActions';
 import {
     APPLY_COUPON_TO_CART_RESET,
     GET_CART_RESET,
 } from '../constants/cartConstants';
+import { CASH_ON_DELIVERY_RESET } from '../constants/codConstants';
 
 const Checkout = () => {
     const dispatch = useDispatch();
@@ -60,6 +62,7 @@ const Checkout = () => {
     };
 
     const { cart: cartDetail } = useSelector((state) => state.getCart);
+    const { cod } = useSelector((state) => state.cashOnDelivery);
     const { user } = useSelector((state) => state.userLogin);
     const {
         totalAfterDiscount: getTotalAfterDiscount,
@@ -126,7 +129,15 @@ const Checkout = () => {
     };
 
     const handlePlaceOrder = () => {
-        navigate('/payment');
+        if (cod) {
+            dispatch(createCashOrder(cart.cartTotal));
+            localStorage.removeItem('cartItems');
+            dispatch({
+                type: CASH_ON_DELIVERY_RESET,
+            });
+        } else {
+            navigate('/payment');
+        }
     };
 
     return (

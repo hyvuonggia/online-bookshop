@@ -11,11 +11,17 @@ const orderSchema = new mongoose.Schema(
             },
         ],
         paymentIntent: {},
+        paymentType: {
+            type: String,
+            default: 'card',
+            enum: ['cash', 'card'],
+        },
         orderStatus: {
             type: String,
             default: 'Not processed',
             enum: [
                 'Not processed',
+                'Cash on Delivery',
                 'Processing',
                 'Ready to deliver',
                 'Delivering',

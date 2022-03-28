@@ -39,11 +39,15 @@ import {
     deleteCouponReducer,
     getCouponsReducer,
 } from './reducers/couponReducers';
-import { creatOrderReducer } from './reducers/orderReducers';
+import {
+    createCashOrderReducer,
+    creatOrderReducer,
+} from './reducers/orderReducers';
 import {
     getOrdersReducer,
     setOrderStatusReducer,
 } from './reducers/adminReducers';
+import { cashOnDeliveryReducer } from './reducers/codReducer';
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -75,8 +79,10 @@ const reducer = combineReducers({
     deleteCoupon: deleteCouponReducer,
     applyCouponToCart: applyCouponToCartReducer,
     createOrder: creatOrderReducer,
+    createCashOrder: createCashOrderReducer,
     getOrders: getOrdersReducer,
     setOrderStatus: setOrderStatusReducer,
+    cashOnDelivery: cashOnDeliveryReducer,
 });
 
 const middleware = [thunk];

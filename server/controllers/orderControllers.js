@@ -39,7 +39,7 @@ export const createOrder = async (req, res) => {
 };
 
 /**
- * @description Create user orders
+ * @description Get user orders
  * @route GET /api/orders/user
  * @access private
  *
@@ -54,4 +54,43 @@ export const getUserOrders = async (req, res) => {
     );
 
     res.json(orders);
+};
+
+/**
+ * @description Create cash orders
+ * @route POST /api/orders/cash
+ * @access private
+ *
+ * @param {*} req
+ * @param {*} res
+ */
+export const createCashOrder = async (req, res) => {
+    const user = await User.findOne({ email: req.user.email });
+    const { total } = req.body;
+    const paymentIntent = {
+        amount: total * 100,
+    };
+    const { products } = await Cart.findOne({ orderedBy: user._id });
+
+    const newOrder = await new Order({
+        paymentIntent,
+        paymentType: 'cash',
+        orderedBy: user._id,
+        products,
+    });
+
+    const bulkOption = products.map((item) => {
+        return {
+            updateOne: {
+                filter: { _id: item.product },
+                update: { $inc: { quantity: -1, sold: +1 } },
+            },
+        };
+    });
+
+    await Product.bulkWrite(bulkOption, {});
+
+    await newOrder.save();
+
+    res.json(newOrder);
 };

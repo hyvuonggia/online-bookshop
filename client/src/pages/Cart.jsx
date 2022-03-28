@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addToCart, removeFromCart, userCart } from '../actions/cartActions';
+import { CASH_ON_DELIVERY } from '../constants/codConstants';
 
 const Cart = () => {
     const match = useParams();
@@ -33,6 +34,24 @@ const Cart = () => {
     };
 
     const handleCheckout = () => {
+        if (!user || !user.token) {
+            navigate('/login?redirect=/cart');
+        } else {
+            dispatch(userCart(cartItems))
+                .then((res) => {
+                    // console.log('CART_POST_RES', res);
+                    if (res.data.ok) {
+                        navigate('/checkout');
+                    }
+                })
+                .catch((error) => console.log('cart save error', error));
+        }
+    };
+
+    const handleCashOnDelivery = () => {
+        dispatch({
+            type: CASH_ON_DELIVERY,
+        });
         if (!user || !user.token) {
             navigate('/login?redirect=/cart');
         } else {
@@ -150,6 +169,7 @@ const Cart = () => {
                                 className='w-100'
                                 disabled={cartItems.length === 0}
                                 variant='secondary'
+                                onClick={handleCashOnDelivery}
                             >
                                 <h5 className='m-0 p-0'>
                                     <i className='fas fa-money-bill me-2' />

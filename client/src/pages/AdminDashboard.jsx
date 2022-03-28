@@ -42,6 +42,9 @@ const AdminDashboard = () => {
                             <Card.Text>
                                 Order date: {order.createdAt.substring(0, 10)}
                             </Card.Text>
+                            <Card.Text>
+                                Payment type: {order.paymentType}
+                            </Card.Text>
                             <Form.Label>Status:</Form.Label>
                             <Form.Select
                                 style={{
