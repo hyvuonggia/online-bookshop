@@ -40,6 +40,10 @@ import {
     getCouponsReducer,
 } from './reducers/couponReducers';
 import { creatOrderReducer } from './reducers/orderReducers';
+import {
+    getOrdersReducer,
+    setOrderStatusReducer,
+} from './reducers/adminReducers';
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -71,6 +75,8 @@ const reducer = combineReducers({
     deleteCoupon: deleteCouponReducer,
     applyCouponToCart: applyCouponToCartReducer,
     createOrder: creatOrderReducer,
+    getOrders: getOrdersReducer,
+    setOrderStatus: setOrderStatusReducer,
 });
 
 const middleware = [thunk];

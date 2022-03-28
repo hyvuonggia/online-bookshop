@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Container, Alert, Table, Button, Card } from 'react-bootstrap';
+import { Container, Alert, Table, Button, Card, Badge } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
@@ -63,7 +63,20 @@ const UserHistory = () => {
                         </Card.Header>
                         <Card.Body>
                             <Card.Title>ID: {order._id}</Card.Title>
-                            <p>STATUS: {order.orderStatus}</p>
+                            <p>
+                                STATUS:{' '}
+                                <Badge
+                                    bg={
+                                        order.orderStatus === 'Completed'
+                                            ? 'success'
+                                            : order.orderStatus === 'Cancelled'
+                                            ? 'danger'
+                                            : 'warning'
+                                    }
+                                >
+                                    {order.orderStatus}
+                                </Badge>
+                            </p>
                             <p>TOTAL: $ {order.paymentIntent.amount / 100}</p>
                             <Table
                                 bordered

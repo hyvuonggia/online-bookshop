@@ -218,19 +218,3 @@ export const createProductReview = async (req, res) => {
         res.send(error.message);
     }
 };
-
-const handleQuery = async (req, res, query) => {
-    const products = await Product.find({ $text: { $search: query } }).populate(
-        'category',
-    );
-    res.json(products);
-};
-
-export const searchFilters = async (req, res) => {
-    const { query } = req.body;
-
-    if (query) {
-        console.log('query', query);
-        await handleQuery(req, res, query);
-    }
-};

@@ -4,6 +4,14 @@ import Cart from '../models/cartModel.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET);
 
+/**
+ * @description Create new stripe payment intent
+ * @route POST /api/stripe/create-payment-intent
+ * @access private
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const createPaymentIntent = async (req, res) => {
     const totalAfterDiscount = req.body.totalAfterDiscount;
 

@@ -34,6 +34,4 @@ router
 
 router.route('/:slug/reviews').post(authCheck, createProductReview);
 
-// router.route('/search/filters').post(searchFilters);
-
 export default router;
