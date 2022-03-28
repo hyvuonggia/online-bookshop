@@ -135,6 +135,7 @@ const Checkout = () => {
             dispatch({
                 type: CASH_ON_DELIVERY_RESET,
             });
+            navigate('/user/history');
         } else {
             navigate('/payment');
         }

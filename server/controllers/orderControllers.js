@@ -49,9 +49,9 @@ export const createOrder = async (req, res) => {
 export const getUserOrders = async (req, res) => {
     const user = await User.findOne({ email: req.user.email });
 
-    const orders = await Order.find({ orderedBy: user._id }).populate(
-        'products.product',
-    );
+    const orders = await Order.find({ orderedBy: user._id })
+        .sort([['createdAt', 'desc']])
+        .populate('products.product');
 
     res.json(orders);
 };
