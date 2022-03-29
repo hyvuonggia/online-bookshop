@@ -62,6 +62,7 @@ const Wishlist = () => {
                             <th>
                                 <strong>Price</strong>
                             </th>
+                            <th></th>
                         </tr>
                     </thead>
 

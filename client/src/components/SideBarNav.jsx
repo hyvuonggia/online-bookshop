@@ -89,7 +89,7 @@ const SideBarNav = () => {
                     >
                         <div className='sidebar-menu-item'>
                             <div className='sidebar-menu-item-text'>
-                                Dashboard
+                                My Orders
                             </div>
                         </div>
                     </Link>

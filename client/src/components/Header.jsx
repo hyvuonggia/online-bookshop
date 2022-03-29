@@ -61,20 +61,32 @@ const Header = () => {
                                             }}
                                         >
                                             <NavDropdown.Item>
-                                                Dashboard
+                                                My Orders
                                             </NavDropdown.Item>
                                         </LinkContainer>
                                     ) : (
-                                        <LinkContainer
-                                            to='/admin/dashboard'
-                                            style={{
-                                                textDecoration: 'none',
-                                            }}
-                                        >
-                                            <NavDropdown.Item>
-                                                Dashboard
-                                            </NavDropdown.Item>
-                                        </LinkContainer>
+                                        <>
+                                            <LinkContainer
+                                                to='/admin/dashboard'
+                                                style={{
+                                                    textDecoration: 'none',
+                                                }}
+                                            >
+                                                <NavDropdown.Item>
+                                                    Dashboard
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
+                                            <LinkContainer
+                                                to='/user/history'
+                                                style={{
+                                                    textDecoration: 'none',
+                                                }}
+                                            >
+                                                <NavDropdown.Item>
+                                                    My Orders
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
+                                        </>
                                     )}
 
                                     <LinkContainer
