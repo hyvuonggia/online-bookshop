@@ -7,6 +7,7 @@ import {
     Image,
     ListGroup,
     Row,
+    Table,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -32,6 +33,8 @@ const Cart = () => {
     const handleRemoveFromCart = (slug) => {
         dispatch(removeFromCart(slug));
     };
+
+    console.log(JSON.stringify(cartItems, null, 4));
 
     const handleCheckout = () => {
         if (!user || !user.token) {
@@ -69,65 +72,59 @@ const Cart = () => {
     return (
         <Container>
             <Row>
-                <Col md={8}>
+                <Col md={8} lg={8}>
                     <h1 className='my-5'>Cart</h1>
                     {cartItems.length === 0 ? (
                         <Alert variant='warning'>Your cart is empty</Alert>
                     ) : (
-                        <ListGroup variant='flush'>
-                            <ListGroup.Item>
-                                <Row>
-                                    <Col md={2} className='text-center'>
-                                        <strong>Image</strong>
-                                    </Col>
-                                    <Col md={5}>
-                                        <strong>Title</strong>
-                                    </Col>
-                                    <Col md={2} className='text-center'>
-                                        <strong>Author</strong>
-                                    </Col>
-                                    <Col md={2} className='text-center'>
-                                        <strong>Price</strong>
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-                            {cartItems.map((item) => (
-                                <ListGroup.Item key={item.product}>
-                                    <Row>
-                                        <Col md={2} className='text-center'>
+                        <Table responsive bordered>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cartItems.map((item) => (
+                                    <tr key={item._id}>
+                                        <td width='10%' className='text-center'>
                                             <Image
-                                                src={item.image}
-                                                alt='item.name'
+                                                src={
+                                                    item.image
+                                                        ? item.image
+                                                        : 'https://crossfitbbros.com/bbros-1/wp-content/uploads/2021/01/no-photo-available.png'
+                                                }
+                                                alt='item name'
                                                 height={100}
                                             />
-                                        </Col>
-                                        <Col md={5}>
+                                        </td>
+                                        <td width='90%'>
                                             <strong>{item.title}</strong>
-                                        </Col>
-                                        <Col md={2} className='text-center'>
-                                            {item.author}
-                                        </Col>
-                                        <Col md={2} className='text-center'>
-                                            $ {item.price}
-                                        </Col>
-                                        <Col md={1}>
-                                            {' '}
+                                        </td>
+                                        <td width='10%'>{item.author}</td>
+                                        <td>$ {item.price}</td>
+                                        <td>
                                             <Button
                                                 variant='danger'
-                                                className='py-4'
                                                 onClick={() =>
                                                     handleRemoveFromCart(
                                                         item.slug,
                                                     )
                                                 }
                                             >
-                                                <i className='fas fa-trash' />
+                                                <i
+                                                    className='fas fa-trash'
+                                                    style={{ height: '100%' }}
+                                                />
                                             </Button>
-                                        </Col>
-                                    </Row>
-                                </ListGroup.Item>
-                            ))}
-                        </ListGroup>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
                     )}
                 </Col>
                 <Col md={4}>

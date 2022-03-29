@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Button, Table } from 'react-bootstrap';
+import { Alert, Button, Container, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWishlist, removeFromWishlist } from '../actions/userActions';
 import Loader from '../components/Loader';
@@ -35,7 +35,7 @@ const Wishlist = () => {
     return loading ? (
         <Loader />
     ) : (
-        <div>
+        <Container>
             <h1 className='py-5'>Wishlist</h1>
             {wishlist.length === 0 ? (
                 <Alert variant='warning'>Your wishlist is empty</Alert>
@@ -89,7 +89,7 @@ const Wishlist = () => {
                     </tbody>
                 </Table>
             )}
-        </div>
+        </Container>
     );
 };
 

@@ -155,7 +155,7 @@ const Checkout = () => {
     return (
         <Container>
             <Row>
-                <Col md={6}>
+                <Col>
                     <h2 className='my-5'>Shipping address</h2>
                     <Form className='ms-5'>
                         <FormGroup controlId='address'>
@@ -224,6 +224,7 @@ const Checkout = () => {
                             )}
                         </Button>
                     </Form>
+                    <br />
                     <hr />
                     <h3 className='mt-4'>Apply Coupon</h3>
                     <br />
