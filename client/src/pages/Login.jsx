@@ -11,7 +11,7 @@ import FormContainer from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LOGGED_IN_USER } from '../constants/userConstants';
-import { createUser } from '../actions/userActions';
+import { createUser, getCurrentUser } from '../actions/userActions';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const Login = () => {
             // console.log(user);
             const idTokenResult = await getIdTokenResult(user);
 
-            dispatch(createUser(idTokenResult.token)).then((res) => {
+            dispatch(getCurrentUser(idTokenResult.token)).then((res) => {
                 dispatch({
                     type: LOGGED_IN_USER,
                     payload: {
@@ -56,15 +56,8 @@ const Login = () => {
                         _id: res.data._id,
                     },
                 });
-                // if (res.data.role === 'admin') {
-                //     navigate('/admin/dashboard');
-                // } else {
-                //     navigate('/user/history');
-                // }
-                // navigate('/');
+                navigate('/');
             });
-
-            // toast.success('Login successful');
         } catch (error) {
             console.error(error);
             toast.error(error.message);
@@ -88,15 +81,8 @@ const Login = () => {
                             _id: res.data._id,
                         },
                     });
-                    // if (res.data.role === 'admin') {
-                    //     navigate('/admin/dashboard');
-                    // } else {
-                    //     navigate('/user/history');
-                    // }
-                    // navigate('/');
+                    navigate('/');
                 });
-                // toast.success('Login successful');
-                // navigate('/');
             })
             .catch((error) => {
                 console.error(error);

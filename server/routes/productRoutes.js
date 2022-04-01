@@ -3,22 +3,18 @@ import {
     createProduct,
     deleteProduct,
     getProducts,
-    // getProductsLimit,
     getProduct,
     updateProduct,
     getProductsByCreatedDate,
     getProductsBySold,
     createProductReview,
     getProductsByRating,
-    // searchFilters,
 } from '../controllers/productControllers.js';
 import { adminCheck, authCheck } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
 router.route('/').get(getProducts).post(authCheck, adminCheck, createProduct);
-
-// router.route('/limit/:limit').get(getProductsLimit);
 
 router.route('/new-arrivals').post(getProductsByCreatedDate);
 

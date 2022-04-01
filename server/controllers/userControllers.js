@@ -87,9 +87,9 @@ export const getAddress = async (req, res) => {
  * @description Add product to wishlist
  * @route POST /api/users/user/wishlist
  * @access private
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 export const addToWishlist = async (req, res) => {
     try {
@@ -110,9 +110,9 @@ export const addToWishlist = async (req, res) => {
  * @description Get wishlist products
  * @route GET /api/users/user/wishlist
  * @access private
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  */
 export const getWishlist = async (req, res) => {
     const user = await User.findOne({ email: req.user.email }).populate({

@@ -21,19 +21,15 @@ export const userSchema = new mongoose.Schema(
         address: {
             address: {
                 type: String,
-                required: true,
             },
             city: {
                 type: String,
-                required: true,
             },
             postalCode: {
                 type: String,
-                required: true,
             },
             country: {
                 type: String,
-                required: true,
             },
         },
         wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],

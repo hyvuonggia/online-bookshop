@@ -20,6 +20,7 @@ const RegisterComplete = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setEmail(window.localStorage.getItem('registrationEmail'));
@@ -27,7 +28,7 @@ const RegisterComplete = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
         // validation
         if (!email || !password) {
             toast.error('Email and password is required');
@@ -72,7 +73,7 @@ const RegisterComplete = () => {
                         },
                     }),
                 );
-
+                setLoading(false);
                 // redirect
                 navigate('/');
             }
@@ -84,7 +85,11 @@ const RegisterComplete = () => {
 
     return (
         <FormContainer>
-            <h1 className='my-5'>Complete your registration</h1>
+            {loading ? (
+                <h1 className='my-5'>Loading...</h1>
+            ) : (
+                <h1 className='my-5'>Complete your registration</h1>
+            )}
             <Form onSubmit={handleSubmit} method='post'>
                 <Form.Group>
                     <Form.Control

@@ -89,12 +89,6 @@ const AllProducts = () => {
                                             width: '100%',
                                         }}
                                     >
-                                        {/* {product.description.length < 30
-                                            ? product.description
-                                            : `${product.description.substring(
-                                                  0,
-                                                  30,
-                                              )}...`} */}
                                         {product.description}
                                     </Card.Text>
                                     <br />

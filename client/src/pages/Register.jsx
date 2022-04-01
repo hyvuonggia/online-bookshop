@@ -28,7 +28,6 @@ const Register = () => {
             url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
             handleCodeInApp: true,
         };
-
         await sendSignInLinkToEmail(auth, email, config);
 
         window.localStorage.setItem('registrationEmail', email);
