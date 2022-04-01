@@ -5,6 +5,7 @@ import CategoryList from '../components/CategoryList';
 import NewArrivals from '../components/NewArrivals';
 import Landing from '../components/Landing';
 import MostRated from '../components/MostRated';
+import Footer from '../components/Footer';
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
                 <BestSellers />
                 <CategoryList />
             </Container>
+            <Footer />
         </>
     );
 };
